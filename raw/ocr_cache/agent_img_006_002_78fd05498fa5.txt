@@ -1,0 +1,13 @@
+Module     Generated Text     Provided Text          Context    Ex P Ex. Sol
+v
+Problem (P)                                          Problem (P)
+上              > Plan                      上              > Plan
+Domain            ILM                         Domain            CLM
+LLM-As-Planner                           LLM-As-Planner (In-context Learning)
+Context) Ex. P & Ex. PDDL       Domain PDDL
+CS;
+<                                                                     -和 pi
+Problem (P) —>                          +中4                                 an
+LLM                 Planner                 LLM
+Problem PDDL            PDDL Plan
+LLM + P (In-context Learning)

@@ -1,0 +1,16 @@
+接下来，我们用LLaMA-6B 模型为例估算其大致需要的内存。
+首先考虑精度对所需内人存的影响 :
+。 fp32 精度，一个参数需要 32 bits, 4 bytes.
+。 fp16 精度，一个参数需要 16 bits, 2 bytes.
+e inti 精度，一个参数需要 8 bits, 1 byte.
+其次，考虑模型需要的 RAM 大致分三个部分:
+。 梯度
+e 模型参数: 等于参数量*每个参数所需内存。
+对于fp32，LLaMA-6B 需要 6B*4 bytes = 24GBAN
+对于 int8, LLaMA-6B 需要 6B*1 byte = 6GB
+。 梯度: 同上，等于参数量*每个梯度参数所需内人存。
+e 优化器参数: 不同的优化器所储仓的参数量不同。
+对于单用的 AdamW 来说，需要储存两倍的模型参数 (用来储存一阶和二阶momentum) 。
+e fp32 AY LLaMA-6B, AdamW 需要 6B*8 bytes = 48 GB
+e int8 AY LLaMA-6B, AdamW 需要 6B*2 bytes = 12 GB
+除此之外，CUDA kernel 也会占据一些 RAM, AHL 1.3GB 左右，查看方式如下。

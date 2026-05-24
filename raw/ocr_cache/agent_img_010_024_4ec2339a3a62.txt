@@ -1,0 +1,15 @@
+Claude Code system_prompt 构建顺序
+系统核心指令
+模型角色定义、基础行为规范
+环境信息
+操作系统、Shell、工作目录
+工具描述
+可用工具列表及参数 schema
+SUMMARIZE_TOOL_RESULTS
+工具结果捕要策略
+Memory (第10段)                                                                /_puild_system() main.py:285
+M ~/.claude/projects/{id}/memory/ 加载，MEMORY.md 索引 + 各记忆文件内容                       \ 仅在 REPL 启动时执行一次 )
+CLAUDE.md
+用户项目级指令，优先级高于 Memory
+其余动态段落
+当前会话上下文竺                                                  民          a         |

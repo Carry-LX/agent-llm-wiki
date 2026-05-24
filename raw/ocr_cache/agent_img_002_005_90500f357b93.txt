@@ -1,0 +1,29 @@
+AR   数据构造   eee eee    ~ Prompts 、     P-Tuning  、
+/                                                                                    /                           /
+N\
+
+f                                                                                \ 1                      1 1                      |
+/        构建           {"question": "      TEAR B) AY      最高? ","answer":"    \ 1  你是一名Mysql数据库开发 |     |                    |
+I          问答模板              select 公司全称 ffom company_table where 年份 ='         |       1 1   人  1       |                               |
+|         es                        and          is not null order by          desc limit 1"}           1 | 据已知的表名、字段名和用  |       |                              |
+|                                                                                   1 。 1 PRA SIRES salttes     |
+
+_                      已
+         =           {"question": "    年哪冢公司的          最局?      1 1!  company_table已知字段 |    |                |
+         变量           ""answer": "select 公司全称from company_table where 年    1 |  SS     |  PRE SEQ LEN=128 |
+='                      | SRaOREM NH, Ba     I    一   一一
+I                                                  desc limit 1"}                      | 1   a  i     1  max_source_length 1
+i                      Z,    万、XX万
+1                              {"question": "2022年哪家公司的购建固定资产最高?          | powomiameem am: 1 1 2200 1
+I                               " "answer": "select 公司全称 from company_table where       |    1 一个亿、 一亿需转换为 I      i   ax_ 机 本 8     i
+I                                    年份 ='2022' and 购建固定资产is not null order by 购建固        | 1   100000000, —FAR% |    quantization_bi        I
+|                        定资产 desc limit 1"}{"question": "                        | 1  pee Sean |     |                    1
+|      ARE                            Manswer": "select Sale; 。 ，。 名，不得新增字段名示例模 1 1                1
+I         问题改写              from company_table where #4 ='2022' and 购建国定资        1     |   板: PMA: 2019年  1       |                              |
+[                                           产is not null order by 购建固定资产 desc limit                       哪家公司的负债合计最高 |                                     1
+ae     LIANE                                           1 1 sqt如下: ”sqlselect 2        |
+|                       1"j{"question":                                      1 1      司全称from      1     |                   1
+|                                                       " "answer": "select 公司全称 from           1     |  人 order by  1      i                           1
+ey    1         o>   -               Si     4 itt"
+\                           company_table where #4 = 2022 and 购建固定资产 is             pape see e a       1                           i
+\                      not null order by 购建固定资产 desc limit 1"       1/ sat. REMY “DI    !

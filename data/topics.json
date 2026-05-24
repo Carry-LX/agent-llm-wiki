@@ -1,0 +1,58 @@
+[
+  {
+    "id": "agent_architecture",
+    "title": "Agent 系统架构",
+    "summary": "围绕工具调用、执行链路、状态管理、观测反馈和 Agent 项目工程化的材料集合。",
+    "asset_count": 40,
+    "markdown_path": "wiki_generated/Agent_系统架构.md"
+  },
+  {
+    "id": "rag_and_retrieval",
+    "title": "RAG 与检索增强",
+    "summary": "围绕 RAG、GraphRAG、LightRAG、知识库构建、检索策略、chunk 和评测的材料集合。",
+    "asset_count": 45,
+    "markdown_path": "wiki_generated/RAG_与检索增强.md"
+  },
+  {
+    "id": "prompt_engineering",
+    "title": "Prompt 约束与上下文设计",
+    "summary": "围绕 System Prompt、上下文约束、工具调用边界、参数 schema 和决策规则的材料集合。",
+    "asset_count": 14,
+    "markdown_path": "wiki_generated/Prompt_约束与上下文设计.md"
+  },
+  {
+    "id": "planning_execution",
+    "title": "规划、执行与反思",
+    "summary": "围绕 CoT、Plan-Execute、Observe、Reflection、自我修正和多步骤任务拆解的材料集合。",
+    "asset_count": 3,
+    "markdown_path": "wiki_generated/规划、执行与反思.md"
+  },
+  {
+    "id": "finetuning_trajectories",
+    "title": "微调、轨迹与训练数据",
+    "summary": "围绕 SFT、RL、训练数据构造、轨迹评估和模型能力内化的材料集合。",
+    "asset_count": 14,
+    "markdown_path": "wiki_generated/微调、轨迹与训练数据.md"
+  },
+  {
+    "id": "evaluation_dataset",
+    "title": "评测集与数据构造",
+    "summary": "围绕评测指标、测试集构造、RAGAS 评测和评估方法的数据集合。",
+    "asset_count": 9,
+    "markdown_path": "wiki_generated/评测集与数据构造.md"
+  },
+  {
+    "id": "text2sql",
+    "title": "Text2SQL 与查询校验",
+    "summary": "围绕 NL2SQL、SQL 生成、执行前校验、执行后校验和业务实体一致性的材料集合。",
+    "asset_count": 10,
+    "markdown_path": "wiki_generated/Text2SQL_与查询校验.md"
+  },
+  {
+    "id": "fault_tolerance_permission",
+    "title": "容错、权限与安全边界",
+    "summary": "围绕 Agent 安全边界、权限控制、容错机制和数据安全的材料集合。",
+    "asset_count": 4,
+    "markdown_path": "wiki_generated/容错、权限与安全边界.md"
+  }
+]

@@ -1,0 +1,15 @@
+1. Session =’ Nisa”, Memory 是”项目级别”
+你可以这样分:
+
+Session: 一次会话的聊天日志                                                     O)
+
+Memory: 某个项目目录下的长期笔记
+Session (RANE:
+
+这一次对话里，用户问了什么，模型答了什么，工具调用了什么。                                    ey
+文档里说，用户输入会变成 UserMessage ，模型回复会变成 AssistantMessage ，关掉终端后这些消息会写入
+JSONL 文件， 下次可以通过 --resume 恢复， 这就是 Session,   加 8) Mit a2: _你用 Claude Code 这么久，它怎么…
+但 Memory 保存的是:
+
+所以它不是一轮对话一个 _ MEMORY.md ，而是多个会话共同沉泥到同一个项目的 MemMoRY.md 。
+2. 一个项目目录只有一个 MEMORY.md 索引

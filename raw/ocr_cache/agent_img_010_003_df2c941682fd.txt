@@ -1,0 +1,6 @@
+searchHint 是面向工具检索的短能力标签，主要在 Toolsearch 阶段使用; description 是面向工具理解与
+调用的正式说明，主要在工具已加载、模型准备实际调用时使用。
+
+再短一点:
+
+Hint ARF", description 用来“看懂它”。

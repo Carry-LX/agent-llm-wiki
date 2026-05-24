@@ -1,0 +1,15 @@
+° 口& &
+一“                   [|
+角色层
+Host        Client        Server
+谁在通信
+核心概念: 角色定位、会话、权限边界
+4          大 | @                 SS
+能力层                     Tools               Resources              Prompts                               三层独立演进
+暴露什么能力                                                一      see
+核心概念: 工具、资源、提示词、发现与描述                解看设计
+a          7         (2) stdio /
+a        { } sail fame  (y) Streamable HTTP
+协议层
+消息怎么传     核心概念: 消息格式、传输方式、流式支持、错误处理
+”MCP 不是一个东西，是三层职责明确的组合

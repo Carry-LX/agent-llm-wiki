@@ -1,0 +1,1093 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Agent Knowledge Network</title>
+  <style>
+    :root {
+      --left: 340px;
+      --right: 460px;
+      --bg: #f5f2ea;
+      --paper: #fffdf8;
+      --ink: #20251f;
+      --muted: #667069;
+      --line: #d7cdbc;
+      --strong: #b8a88f;
+      --shadow: 0 18px 48px rgba(50, 43, 32, .14);
+      --topic: #157a7d;
+      --concept: #9a6a22;
+      --method: #b14a5a;
+      --infrastructure: #58707a;
+      --system: #4c68a1;
+      --workflow: #6c7f2e;
+      --control: #824f91;
+      --training: #bd6530;
+      --evaluation: #4d8656;
+      --evidence: #697179;
+      --source: #0d7969;
+      --page: #806f55;
+      --root: #111827;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Microsoft YaHei", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      letter-spacing: 0;
+      overflow: hidden;
+    }
+
+    button, input { font: inherit; }
+
+    .shell {
+      display: grid;
+      grid-template-columns: var(--left) 8px minmax(360px, 1fr) 8px var(--right);
+      height: 100vh;
+      min-width: 900px;
+    }
+
+    .shell.hide-left { grid-template-columns: 0 0 minmax(360px, 1fr) 8px var(--right); }
+    .shell.hide-right { grid-template-columns: var(--left) 8px minmax(360px, 1fr) 0 0; }
+    .shell.hide-left.hide-right { grid-template-columns: 0 0 minmax(360px, 1fr) 0 0; }
+    .shell.hide-left .left, .shell.hide-left #leftResize,
+    .shell.hide-right .right, .shell.hide-right #rightResize { display: none; }
+
+    .panel {
+      background: rgba(255, 253, 248, .95);
+      overflow: auto;
+      padding: 20px;
+    }
+
+    .left { grid-column: 1; border-right: 1px solid var(--line); }
+    #leftResize { grid-column: 2; }
+    .stage { grid-column: 3; }
+    #rightResize { grid-column: 4; }
+    .right { grid-column: 5; border-left: 1px solid var(--line); }
+
+    .resizer {
+      background: linear-gradient(90deg, transparent, rgba(110, 100, 80, .18), transparent);
+      cursor: col-resize;
+      z-index: 10;
+    }
+
+    .stage {
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 18% 14%, rgba(21, 122, 125, .10), transparent 28%),
+        radial-gradient(circle at 82% 72%, rgba(154, 106, 34, .12), transparent 30%),
+        linear-gradient(180deg, #fbfaf5, #eee8dc);
+    }
+
+    h1 { font-size: 24px; line-height: 1.2; margin: 0 0 8px; }
+    h2 { font-size: 15px; margin: 20px 0 10px; }
+    h3 { font-size: 15px; margin: 18px 0 8px; }
+
+    .panel-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .panel-head h1, .panel-head h2 { margin-top: 0; }
+
+    .panel-toggle {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #fff;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 12px;
+      line-height: 1;
+      padding: 8px 10px;
+      white-space: nowrap;
+    }
+
+    .panel-toggle:hover {
+      border-color: var(--strong);
+      box-shadow: 0 4px 16px rgba(50, 43, 32, .08);
+    }
+
+    .muted {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .search-row {
+      display: grid;
+      grid-template-columns: 1fr 36px;
+      gap: 8px;
+      margin: 14px 0 10px;
+    }
+
+    .search {
+      width: 100%;
+      height: 42px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      padding: 0 12px;
+      font-size: 14px;
+      outline: none;
+      color: var(--ink);
+    }
+
+    .search:focus { border-color: var(--topic); box-shadow: 0 0 0 3px rgba(21, 122, 125, .10); }
+
+    .iconbtn {
+      width: 36px;
+      height: 42px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--muted);
+      cursor: pointer;
+    }
+
+    .quick, .stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 9px;
+      margin: 12px 0;
+    }
+
+    .chip, .toolbtn, .neighbor, .result-btn {
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, .94);
+      color: var(--ink);
+      border-radius: 999px;
+      padding: 8px 10px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .chip:hover, .toolbtn:hover, .neighbor:hover, .result-btn:hover, .iconbtn:hover {
+      border-color: var(--strong);
+      box-shadow: 0 4px 16px rgba(50, 43, 32, .08);
+    }
+
+    .chip.active {
+      border-color: var(--topic);
+      background: #e9f6f3;
+      color: #0b5f62;
+      font-weight: 600;
+    }
+
+    .stat {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      padding: 10px;
+      min-width: 0;
+    }
+
+    .stat strong { display: block; font-size: 20px; }
+    .stat span { color: var(--muted); font-size: 12px; }
+
+    .legend, .topic-list, .neighbors, .search-results {
+      display: grid;
+      gap: 8px;
+    }
+
+    .search-results { margin: 4px 0 12px; }
+
+    .result-btn {
+      border-radius: 8px;
+      text-align: left;
+      line-height: 1.4;
+    }
+
+    .result-btn strong {
+      display: block;
+      font-size: 13px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .type-row {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 9px 10px;
+      cursor: pointer;
+      font-size: 13px;
+      color: var(--ink);
+      user-select: none;
+    }
+
+    .type-row.off { opacity: .42; }
+    .type-left { display: flex; align-items: center; min-width: 0; }
+
+    .check {
+      width: 16px;
+      height: 16px;
+      border-radius: 4px;
+      border: 1px solid var(--strong);
+      display: inline-grid;
+      place-items: center;
+      margin-right: 8px;
+      color: white;
+      font-size: 11px;
+      flex: 0 0 auto;
+    }
+
+    .off .check { color: transparent; background: #fff !important; }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 7px;
+      flex: 0 0 auto;
+    }
+
+    .topic-btn {
+      text-align: left;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      padding: 10px;
+      cursor: pointer;
+      color: var(--ink);
+    }
+
+    .topic-btn:hover { border-color: var(--strong); }
+    .topic-btn.active { border-color: var(--topic); background: #edf8f5; }
+    .topic-btn strong { display: block; font-size: 13px; line-height: 1.35; }
+    .topic-btn span { display: block; margin-top: 3px; color: var(--muted); font-size: 12px; }
+
+    .toolbar {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      right: 16px;
+      z-index: 4;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      pointer-events: none;
+      flex-wrap: wrap;
+    }
+
+    .badge, .toolbtn {
+      pointer-events: auto;
+      box-shadow: 0 6px 22px rgba(50, 43, 32, .08);
+      background: rgba(255, 253, 248, .94);
+    }
+
+    .badge {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 8px 11px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .restore-left, .restore-right { display: none; }
+    .shell.hide-left .restore-left, .shell.hide-right .restore-right { display: inline-block; }
+
+    svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+      cursor: grab;
+      touch-action: none;
+    }
+
+    svg.panning { cursor: grabbing; }
+
+    .link {
+      stroke: rgba(79, 83, 80, .18);
+      stroke-width: 1.1;
+    }
+
+    .link.focus {
+      stroke: rgba(32, 37, 31, .66);
+      stroke-width: 2.2;
+    }
+
+    .node circle {
+      stroke: rgba(255, 255, 255, .95);
+      stroke-width: 2.4;
+      cursor: pointer;
+      filter: drop-shadow(0 3px 7px rgba(40, 35, 28, .18));
+    }
+
+    .node text {
+      font-size: 12px;
+      fill: #20251f;
+      paint-order: stroke;
+      stroke: rgba(255, 253, 248, .96);
+      stroke-width: 5px;
+      stroke-linejoin: round;
+      pointer-events: none;
+    }
+
+    .node.evidence text, .node.source text { font-size: 11px; }
+    .node.selected circle { stroke: #101817; stroke-width: 3.4; }
+    .node.dim, .link.dim { opacity: .16; }
+    .node.hit circle { stroke: #f2c94c; stroke-width: 3; }
+
+    .detail-img-wrap {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: #f1eee6;
+      padding: 8px;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .55);
+    }
+
+    .detail-img {
+      width: 100%;
+      max-height: 42vh;
+      object-fit: contain;
+      border-radius: 7px;
+      display: block;
+      cursor: zoom-in;
+    }
+
+    .img-hint { margin-top: 6px; color: var(--muted); font-size: 12px; }
+    .meta { display: grid; gap: 9px; margin-top: 12px; }
+
+    .kv {
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 8px;
+      padding: 10px;
+      font-size: 13px;
+      line-height: 1.55;
+      overflow-wrap: anywhere;
+    }
+
+    .kv b {
+      color: var(--muted);
+      font-weight: 600;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    a { color: var(--source); overflow-wrap: anywhere; }
+
+    .text-box {
+      white-space: pre-wrap;
+      word-break: break-word;
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 8px;
+      padding: 11px;
+      font-size: 13px;
+      line-height: 1.7;
+      max-height: 25vh;
+      overflow: auto;
+    }
+
+    .neighbor {
+      border-radius: 8px;
+      text-align: left;
+      line-height: 1.4;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(16, 18, 16, .78);
+      z-index: 99;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .modal.open { display: flex; }
+
+    .modal img {
+      max-width: 96vw;
+      max-height: 92vh;
+      object-fit: contain;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: var(--shadow);
+    }
+
+    .modal button {
+      position: fixed;
+      top: 18px;
+      right: 22px;
+      border: 1px solid rgba(255, 255, 255, .4);
+      background: rgba(255, 255, 255, .12);
+      color: #fff;
+      border-radius: 999px;
+      padding: 9px 13px;
+      cursor: pointer;
+    }
+
+    @media (max-width: 1100px) {
+      body { overflow: auto; }
+      .shell { grid-template-columns: 1fr; height: auto; min-width: 0; }
+      .left, .stage, .right { grid-column: 1; }
+      .stage { order: 1; height: 68vh; min-height: 520px; }
+      .left { order: 2; border-right: 0; border-top: 1px solid var(--line); }
+      .right { order: 3; border-left: 0; border-top: 1px solid var(--line); }
+      .resizer { display: none; }
+    }
+
+    @media (max-width: 560px) {
+      .panel { padding: 16px; }
+      .stage { height: 62vh; min-height: 440px; }
+      .toolbar { top: 10px; left: 10px; right: 10px; gap: 6px; }
+      .badge, .toolbtn { font-size: 12px; padding: 7px 9px; }
+      .quick, .stats { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div id="shell" class="shell">
+    <aside class="panel left">
+      <div class="panel-head">
+        <h1>Agent 知识网络</h1>
+        <button id="hideLeft" class="panel-toggle" type="button">隐藏左栏</button>
+      </div>
+      <p class="muted">以“主题-概念-证据-来源-页面”组织 OneNote 材料。默认先展示结构，选择主题后展开对应证据。</p>
+
+      <div class="search-row">
+        <input id="search" class="search" placeholder="搜索节点、整理文本、链接">
+        <button id="clearSearch" class="iconbtn" type="button" title="清空搜索">×</button>
+      </div>
+      <div id="searchResults" class="search-results"></div>
+
+      <div class="quick">
+        <button class="chip" data-preset="structure" type="button">结构视图</button>
+        <button class="chip" data-preset="all" type="button">完整图谱</button>
+        <button class="chip" data-preset="evidence" type="button">证据视图</button>
+        <button class="chip" data-preset="none" type="button">全部隐藏</button>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><strong id="nodeCount">0</strong><span>当前节点</span></div>
+        <div class="stat"><strong id="edgeCount">0</strong><span>当前关系</span></div>
+        <div class="stat"><strong id="rawAssetCount">0</strong><span>原始证据</span></div>
+        <div class="stat"><strong id="graphAssetCount">0</strong><span>去重证据节点</span></div>
+      </div>
+
+      <h2>节点类型</h2>
+      <div id="legend" class="legend"></div>
+
+      <h2>主题聚焦</h2>
+      <div id="topicList" class="topic-list"></div>
+    </aside>
+
+    <div id="leftResize" class="resizer" title="拖动调整左侧宽度"></div>
+
+    <main class="stage">
+      <div class="toolbar">
+        <span id="status" class="badge">布局中</span>
+        <button id="showLeft" class="toolbtn restore-left" type="button">显示左栏</button>
+        <button id="showRight" class="toolbtn restore-right" type="button">显示右栏</button>
+        <button id="reset" class="toolbtn" type="button">重置视图</button>
+        <button id="fit" class="toolbtn" type="button">适配画布</button>
+      </div>
+      <svg id="graph" role="img" aria-label="Agent knowledge network"></svg>
+    </main>
+
+    <div id="rightResize" class="resizer" title="拖动调整右侧宽度"></div>
+
+    <aside class="panel right">
+      <div class="panel-head">
+        <h2>节点详情</h2>
+        <button id="hideRight" class="panel-toggle" type="button">隐藏右栏</button>
+      </div>
+      <div id="detail" class="muted">选择一个节点查看原图、来源和整理文本。</div>
+      <h2>相邻关系</h2>
+      <div id="neighbors" class="neighbors"></div>
+    </aside>
+  </div>
+
+  <div id="modal" class="modal"><button type="button">关闭</button><img alt=""></div>
+
+  <script src="wiki_data.js"></script>
+  <script>
+    const color = {
+      root: "#111827", topic: "#157a7d", concept: "#9a6a22", method: "#b14a5a",
+      infrastructure: "#58707a", system: "#4c68a1", workflow: "#6c7f2e",
+      control: "#824f91", training: "#bd6530", evaluation: "#4d8656",
+      evidence: "#697179", source: "#0d7969", page: "#806f55"
+    };
+
+    const label = {
+      root: "根节点", topic: "主题", concept: "概念", method: "方法",
+      infrastructure: "基础设施", system: "系统", workflow: "流程",
+      control: "控制/安全", training: "训练", evaluation: "评测",
+      evidence: "证据图片", source: "网页来源", page: "OneNote 页面"
+    };
+
+    const relationText = {
+      contains_page: "包含页面", has_topic: "形成主题", supported_by: "由证据支撑",
+      contains_evidence: "页面包含证据", from_source: "来自网页",
+      references_source: "参考来源", explained_by: "由材料说明", has_concept: "关联概念"
+    };
+
+    const structureTypes = ["root", "topic", "concept", "method", "infrastructure", "system", "workflow", "control", "training", "evaluation", "page"];
+    const allTypes = Object.keys(label).filter(t => WIKI_DATA.graph.nodes.some(n => n.type === t));
+    const nodes = WIKI_DATA.graph.nodes.map(n => ({ ...n, vx: 0, vy: 0 }));
+    const edges = WIKI_DATA.graph.edges.map(e => ({ ...e, relation_label: e.relation_label || relationText[e.relation] || e.relation }));
+    const byId = new Map(nodes.map(n => [n.id, n]));
+    const adj = new Map(nodes.map(n => [n.id, []]));
+    const topicRawCount = new Map((WIKI_DATA.topics || []).map(t => [`topic_${t.id}`, t.asset_count || 0]));
+    const graphEvidenceCount = nodes.filter(n => n.type === "evidence").length;
+    const rawEvidenceCount = WIKI_DATA.asset_count || graphEvidenceCount;
+
+    for (const e of edges) {
+      adj.get(e.source)?.push({ id: e.target, relation: e.relation, label: e.relation_label });
+      adj.get(e.target)?.push({ id: e.source, relation: e.relation, label: e.relation_label });
+    }
+
+    const state = {
+      visibleTypes: new Set(allTypes),
+      preset: "all",
+      selected: "",
+      query: "",
+      focusTopic: "",
+      tx: 0,
+      ty: 0,
+      scale: 1
+    };
+
+    const svg = document.getElementById("graph");
+    const shellEl = document.getElementById("shell");
+    const statusEl = document.getElementById("status");
+    const detailEl = document.getElementById("detail");
+    const neighborsEl = document.getElementById("neighbors");
+    const searchEl = document.getElementById("search");
+    const searchResultsEl = document.getElementById("searchResults");
+    const legendEl = document.getElementById("legend");
+    const topicListEl = document.getElementById("topicList");
+    const modalEl = document.getElementById("modal");
+
+    const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    const linkLayer = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    const nodeLayer = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    g.appendChild(linkLayer);
+    g.appendChild(nodeLayer);
+    svg.appendChild(g);
+
+    const width = () => svg.clientWidth || 900;
+    const height = () => svg.clientHeight || 700;
+    const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
+    const esc = t => String(t || "").replace(/[&<>"']/g, m => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[m]));
+    const norm = t => String(t || "").toLowerCase();
+    const imageSrc = n => n.image_path ? "../" + n.image_path : "";
+    const nodeText = n => [
+      n.title, n.description, n.text, n.source_url, n.source_urls?.join(" "),
+      n.page_title, n.page_titles?.join(" "), n.asset_id_raw,
+      n.duplicate_asset_ids?.join(" "), n.keywords?.join(" ")
+    ].filter(Boolean).join(" ");
+
+    function matchState(n) {
+      if (!state.query) return "";
+      const q = norm(state.query);
+      if (norm(nodeText(n)).includes(q)) return "direct";
+      if ((adj.get(n.id) || []).some(x => norm(nodeText(byId.get(x.id) || {})).includes(q))) return "neighbor";
+      return "";
+    }
+
+    function focusedIds() {
+      if (!state.focusTopic) return null;
+      const keep = new Set([state.focusTopic]);
+      for (const a of adj.get(state.focusTopic) || []) {
+        keep.add(a.id);
+        for (const b of adj.get(a.id) || []) keep.add(b.id);
+      }
+      return keep;
+    }
+
+    function visibleNode(n) {
+      if (!state.visibleTypes.has(n.type)) return false;
+      if (state.query && !matchState(n)) return false;
+      const keep = focusedIds();
+      if (keep && !keep.has(n.id)) return false;
+      return true;
+    }
+
+    const visibleEdge = e => visibleNode(byId.get(e.source)) && visibleNode(byId.get(e.target));
+
+    function nodeRadius(n) {
+      if (n.type === "root") return 19;
+      if (n.type === "topic") return 15 + Math.min(10, Math.sqrt(n.asset_count || 1));
+      if (n.type === "evidence") return n.source_url ? 7.5 : 6.2;
+      if (n.type === "source") return 8.5;
+      return 11;
+    }
+
+    function initPositions() {
+      const cx = width() / 2;
+      const cy = height() / 2;
+      const groups = {
+        topic: nodes.filter(n => n.type === "topic"),
+        concept: nodes.filter(n => !["root", "topic", "evidence", "source", "page"].includes(n.type)),
+        page: nodes.filter(n => n.type === "page"),
+        evidence: nodes.filter(n => n.type === "evidence"),
+        source: nodes.filter(n => n.type === "source")
+      };
+      const root = byId.get("root_agent_wiki");
+      if (root) { root.x = cx; root.y = cy; }
+
+      function ring(list, r, offset = 0) {
+        list.forEach((n, i) => {
+          const a = offset + Math.PI * 2 * i / Math.max(1, list.length);
+          n.x = cx + Math.cos(a) * r;
+          n.y = cy + Math.sin(a) * r;
+          n.vx = 0;
+          n.vy = 0;
+        });
+      }
+
+      ring(groups.topic, Math.min(width(), height()) * .24, -.55);
+      ring(groups.concept, Math.min(width(), height()) * .38, .1);
+      ring(groups.page, Math.min(width(), height()) * .49, .75);
+      ring(groups.evidence, Math.min(width(), height()) * .54, 0);
+      ring(groups.source, Math.min(width(), height()) * .62, .35);
+    }
+
+    function tick() {
+      const visible = nodes.filter(visibleNode);
+      const set = new Set(visible.map(n => n.id));
+      for (let step = 0; step < 2; step++) {
+        for (let i = 0; i < visible.length; i++) {
+          for (let j = i + 1; j < visible.length; j++) {
+            const a = visible[i], b = visible[j];
+            let dx = a.x - b.x, dy = a.y - b.y;
+            let d2 = dx * dx + dy * dy || 1;
+            const d = Math.sqrt(d2);
+            const force = (a.type === "evidence" && b.type === "evidence") ? 520 / d2 : 760 / d2;
+            dx /= d;
+            dy /= d;
+            a.vx = (a.vx || 0) + dx * force;
+            a.vy = (a.vy || 0) + dy * force;
+            b.vx = (b.vx || 0) - dx * force;
+            b.vy = (b.vy || 0) - dy * force;
+          }
+        }
+
+        for (const e of edges) {
+          if (!set.has(e.source) || !set.has(e.target)) continue;
+          const a = byId.get(e.source), b = byId.get(e.target);
+          const ideal = e.relation === "supported_by" ? 118 : e.relation === "from_source" ? 92 : 150;
+          let dx = b.x - a.x, dy = b.y - a.y;
+          const d = Math.sqrt(dx * dx + dy * dy) || 1;
+          const pull = (d - ideal) * .006 * Math.min(4, e.weight || 1);
+          dx /= d;
+          dy /= d;
+          a.vx = (a.vx || 0) + dx * pull;
+          a.vy = (a.vy || 0) + dy * pull;
+          b.vx = (b.vx || 0) - dx * pull;
+          b.vy = (b.vy || 0) - dy * pull;
+        }
+
+        for (const n of visible) {
+          const cx = width() / 2;
+          const cy = height() / 2;
+          n.vx = (n.vx || 0) + (cx - n.x) * .0015;
+          n.vy = (n.vy || 0) + (cy - n.y) * .0015;
+          if (n.type === "root") {
+            n.vx += (cx - n.x) * .05;
+            n.vy += (cy - n.y) * .05;
+          }
+          n.x += n.vx || 0;
+          n.y += n.vy || 0;
+          n.vx *= .84;
+          n.vy *= .84;
+        }
+      }
+    }
+
+    function visibleNodes() { return nodes.filter(visibleNode); }
+    function visibleEdges() { return edges.filter(visibleEdge); }
+
+    function fitVisibleNodes(animated = false) {
+      const list = visibleNodes();
+      if (!list.length) {
+        state.tx = 0;
+        state.ty = 0;
+        state.scale = 1;
+        render();
+        return;
+      }
+      let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+      for (const n of list) {
+        const r = nodeRadius(n) + 60;
+        minX = Math.min(minX, n.x - r);
+        minY = Math.min(minY, n.y - r);
+        maxX = Math.max(maxX, n.x + r);
+        maxY = Math.max(maxY, n.y + r);
+      }
+      const bw = Math.max(1, maxX - minX);
+      const bh = Math.max(1, maxY - minY);
+      const padding = width() < 700 ? 42 : 90;
+      const nextScale = clamp(Math.min((width() - padding) / bw, (height() - padding) / bh), .38, 2.35);
+      const nextTx = width() / 2 - (minX + bw / 2) * nextScale;
+      const nextTy = height() / 2 - (minY + bh / 2) * nextScale;
+      state.scale = nextScale;
+      state.tx = nextTx;
+      state.ty = nextTy;
+      if (!animated) render();
+    }
+
+    let renderQueued = false;
+    function queueRender() {
+      if (renderQueued) return;
+      renderQueued = true;
+      requestAnimationFrame(() => {
+        renderQueued = false;
+        render();
+      });
+    }
+
+    function render() {
+      const list = visibleNodes();
+      const lines = visibleEdges();
+      document.getElementById("nodeCount").textContent = list.length;
+      document.getElementById("edgeCount").textContent = lines.length;
+      document.getElementById("rawAssetCount").textContent = rawEvidenceCount;
+      document.getElementById("graphAssetCount").textContent = graphEvidenceCount;
+
+      const selectedNeighbors = new Set((adj.get(state.selected) || []).map(x => x.id));
+      const queryHits = new Set(nodes.filter(n => matchState(n) === "direct").map(n => n.id));
+
+      linkLayer.innerHTML = lines.map(e => {
+        const a = byId.get(e.source), b = byId.get(e.target);
+        const focus = state.selected && (e.source === state.selected || e.target === state.selected);
+        const dim = state.selected && !focus ? " dim" : "";
+        return `<line class="link ${focus ? "focus" : ""}${dim}" x1="${a.x}" y1="${a.y}" x2="${b.x}" y2="${b.y}"><title>${esc(e.relation_label)}</title></line>`;
+      }).join("");
+
+      nodeLayer.innerHTML = list.map(n => {
+        const r = nodeRadius(n);
+        const selected = n.id === state.selected ? " selected" : "";
+        const related = n.id === state.selected || selectedNeighbors.has(n.id);
+        const dim = state.selected && !related ? " dim" : "";
+        const hit = queryHits.has(n.id) ? " hit" : "";
+        const labelShown = n.type !== "evidence" && (n.type !== "source" || state.scale > 1.1 || n.id === state.selected);
+        const title = n.title.length > 26 ? n.title.slice(0, 25) + "..." : n.title;
+        return `<g class="node ${esc(n.type)}${selected}${dim}${hit}" data-id="${esc(n.id)}" transform="translate(${n.x},${n.y})"><circle r="${r}" fill="${color[n.type] || "#666"}"><title>${esc(label[n.type] || n.type)} · ${esc(n.title)}</title></circle>${labelShown ? `<text x="${r + 6}" y="4">${esc(title)}</text>` : ""}</g>`;
+      }).join("");
+
+      g.setAttribute("transform", `translate(${state.tx},${state.ty}) scale(${state.scale})`);
+      statusEl.textContent = state.focusTopic ? "主题聚焦" : state.preset === "structure" ? "结构视图" : `${list.length} 节点 · ${lines.length} 关系`;
+      renderSearchResults();
+      updatePresetButtons();
+    }
+
+    function selectNode(id, options = {}) {
+      const n = byId.get(id);
+      if (!n) return;
+      if (options.reveal) {
+        state.visibleTypes.add(n.type);
+        const keep = focusedIds();
+        if (keep && !keep.has(id)) state.focusTopic = "";
+      }
+      state.selected = state.selected === id && !options.force ? "" : id;
+      renderDetail();
+      renderTopics();
+      renderLegend();
+      render();
+      if (options.center) centerNode(id);
+    }
+
+    function centerNode(id) {
+      const n = byId.get(id);
+      if (!n) return;
+      state.scale = Math.max(state.scale, 1.15);
+      state.tx = width() / 2 - n.x * state.scale;
+      state.ty = height() / 2 - n.y * state.scale;
+      render();
+    }
+
+    function openImage(src) {
+      if (!src) return;
+      modalEl.querySelector("img").src = src;
+      modalEl.classList.add("open");
+    }
+
+    const joinList = v => Array.isArray(v) ? v.filter(Boolean).join(" / ") : v;
+    const linkList = v => (Array.isArray(v) ? v : [v]).filter(Boolean).map(url => `<a href="${esc(url)}" target="_blank" rel="noreferrer">${esc(url)}</a>`).join("<br>");
+
+    function renderDetail() {
+      const n = byId.get(state.selected) || byId.get("root_agent_wiki") || nodes[0];
+      const img = imageSrc(n) ? `<div class="detail-img-wrap"><img class="detail-img" src="${esc(imageSrc(n))}" alt="${esc(n.title)}"><div class="img-hint">点击图片放大查看原图</div></div>` : "";
+      const url = linkList(n.source_urls?.length ? n.source_urls : n.source_url);
+      const urlBlock = url ? `<div class="kv"><b>原始链接</b>${url}</div>` : "";
+      const desc = n.description || n.text || "";
+      const ids = joinList(n.duplicate_asset_ids) || n.asset_id_raw;
+      const rawId = ids ? `<div class="kv"><b>证据 ID</b>${esc(ids)}</div>` : "";
+      const merged = n.duplicate_count && n.duplicate_count > 1 ? `<div class="kv"><b>合并记录</b>同一图片合并 ${esc(n.duplicate_count)} 个 OneNote 位置</div>` : "";
+      const pages = joinList(n.page_titles) || n.page_title;
+      const source = n.text_source ? `<div class="kv"><b>文本来源</b>${esc(n.text_source)}</div>` : "";
+      const modified = n.content_modified_at ? `<div class="kv"><b>内容最后修改</b>${esc(n.content_modified_at)}</div>` : "";
+      const labelTime = n.label_generated_at ? `<div class="kv"><b>节点名生成时间</b>${esc(n.label_generated_at)}<br>${esc(n.label_model || "")}</div>` : "";
+
+      detailEl.innerHTML = `${img}<div class="meta"><div class="kv"><b>节点名称</b>${esc(n.title)}</div>${rawId}<div class="kv"><b>节点类型</b>${esc(label[n.type] || n.type)}</div>${pages ? `<div class="kv"><b>OneNote 页面</b>${esc(pages)}</div>` : ""}${merged}${urlBlock}${source}${modified}${labelTime}</div>${desc ? `<h3>${n.type === "evidence" ? "整理文本" : "说明"}</h3><div class="text-box">${esc(desc)}</div>` : ""}`;
+      const detailImg = detailEl.querySelector(".detail-img");
+      if (detailImg) detailImg.addEventListener("click", () => openImage(detailImg.src));
+
+      neighborsEl.innerHTML = (adj.get(n.id) || []).slice(0, 60).map(x => {
+        const other = byId.get(x.id);
+        return other ? `<button class="neighbor" type="button" data-id="${esc(other.id)}"><span class="dot" style="background:${color[other.type] || "#666"}"></span>${esc(other.title)}<br><span class="muted">${esc(x.label)}</span></button>` : "";
+      }).join("") || "<p class='muted'>暂无相邻节点。</p>";
+    }
+
+    function renderLegend() {
+      legendEl.innerHTML = allTypes.map(t => `<div class="type-row ${state.visibleTypes.has(t) ? "" : "off"}" data-type="${t}"><span class="type-left"><span class="check" style="background:${color[t]}">✓</span><span class="dot" style="background:${color[t]}"></span>${label[t]}</span><span>${nodes.filter(n => n.type === t).length}</span></div>`).join("");
+    }
+
+    function setPreset(name, options = {}) {
+      state.preset = name;
+      if (name === "all") state.visibleTypes = new Set(allTypes);
+      if (name === "none") state.visibleTypes = new Set();
+      if (name === "structure") state.visibleTypes = new Set(structureTypes.filter(t => allTypes.includes(t)));
+      if (name === "evidence") state.visibleTypes = new Set(["root", "topic", "page", "evidence", "source"].filter(t => allTypes.includes(t)));
+      if (!options.keepFocus) state.focusTopic = "";
+      renderLegend();
+      renderTopics();
+      afterFilterChange(options.fit !== false);
+    }
+
+    function updatePresetButtons() {
+      document.querySelectorAll("[data-preset]").forEach(b => b.classList.toggle("active", b.dataset.preset === state.preset && !state.focusTopic));
+    }
+
+    function renderTopics() {
+      const topics = nodes.filter(n => n.type === "topic");
+      topicListEl.innerHTML = topics.map(t => {
+        const raw = topicRawCount.get(t.id) || t.asset_count || 0;
+        const graph = t.asset_count || 0;
+        const countText = raw && raw !== graph ? `${graph} 去重 / ${raw} 原始` : `${graph} 条证据`;
+        return `<button class="topic-btn ${state.focusTopic === t.id ? "active" : ""}" type="button" data-id="${esc(t.id)}"><strong>${esc(t.title)}</strong><span>${countText}</span></button>`;
+      }).join("");
+    }
+
+    function renderSearchResults() {
+      if (!state.query) {
+        searchResultsEl.innerHTML = "";
+        return;
+      }
+      const direct = nodes.filter(n => matchState(n) === "direct");
+      const neighbor = nodes.filter(n => matchState(n) === "neighbor").slice(0, 4);
+      const results = direct.slice(0, 10).concat(neighbor);
+      searchResultsEl.innerHTML = results.length ? results.map(n => {
+        const kind = matchState(n) === "direct" ? "直接命中" : "相邻命中";
+        return `<button class="result-btn" type="button" data-id="${esc(n.id)}"><strong>${esc(n.title)}</strong><span class="muted">${esc(label[n.type] || n.type)} · ${kind}</span></button>`;
+      }).join("") : `<p class="muted">没有匹配结果。</p>`;
+    }
+
+    function afterFilterChange(shouldFit = true) {
+      for (const n of nodes) { n.vx = 0; n.vy = 0; }
+      const isPlainFullGraph = state.preset === "all" && !state.focusTopic && !state.query;
+      if (isPlainFullGraph) initPositions();
+      if (shouldFit && !isPlainFullGraph) fitVisibleNodes();
+      else if (isPlainFullGraph) {
+        state.tx = 0;
+        state.ty = 0;
+        state.scale = 1;
+        render();
+      }
+      else render();
+    }
+
+    function refreshAfterSidebarToggle() {
+      requestAnimationFrame(() => {
+        if (state.preset === "all" && !state.focusTopic && !state.query) {
+          initPositions();
+          render();
+        } else {
+          fitVisibleNodes();
+        }
+      });
+    }
+
+    function setSidebar(side, hidden) {
+      shellEl.classList.toggle(side === "left" ? "hide-left" : "hide-right", hidden);
+      refreshAfterSidebarToggle();
+    }
+
+    let nodeDrag = null, panDrag = null, resizeDrag = null;
+    function startNodeDrag(ev) {
+      const nodeEl = ev.target.closest(".node");
+      if (!nodeEl) return;
+      ev.stopPropagation();
+      nodeDrag = { node: byId.get(nodeEl.dataset.id), px: ev.clientX, py: ev.clientY };
+      nodeEl.setPointerCapture?.(ev.pointerId);
+    }
+
+    nodeLayer.addEventListener("click", ev => {
+      const nodeEl = ev.target.closest(".node");
+      if (!nodeEl) return;
+      ev.stopPropagation();
+      selectNode(nodeEl.dataset.id, { force: true });
+    });
+    nodeLayer.addEventListener("pointerdown", startNodeDrag);
+
+    neighborsEl.addEventListener("click", ev => {
+      const btn = ev.target.closest(".neighbor");
+      if (btn) selectNode(btn.dataset.id, { force: true, reveal: true, center: true });
+    });
+
+    searchResultsEl.addEventListener("click", ev => {
+      const btn = ev.target.closest(".result-btn");
+      if (btn) selectNode(btn.dataset.id, { force: true, reveal: true, center: true });
+    });
+
+    legendEl.addEventListener("click", ev => {
+      const row = ev.target.closest(".type-row");
+      if (!row) return;
+      const t = row.dataset.type;
+      if (state.visibleTypes.has(t)) state.visibleTypes.delete(t);
+      else state.visibleTypes.add(t);
+      state.preset = "custom";
+      renderLegend();
+      afterFilterChange();
+    });
+
+    topicListEl.addEventListener("click", ev => {
+      const btn = ev.target.closest(".topic-btn");
+      if (!btn) return;
+      const same = state.focusTopic === btn.dataset.id;
+      state.focusTopic = same ? "" : btn.dataset.id;
+      state.selected = same ? "" : btn.dataset.id;
+      if (!same) {
+        state.preset = "topic";
+        state.visibleTypes = new Set(["root", "topic", "page", "evidence", "source", "concept", "method", "infrastructure", "system", "workflow", "control", "training", "evaluation"].filter(t => allTypes.includes(t)));
+      }
+      renderLegend();
+      renderTopics();
+      renderDetail();
+      afterFilterChange();
+    });
+
+    svg.addEventListener("pointerdown", ev => {
+      if (ev.target.closest(".node")) return;
+      panDrag = { px: ev.clientX, py: ev.clientY, moved: false };
+      svg.classList.add("panning");
+    });
+
+    window.addEventListener("pointermove", ev => {
+      if (nodeDrag) {
+        nodeDrag.node.x += (ev.clientX - nodeDrag.px) / state.scale;
+        nodeDrag.node.y += (ev.clientY - nodeDrag.py) / state.scale;
+        nodeDrag.px = ev.clientX;
+        nodeDrag.py = ev.clientY;
+        queueRender();
+        return;
+      }
+      if (panDrag) {
+        const dx = ev.clientX - panDrag.px;
+        const dy = ev.clientY - panDrag.py;
+        if (Math.abs(dx) + Math.abs(dy) > 3) panDrag.moved = true;
+        state.tx += dx;
+        state.ty += dy;
+        panDrag.px = ev.clientX;
+        panDrag.py = ev.clientY;
+        queueRender();
+        return;
+      }
+      if (resizeDrag) {
+        if (resizeDrag.side === "left") {
+          document.documentElement.style.setProperty("--left", `${Math.max(260, Math.min(560, ev.clientX))}px`);
+        } else {
+          document.documentElement.style.setProperty("--right", `${Math.max(320, Math.min(720, window.innerWidth - ev.clientX))}px`);
+        }
+        queueRender();
+      }
+    });
+
+    window.addEventListener("pointerup", () => {
+      if (panDrag && !panDrag.moved && state.selected) {
+        state.selected = "";
+        renderDetail();
+        render();
+      }
+      nodeDrag = null;
+      panDrag = null;
+      resizeDrag = null;
+      svg.classList.remove("panning");
+    });
+
+    svg.addEventListener("wheel", ev => {
+      ev.preventDefault();
+      const old = state.scale;
+      state.scale = clamp(state.scale * (ev.deltaY > 0 ? .91 : 1.09), .35, 3.2);
+      const rect = svg.getBoundingClientRect();
+      const mx = ev.clientX - rect.left;
+      const my = ev.clientY - rect.top;
+      state.tx = mx - (mx - state.tx) * (state.scale / old);
+      state.ty = my - (my - state.ty) * (state.scale / old);
+      render();
+    }, { passive: false });
+
+    document.getElementById("leftResize").addEventListener("pointerdown", ev => { resizeDrag = { side: "left" }; ev.preventDefault(); });
+    document.getElementById("rightResize").addEventListener("pointerdown", ev => { resizeDrag = { side: "right" }; ev.preventDefault(); });
+    document.getElementById("hideLeft").addEventListener("click", () => setSidebar("left", true));
+    document.getElementById("hideRight").addEventListener("click", () => setSidebar("right", true));
+    document.getElementById("showLeft").addEventListener("click", () => setSidebar("left", false));
+    document.getElementById("showRight").addEventListener("click", () => setSidebar("right", false));
+    document.querySelectorAll("[data-preset]").forEach(b => b.addEventListener("click", () => setPreset(b.dataset.preset)));
+    document.getElementById("fit").addEventListener("click", () => {
+      if (state.preset === "all" && !state.focusTopic && !state.query) {
+        state.tx = 0;
+        state.ty = 0;
+        state.scale = .9;
+        render();
+      } else {
+        fitVisibleNodes();
+      }
+    });
+    document.getElementById("reset").addEventListener("click", () => {
+      state.query = "";
+      state.selected = "";
+      state.focusTopic = "";
+      searchEl.value = "";
+      initPositions();
+      setPreset("all", { fit: false });
+      renderDetail();
+    });
+    document.getElementById("clearSearch").addEventListener("click", () => {
+      state.query = "";
+      searchEl.value = "";
+      searchEl.focus();
+      afterFilterChange();
+    });
+    searchEl.addEventListener("input", () => {
+      state.query = searchEl.value.trim();
+      afterFilterChange();
+    });
+    modalEl.addEventListener("click", ev => {
+      if (ev.target === modalEl || ev.target.tagName === "BUTTON") modalEl.classList.remove("open");
+    });
+    window.addEventListener("resize", () => {
+      if (state.preset === "all" && !state.focusTopic && !state.query) {
+        initPositions();
+        render();
+      } else {
+        fitVisibleNodes();
+      }
+    });
+
+    initPositions();
+    renderLegend();
+    renderTopics();
+    renderDetail();
+    render();
+    statusEl.textContent = "布局完成";
+  </script>
+</body>
+</html>

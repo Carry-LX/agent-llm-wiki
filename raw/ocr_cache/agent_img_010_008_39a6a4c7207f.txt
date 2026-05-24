@@ -1,0 +1,26 @@
+这个循环对所有工具是平等的。LLM 可以在任何时候调用任何工具，甚至在一次响应中同时调多
+个。没有硬编码的“必须先搜再读"。与代码搜索相关的核心工具有四个:
+
+工具                      底层实现                   作用
+
+GrepTool                      ripgrep (rz )                    正则搜索文件内容
+
+GlobTool                   glob 模式匹配              按文件名/路径模式查找文件
+
+FileReadTool              Nodejs fs                    读取指定文件的指定行范围
+
+AgentTool                 独立 LLM 对话              启动子 agent 做多步探索
+
+此外还有 LSP (Language Server Protocol) 工具,用 "go to definition”, “find references” SiS
+义精确的操作补充 Grep 的不足。但核心搜索架构建立在这四个工具之上。
+
+其中 AgentTool 比较特殊: 它不是直接搜索文件，而是启动一个独立的子 agent，让子 agent 在
+自己的 context window 里完成一整套搜索任务，最后只把结论返回给主对话。子 agent 有多种类
+型，与搜索最相关的是 Explore 类型: 它只配备搜索和读取工具 (Grep、Glob、Read) ，不能编
+辑文件、不能执行命令、不能黎套启动新的 Agent，是一个纯只读的搜索专家。
+
+F agent 的核心价值是 context 隔离。它从零开始构建自己的对话历史，不继承主对话的消息，这
+意味着它搜索过程中产生的大量 grep 结果、代码片段都留在自己的 context 里，主对话只收到一段
+总结性的文本结论。对于需要大范围搜索的任务，如果在主对话里直接搜索，几轮 grep/read 下来
+context 可能就被中间结果塞满了。因此交给子 agent 处理后，主对话的 context 只增加一条结论
+消息。

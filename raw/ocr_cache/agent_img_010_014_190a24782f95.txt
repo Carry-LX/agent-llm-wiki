@@ -1,0 +1,15 @@
+2.  子文件一:     user_role data_scientist.md
+文件路径:
+~/.claude/projects/a3f8c2bidee9/memory/user_role_data_scientist.md                                                              OD
+文件内容:
+4《》 Markdown                                                                                                                                   加
+name: user_role_ data_scientist
+description: 用户是数据科学家，关注数据管道、可观测性和横型评估
+type: user
+用户主要以数据科学家和机器学习工程视角使用 Claude Code.
+回答时应优先关注以下方面:
+1. 数据管道是否稳定、可追踪、可复现。
+2. 指标口径是否清晰，尤其是样本量、窗口期、过滤条件和异常值处理。
+3. 模型评估是人否包含离线指标、线上指标和监控指标。
+4. 代码解释需要说明数据流、状态变化和边界条件。
+用户通常不满足于“怎么用”的回答，更希望理解“为什么这样设计”。

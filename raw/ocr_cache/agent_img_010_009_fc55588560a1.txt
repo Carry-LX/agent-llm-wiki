@@ -1,0 +1,15 @@
+2.7 延迟加载与 ToolSearch
+
+当工具数量超过一定靖值时 《尤其是 MCP 工具大量接入后) ，将所有工具的完整 schema 发送给模型会消
+耗大量 token. Claude Code 通过延迟加载 (Deferred Loading) 机制解决这个问题。
+
+标记了 shouldDefer: true 的工具在初始提示中只发送工具名称 (defer_loading: true ) ，不发送完
+整的参数 schema。模型需要先调用 TooLsearchTootL 按关键词搜索并获取工具的完整定义后，才能调用
+这些延迟加载的工具。
+
+每个工具的 searchHint 字段融是为此设计的一一它提供 3-10 个词的能力摘述，帮助 ToolSearchTool
+进行关键词匹配。例如 GrepTool 的 searchHint 是 'search file contents with regex
+(ripgrep)' o
+
+标记了 alwaysLoad: true 的工具则永远不会被延迟一一它们的完整 schema 总是出现在初始提示中。这
+适用于模型在第一轮对话瓯必须能直接调用的核心工具。

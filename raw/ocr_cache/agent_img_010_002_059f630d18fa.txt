@@ -1,0 +1,24 @@
+当工具很多时，Claude Code 不会在一开始把所有工具的完整 schema 都发给模型，而是只把一部分核心
+工具完整加载; 对标记为 deferred 的工具，初始提示里通常只暴露“工具名 + 这是延迟加载的标记”"，不附
+带完整参数定义。
+模型如果觉得当前任务可能需要某个 deferred 工具，并不是直接调用它，而是先调用 ToolsearchTool 做一
+次按需搜索。搜索时不会只靠工具名硬匹配，更重要的是利用每个工具预先写好的 searchHint 做语义匹
+Be.
+比如某个工具初始只暴露名字 GrepTool , 但它背后还有一个 hint:
+
+search file contents with regex (ripgrep)
+当模型搜索'find text in files’ regex search in repo'这类关键词时， ToolsearchTool 就会把这个 hint 作为
+索引线索，匹配出 GrepTool ，然后把它的完整定义返回给模型，包括 :
+
+© 工具说明
+
+。 BA schema
+
+° 必填字段
+
+。 可选字段
+模型拿到这个完整 schema 后，才真正知道这个工具怎么调用; 所以“只暴露名字”“不是说模型靠名字直接猜
+参数，而是先知道“有这么个工具存在“，再通过 ToolSearch 按名字和 hint 找回完整说明书。
+再压缩一点，可以记成:
+deferred tool 在首轮只做“目录项“，不做“完整文档"; 真正的文档是在模型通过 ToolSearch 搜到后，才按
+需加载进上下文。

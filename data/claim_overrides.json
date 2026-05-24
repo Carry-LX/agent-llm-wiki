@@ -1,0 +1,616 @@
+{
+  "agent_img_001_004_90500f357b93": {
+    "claim_type": "workflow",
+    "claim_text": "Text2SQL 训练数据可以由问答模板、变量随机填充和大模型问题改写构造；生成 SQL 时要约束模型只使用已知表名和字段名，并把中文数字转换为可执行的阿拉伯数字。",
+    "confidence": "medium",
+    "extraction_method": "human_curated_from_image",
+    "status": "active"
+  },
+  "agent_img_002_005_90500f357b93": {
+    "claim_type": "workflow",
+    "claim_text": "Text2SQL 训练数据可以由问答模板、变量随机填充和大模型问题改写构造；生成 SQL 时要约束模型只使用已知表名和字段名，并把中文数字转换为可执行的阿拉伯数字。",
+    "confidence": "medium",
+    "extraction_method": "human_curated_from_image",
+    "status": "active"
+  },
+  "agent_img_004_001_c7a560785213": {
+    "claim_type": "risk",
+    "claim_text": "Text2SQL 工具不能只校验 SQL 语法；执行前要检查 SELECT、表授权、危险关键字和 LIMIT，执行后还要检查非空、数值范围、关键实体缺失和历史对比，发现实体不匹配时应拒绝直接回答并提示补充过滤条件。",
+    "confidence": "high",
+    "extraction_method": "human_curated_from_image",
+    "status": "active"
+  },
+  "agent_link_004_001_a434e04af222": {
+    "claim_type": "workflow",
+    "claim_text": "在 Agent 系统里，Text2SQL 应作为只读受控工具：Agent 负责意图判断、歧义澄清和流程调度，Text2SQL 只在条件齐全时被调用。",
+    "confidence": "medium",
+    "extraction_method": "human_curated_from_onenote_text",
+    "status": "active"
+  },
+  "agent_link_004_002_1309c6f76a59": {
+    "claim_type": "risk",
+    "claim_text": "Text2SQL 实现应通过动态 Schema 裁剪降低 token 和歧义，通过业务术语词典与澄清机制提高理解准确率，并在执行前加入 SQL 安全校验和 LIMIT 约束。",
+    "confidence": "high",
+    "extraction_method": "human_curated_from_text_link",
+    "status": "active"
+  },
+  "agent_link_004_003_efdfe5a416f4": {
+    "claim_type": "workflow",
+    "claim_text": "Text2SQL 执行后需要做结果合理性验证，并结合日志、用户反馈和 few-shot 示例迭代，形成可持续修正的闭环。",
+    "confidence": "high",
+    "extraction_method": "human_curated_from_text_link",
+    "status": "active"
+  },
+  "agent_link_001_003_4eea312600bf": {
+    "claim_type": "metric",
+    "claim_text": "Text2SQL 数据增强可以采用问题到 SQL 的正向构造和 SQL 到问题的逆向构造；现有材料记录该双向增强框架相对少量人工标注 LoRA 提升执行准确率 16.3%，相对 few-shot 提示学习提升 35.7%。",
+    "confidence": "medium",
+    "extraction_method": "human_curated_from_text_link",
+    "status": "active"
+  },
+  "agent_link_002_002_299ba7379201": {
+    "claim_type": "metric",
+    "claim_text": "Text2SQL 数据增强可以采用问题到 SQL 的正向构造和 SQL 到问题的逆向构造；现有材料记录该双向增强框架相对少量人工标注 LoRA 提升执行准确率 16.3%，相对 few-shot 提示学习提升 35.7%。",
+    "confidence": "medium",
+    "extraction_method": "human_curated_from_text_link",
+    "status": "active"
+  },
+  "agent_img_002_027_e76d357cd694": {
+    "topic_id": "rag_and_retrieval",
+    "topic_title": "RAG 与检索增强",
+    "claim_type": "engineering_judgment",
+    "claim_text": "向量检索延迟飙升不一定来自索引算法；当向量索引占满内存并触发 swap 时，查询延迟可能从毫秒级上升到秒级，工程上应优先检查内存和量化策略。",
+    "confidence": "medium",
+    "extraction_method": "human_curated_topic_reassignment",
+    "status": "active"
+  },
+  "agent_img_002_026_f9760a189147": {
+    "topic_id": "rag_and_retrieval",
+    "topic_title": "RAG 与检索增强",
+    "claim_type": "engineering_judgment",
+    "claim_text": "向量库批量写入会触发 Segment 合并并造成查询抖动；工程上应把大批量写入错峰到低峰期，并拆成 500 到 1000 条的小批次降低 P99 延迟冲击。",
+    "confidence": "medium",
+    "extraction_method": "human_curated_topic_reassignment",
+    "status": "active"
+  },
+  "agent_img_002_009_cd3df81953ab": {
+    "topic_id": "agent_architecture",
+    "topic_title": "Agent 系统架构",
+    "claim_type": "definition",
+    "claim_text": "Agent Memory 可以理解为除静态知识库之外的第二检索源：知识库保存所有用户共享的静态知识，记忆库保存与特定用户或会话绑定的动态上下文，两路检索结果共同进入回答生成。",
+    "confidence": "high",
+    "extraction_method": "human_curated_from_memory_evidence",
+    "status": "active"
+  },
+  "agent_img_001_008_cd3df81953ab": {
+    "topic_id": "agent_architecture",
+    "topic_title": "Agent 系统架构",
+    "claim_type": "definition",
+    "claim_text": "Agent Memory 可以理解为除静态知识库之外的第二检索源：知识库保存所有用户共享的静态知识，记忆库保存与特定用户或会话绑定的动态上下文，两路检索结果共同进入回答生成。",
+    "confidence": "high",
+    "extraction_method": "human_curated_from_memory_evidence",
+    "status": "active"
+  },
+  "agent_img_010_020_b527d8b886ff": {
+    "topic_id": "agent_architecture",
+    "topic_title": "Agent 系统架构",
+    "claim_type": "engineering_judgment",
+    "claim_text": "Agent Memory 应被设计为需要主动管理的系统，而不是只写入的存储；记忆要按用户信息、反馈规则、项目状态和外部引用分层，并分别处理加载时机、优先级和时效性。",
+    "confidence": "high",
+    "extraction_method": "human_curated_from_image",
+    "status": "active"
+  },
+  "agent_img_010_021_b3c82f1477b0": {
+    "topic_id": "agent_architecture",
+    "topic_title": "Agent 系统架构",
+    "claim_type": "risk",
+    "claim_text": "把用户偏好、反馈规则、项目状态和外部引用都混在一个无分类向量库里，会导致时效不同的信息难以清理、检索噪声增大；按 user、feedback、project、reference 分层后，可降低记忆库规模并提高高优先级记忆的稳定影响。",
+    "confidence": "high",
+    "extraction_method": "human_curated_from_image",
+    "status": "active"
+  },
+  "agent_img_010_022_c5deb2fdfd12": {
+    "topic_id": "agent_architecture",
+    "topic_title": "Agent 系统架构",
+    "claim_type": "workflow",
+    "claim_text": "四类 Agent Memory 应采用不同检索策略：user 类会话开始全量加载并直接注入 system prompt，feedback 类执行操作前检索并最高优先级约束当前行为，project 类按任务相关性检索且先检查绝对时效，reference 类仅在需要外部信息时按需检索。",
+    "confidence": "high",
+    "extraction_method": "human_curated_from_image",
+    "status": "active"
+  },
+  "agent_img_010_016_10147080437a": {
+    "topic_id": "agent_architecture",
+    "topic_title": "Agent 系统架构",
+    "claim_type": "definition",
+    "claim_text": "Session 和 Memory 应分开理解：Session 是一次会话的聊天日志，记录用户消息、模型回复和工具调用；Memory 是项目级长期笔记，从一次或多次对话中提炼出以后可复用的信息。",
+    "confidence": "medium",
+    "extraction_method": "human_curated_from_image",
+    "status": "active"
+  },
+  "agent_img_010_017_51c9eb8de69e": {
+    "topic_id": "agent_architecture",
+    "topic_title": "Agent 系统架构",
+    "claim_type": "workflow",
+    "claim_text": "Agent Memory 可以采用项目目录下的 MEMORY.md 索引加多个子文件的结构：索引文件列出用户角色、反馈规则、项目状态和外部引用，子文件保存具体内容；记忆文件 ID 应使用稳定哈希，避免依赖运行时随机 hash。",
+    "confidence": "high",
+    "extraction_method": "human_curated_from_image",
+    "status": "active"
+  },
+  "agent_img_010_018_b5f17153c5f1": {
+    "topic_id": "agent_architecture",
+    "topic_title": "Agent 系统架构",
+    "claim_type": "workflow",
+    "claim_text": "记忆提取触发策略的核心是在成本和覆盖率之间取平衡：规则驱动触发可预测但不够灵活，LLM 自主触发更灵活但成本和不确定性更高；工程实践可采用后台异步触发，并用 ADD、UPDATE、DELETE、NOOP 处理提取结果。",
+    "confidence": "high",
+    "extraction_method": "human_curated_from_image",
+    "status": "active"
+  },
+  "agent_img_010_019_209453d6a810": {
+    "topic_id": "agent_architecture",
+    "topic_title": "Agent 系统架构",
+    "claim_type": "engineering_judgment",
+    "claim_text": "后台记忆提取需要合并并发请求：同一时间只运行一个提取任务，运行期间的新请求只标记 dirty，当前任务结束后再根据 watermark 统一扫描新增消息，避免多个异步任务同时修改记忆状态。",
+    "confidence": "medium",
+    "extraction_method": "human_curated_from_image",
+    "status": "active"
+  },
+  "agent_img_010_012_450cba6d1d68": {
+    "topic_id": "agent_architecture",
+    "topic_title": "Agent 系统架构",
+    "claim_type": "engineering_judgment",
+    "claim_text": "Memory 不应该保存可从代码或 git 历史恢复的实现细节，而应保存无法从当前状态自动推导出的关键决策，例如用户偏好、方案选择原因和 bug 根因。",
+    "confidence": "medium",
+    "extraction_method": "human_curated_from_image",
+    "status": "active"
+  },
+  "agent_img_010_013_a7f193bf605f": {
+    "topic_id": "agent_architecture",
+    "topic_title": "Agent 系统架构",
+    "claim_type": "workflow",
+    "claim_text": "项目级 Memory 适合以目录形式组织：一个 MEMORY.md 作为入口索引，下面拆分用户角色、偏好、反馈规则、项目状态和外部引用等子文件，便于按需读取而不是一次性塞满上下文。",
+    "confidence": "medium",
+    "extraction_method": "human_curated_from_image",
+    "status": "active"
+  },
+  "agent_img_010_014_190a24782f95": {
+    "topic_id": "agent_architecture",
+    "topic_title": "Agent 系统架构",
+    "claim_type": "example",
+    "claim_text": "用户角色类 Memory 应描述稳定身份和长期回答偏好，例如用户是数据科学家时，回答应更关注数据管道可复现、指标口径、模型评估和边界条件，而不是只给操作步骤。",
+    "confidence": "medium",
+    "extraction_method": "human_curated_from_image",
+    "status": "active"
+  },
+  "agent_img_010_015_8da4dcbcb47c": {
+    "topic_id": "agent_architecture",
+    "topic_title": "Agent 系统架构",
+    "claim_type": "workflow",
+    "claim_text": "MEMORY.md 更像项目记忆目录而不是完整记忆本体：它列出有哪些记忆、每条记忆大概是什么、需要详细内容时应读取哪个子 Markdown 文件。",
+    "confidence": "medium",
+    "extraction_method": "human_curated_from_image",
+    "status": "active"
+  },
+  "agent_img_010_004_7748829a7526": {
+    "topic_id": "agent_architecture",
+    "topic_title": "Agent 系统架构",
+    "claim_type": "risk",
+    "claim_text": "Agent 工具系统应采用安全默认值：工具构建的默认假设应偏向最危险情形，必须由工具开发者显式声明并发安全、只读等属性；这会把安全从“默认允许”转成“显式退出风险”。",
+    "confidence": "high",
+    "extraction_method": "human_curated_from_image",
+    "status": "active"
+  },
+  "agent_img_010_027_8cb3c4541134": {
+    "topic_id": "agent_architecture",
+    "topic_title": "Agent 系统架构",
+    "claim_type": "engineering_judgment",
+    "claim_text": "系统 Prompt 应拆成有名称、可定位、可缓存标注的段落注册表；动态工具列表、实时状态等每轮变化内容应放到缓存边界之后，并要求调用者说明为什么必须每轮重算。",
+    "confidence": "high",
+    "extraction_method": "human_curated_from_image",
+    "status": "active"
+  },
+  "agent_img_010_026_92e884da861b": {
+    "topic_id": "agent_architecture",
+    "topic_title": "Agent 系统架构",
+    "claim_type": "engineering_judgment",
+    "claim_text": "Prompt 缓存设计应把高优先级、稳定、可缓存内容放在前缀，例如 Agent 身份、安全规则、工具使用原则、输出格式和错误处理规则；当前时间、用户状态、会话变量、检索结果和工具调用结果应放在动态边界之后。",
+    "confidence": "high",
+    "extraction_method": "human_curated_from_image",
+    "status": "active"
+  },
+  "agent_img_009_011_f3f3422d45ce": {
+    "topic_id": "agent_architecture",
+    "topic_title": "Agent 系统架构",
+    "claim_type": "comparison",
+    "claim_text": "多 Agent 编排常见模式包括顺序管道、Map-Reduce、层级嵌套和路由分发：顺序管道适合强依赖步骤，Map-Reduce 适合并行任务但难点在汇总，层级嵌套适合深层复杂任务但要限深，路由分发适合请求类型多样的系统。",
+    "confidence": "medium",
+    "extraction_method": "human_curated_from_image",
+    "status": "active"
+  },
+  "agent_img_005_001_bad29a1acc99": {
+    "topic_id": "agent_architecture",
+    "topic_title": "Agent 系统架构",
+    "claim_type": "workflow",
+    "claim_text": "一个标准 Agent 轨迹应包含用户问题、模型思考、工具调用、工具观察结果和最终回答；工具返回内容属于外部 observation，不应和模型内部推理或最终回答混在一起。",
+    "confidence": "medium",
+    "extraction_method": "human_curated_from_image",
+    "status": "active"
+  },
+  "agent_img_009_008_71cb71df22d7": {
+    "topic_id": "agent_architecture",
+    "topic_title": "Agent 系统架构",
+    "claim_type": "engineering_judgment",
+    "claim_text": "长上下文清理可采用“头部保护、尾部保护、中间摘要”策略：保留系统指令和初始任务，保留最近几轮对话以维持短期连贯性，对中间冗长工具过程和推理步骤裁剪并生成摘要。",
+    "confidence": "medium",
+    "extraction_method": "human_curated_from_image",
+    "status": "active"
+  },
+  "agent_img_010_029_ea01ad355cb5": {
+    "topic_id": "agent_architecture",
+    "topic_title": "Agent 系统架构",
+    "claim_type": "risk",
+    "claim_text": "Agent 重试机制需要预算、错误分类、过载降载、幂等性和可观测性：不同错误码不应统一重试，过载时应减少请求而不是一起重试，涉及写文件、调用工具或提交变更时必须考虑重复执行副作用。",
+    "confidence": "high",
+    "extraction_method": "human_curated_from_image",
+    "status": "active"
+  },
+  "agent_img_010_028_deae5c10a6f8": {
+    "topic_id": "agent_architecture",
+    "topic_title": "Agent 系统架构",
+    "claim_type": "risk",
+    "claim_text": "指数退避重试应加入随机抖动，避免大量客户端在固定时间点同时重试放大后端压力；等待期间最好对用户可见，而不是让程序像卡死一样沉默。",
+    "confidence": "medium",
+    "extraction_method": "human_curated_from_image",
+    "status": "active"
+  },
+  "agent_img_010_030_907dbaa011f8": {
+    "topic_id": "agent_architecture",
+    "topic_title": "Agent 系统架构",
+    "claim_type": "risk",
+    "claim_text": "文件编辑工具应强制编辑前读取文件，并在运行时检查对话历史中是否存在对应 Read 调用；这不是提示词建议，而是防止模型凭记忆或猜测修改过期文件的硬约束。",
+    "confidence": "high",
+    "extraction_method": "human_curated_from_image",
+    "status": "active"
+  },
+  "agent_img_001_016_55162987dd1e": {
+    "topic_id": "agent_architecture",
+    "topic_title": "Agent 系统架构",
+    "claim_type": "risk",
+    "claim_text": "Agent 工具调用场景不能只依赖推理链完整性，还必须对模型输出的工具参数做类型和范围校验，拦截因幻觉产生的错误工具调用。",
+    "confidence": "medium",
+    "extraction_method": "human_curated_from_image",
+    "status": "active"
+  },
+  "agent_img_010_003_df2c941682fd": {
+    "topic_id": "agent_architecture",
+    "topic_title": "Agent 系统架构",
+    "claim_type": "engineering_judgment",
+    "claim_text": "工具检索字段应区分 searchHint 和 description：searchHint 是给 ToolSearch 匹配用的短能力标签，description 是工具已加载后给模型理解参数和调用边界用的正式说明。",
+    "confidence": "medium",
+    "extraction_method": "human_curated_from_image",
+    "status": "active"
+  },
+  "agent_img_001_005_ce1638579d53": {
+    "topic_id": "agent_architecture",
+    "topic_title": "Agent 系统架构",
+    "claim_type": "workflow",
+    "claim_text": "Agent 系统上线后的 badcase 闭环应包含收集、分类、修复验证、全量回归和灰度发布：收集渠道可包括用户反馈、客服工单和自动检测，分类可覆盖检索失败、幻觉生成、路由错误和知识缺失。",
+    "confidence": "medium",
+    "extraction_method": "human_curated_from_image",
+    "status": "active"
+  },
+  "agent_img_001_015_5be324090a5c": {
+    "topic_id": "agent_architecture",
+    "topic_title": "Agent 系统架构",
+    "claim_type": "workflow",
+    "claim_text": "Workflow 可以封装业务相关上下文和 Skills 执行编排：复杂任务不是只调用单个 Skill，而是按步骤串联多个 Skill，并把业务上下文作为编排的一部分。",
+    "confidence": "medium",
+    "extraction_method": "human_curated_from_image",
+    "status": "active"
+  },
+  "agent_link_001_004_b0fd20db1549": {
+    "topic_id": "agent_architecture",
+    "topic_title": "Agent 系统架构",
+    "claim_type": "workflow",
+    "claim_text": "RAG/Agent 系统出现用户反馈答案不对时，应把 badcase 收集、分类、修复验证和回归测试做成闭环，而不是只临时修改 prompt 或单条规则。",
+    "confidence": "medium",
+    "extraction_method": "human_curated_from_text_link",
+    "status": "active"
+  },
+  "agent_link_001_005_2da27c38a6fa": {
+    "topic_id": "agent_architecture",
+    "topic_title": "Agent 系统架构",
+    "claim_type": "example",
+    "claim_text": "交易领域问诊 Agent 可作为业务 Agent 落地案例：系统价值不只在问答，而在把问题定位、流程调度和反馈闭环纳入工程化处理。",
+    "confidence": "medium",
+    "extraction_method": "human_curated_from_text_link",
+    "status": "active"
+  },
+  "agent_link_001_001_ab0d3f31e5b4": {
+    "topic_id": "agent_architecture",
+    "topic_title": "Agent 系统架构",
+    "claim_type": "example",
+    "claim_text": "该条只有外部链接和重复 URL，当前无法从本地材料中提炼稳定结论；保留为待复查来源，不进入核心摘要。",
+    "confidence": "low",
+    "extraction_method": "human_marked_needs_review",
+    "status": "needs_review"
+  },
+  "agent_link_001_002_3aa486062719": {
+    "topic_id": "rag_and_retrieval",
+    "topic_title": "RAG 与检索增强",
+    "claim_type": "engineering_judgment",
+    "claim_text": "文档切分更适合采用文档层级划分加句子级 overlap，而不是只做固定长度截断；该证据应归入 RAG 与检索增强主题。",
+    "confidence": "medium",
+    "extraction_method": "human_curated_topic_reassignment",
+    "status": "active"
+  },
+  "agent_link_001_006_14131c3a0a2a": {
+    "topic_id": "agent_architecture",
+    "topic_title": "Agent 系统架构",
+    "claim_type": "workflow",
+    "claim_text": "意图识别和槽位抽取适合放在 Agent 调度前置层：先判断用户任务是否完整、意图是否结束、槽位是否齐全，再决定调用具体工具或继续澄清。",
+    "confidence": "medium",
+    "extraction_method": "human_curated_from_text_link",
+    "status": "active"
+  },
+  "agent_link_010_002_008f43b1ea20": {
+    "topic_id": "agent_architecture",
+    "topic_title": "Agent 系统架构",
+    "claim_type": "workflow",
+    "claim_text": "Agent 记忆提取不宜每轮无条件触发；应在成本和覆盖率之间权衡，可结合消息阈值、重要性判断或后台异步触发。",
+    "confidence": "medium",
+    "extraction_method": "human_curated_from_text_link",
+    "status": "active"
+  },
+  "agent_img_009_002_7af3c22a8eaf": {
+    "topic_id": "finetuning_trajectories",
+    "topic_title": "微调、轨迹与训练数据",
+    "claim_type": "metric",
+    "claim_text": "模型训练内存由模型参数、梯度和优化器状态三部分组成：以 LLaMA-6B 为例，fp32 精度下参数占 24GB、AdamW 优化器状态占 48GB、CUDA kernel 约占 1.3GB，总计约 73GB；int8 精度可降至约 19GB。",
+    "confidence": "medium",
+    "extraction_method": "human_curated_topic_reassignment",
+    "status": "active"
+  },
+  "agent_img_001_017_29006a1055a1": {
+    "topic_id": "prompt_engineering",
+    "topic_title": "Prompt 约束与上下文设计",
+    "claim_type": "workflow",
+    "claim_text": "金融 RAG 场景应采用三层防幻觉体系：事前通过结构化输出约束（JSON 字段类型和值域、数字直接从原文抽取而非推算）从根源杜绝推理型幻觉；事中通过引用一致性自动校验（NLI 模型逐句比对原始文档）做声明级溯源验证；事后通过置信度分级将低置信案例强制路由人工复核并沉淀为难例数据集。",
+    "confidence": "medium",
+    "extraction_method": "human_curated_from_image",
+    "status": "active"
+  },
+  "agent_img_009_010_1123d496a7e0": {
+    "topic_id": "prompt_engineering",
+    "topic_title": "Prompt 约束与上下文设计",
+    "claim_type": "comparison",
+    "claim_text": "大模型结构化输出可按技术路线分为六类：Prompt 引导（零成本但无法保证合规）、输出后校验（事后保障但治标不治本）、约束解码（逐 token 硬约束可 100% 语法合规）、监督微调（永久改变行为但有 plateau 现象）、RL 强化（能突破 SFT 高原但成本高）、接口化能力（API 参数强制执行、端到端类型安全但依赖特定供应商）。选型应权衡合规性要求、开发成本和供应商锁定风险。",
+    "confidence": "medium",
+    "extraction_method": "human_curated_from_image",
+    "status": "active"
+  },
+  "agent_img_001_014_65226eff0183": {
+    "topic_id": "agent_architecture",
+    "topic_title": "Agent 系统架构",
+    "claim_type": "definition",
+    "claim_text": "Workflow 是上下文封装的基本单位：它包含特定业务的上下文和对通用 Skill 的执行编排，本质上是对人类完成该工作流程的语义描述。",
+    "confidence": "medium",
+    "extraction_method": "human_curated_topic_reassignment",
+    "status": "active"
+  },
+  "agent_img_009_009_fd719d4b2dcf": {
+    "topic_id": "prompt_engineering",
+    "topic_title": "Prompt 约束与上下文设计",
+    "claim_type": "comparison",
+    "claim_text": "大模型结构化输出技术已从最初依赖开发者经验的 Prompt 引导，演进到模型原生支持的硬性接口化能力；每种技术路径（Prompt 引导、输出校验、约束解码、微调、RL、接口化 API）都有独特的适用场景和成本考量，技术选型时应综合比较而非盲目追随最新方案。",
+    "confidence": "medium",
+    "extraction_method": "human_curated_from_image",
+    "status": "active"
+  },
+  "agent_img_010_031_94b80bbf7ca5": {
+    "topic_id": "prompt_engineering",
+    "topic_title": "Prompt 约束与上下文设计",
+    "claim_type": "engineering_judgment",
+    "claim_text": "Agent 关键约束应实现提示词和运行时双层防御：提示词层告诉模型必须做什么（如「编辑前先读取文件」），运行时层在工具执行时真正检查前提条件是否满足（如检查对话历史中有没有 Read 调用）；这比单纯依靠 prompt 或单纯依靠工具校验更可靠。",
+    "confidence": "medium",
+    "extraction_method": "human_curated_from_image",
+    "status": "active"
+  },
+  "agent_link_010_003_11ca96cf6d58": {
+    "topic_id": "agent_architecture",
+    "topic_title": "Agent 系统架构",
+    "claim_type": "risk",
+    "claim_text": "把用户偏好、截止日期等异构信息混入同一个无分类向量库会导致时效不同的信息难以区分和清理；应按照信息类别（用户偏好、反馈规则、项目状态、外部引用）分层存储并分别管理检索策略和时效。",
+    "confidence": "medium",
+    "extraction_method": "human_curated_topic_reassignment",
+    "status": "active"
+  },
+  "agent_link_010_004_dd778098aff4": {
+    "topic_id": "agent_architecture",
+    "topic_title": "Agent 系统架构",
+    "claim_type": "example",
+    "claim_text": "Claude Code 的 Memory 系统会自动记录用户偏好和项目上下文到 MEMORY.md 索引文件中；使用者应定期翻阅和清理记忆文件，避免过期或错误的记忆长期影响 Agent 行为。",
+    "confidence": "medium",
+    "extraction_method": "human_curated_topic_reassignment",
+    "status": "active"
+  },
+  "agent_link_010_001_bf6562fce929": {
+    "topic_id": "agent_architecture",
+    "topic_title": "Agent 系统架构",
+    "claim_type": "engineering_judgment",
+    "claim_text": "Agent 长期使用中，用户偏好记忆应通过文件系统（如 MEMORY.md）而非向量库持久化；文件索引方式可读、可编辑、可审计，比黑盒向量检索更适合偏好类记忆的长期维护。",
+    "confidence": "medium",
+    "extraction_method": "human_curated_topic_reassignment",
+    "status": "active"
+  },
+  "agent_link_002_004_a6f5c9c86dbe": {
+    "topic_id": "agent_architecture",
+    "topic_title": "Agent 系统架构",
+    "claim_type": "example",
+    "claim_text": "交易领域问诊 Agent 可作为业务 Agent 落地案例参考：其核心价值在于将问题定位、流程调度和反馈闭环纳入工程化处理，而非仅提供问答能力。",
+    "confidence": "medium",
+    "extraction_method": "human_curated_topic_reassignment",
+    "status": "active"
+  },
+  "agent_img_002_006_ce1638579d53": {
+    "topic_id": "agent_architecture",
+    "topic_title": "Agent 系统架构",
+    "claim_type": "workflow",
+    "claim_text": "Agent 系统上线后的 badcase 闭环应包含三路收集渠道（用户反馈、客服工单、自动检测）和四分类框架（检索失败、幻觉生成、路由错误、知识缺失），修复后需在原 case 验证、全量回归并灰度发布；实践表明这套机制可将系统准确率从 76% 提升到 89%。",
+    "confidence": "high",
+    "extraction_method": "human_curated_topic_reassignment",
+    "status": "active"
+  },
+  "agent_img_009_001_e84966ff036b": {
+    "topic_id": "prompt_engineering",
+    "topic_title": "Prompt 约束与上下文设计",
+    "claim_type": "engineering_judgment",
+    "claim_text": "高质量文本生成流水线可采用温度调节、Top-K/Top-P 过滤和拒绝采样三层质检：温度控制随机性与创造性的平衡（低温严谨、高温创造），Top-K/Top-P 划定候选词范围过滤噪声，拒绝采样用规则对最终选词做合规审查。",
+    "confidence": "medium",
+    "extraction_method": "human_curated_topic_reassignment",
+    "status": "active"
+  },
+  "agent_img_001_018_90388fa1fee2": {
+    "topic_id": "rag_and_retrieval",
+    "topic_title": "RAG 与检索增强",
+    "claim_type": "engineering_judgment",
+    "claim_text": "RAG Prompt 存在根本性矛盾：LLM 预训练时已存储大量参数知识，默认行为是将检索文档与自身参数知识混合使用；因此 RAG Prompt 必须显式约束模型只能使用传入的文档片段回答，而不能依赖参数知识。",
+    "confidence": "medium",
+    "extraction_method": "human_curated_from_image",
+    "status": "active"
+  },
+  "agent_img_002_025_f5c936ace146": {
+    "topic_id": "rag_and_retrieval",
+    "topic_title": "RAG 与检索增强",
+    "claim_type": "definition",
+    "claim_text": "HNSW 检索的正确理解是分层贪心定位而非每层保留 Top-N 展开：高层每层只找 1 个当前最优入口并仅将其带到下一层，底层（第 0 层）才用候选池 ef 扩大搜索范围并输出最终 Top-K 结果。常见错误理解是高层每层保留 Top-N 再分别向下搜索。",
+    "confidence": "medium",
+    "extraction_method": "human_curated_from_image",
+    "status": "active"
+  },
+  "agent_link_002_001_43ab2992d0b1": {
+    "topic_id": "rag_and_retrieval",
+    "topic_title": "RAG 与检索增强",
+    "claim_type": "engineering_judgment",
+    "claim_text": "RAG 文档切分的最佳实践是文档层级划分加句子级 overlap，而非固定长度截断；层级划分保留文档结构信息，句子级 overlap 避免在句子中间切断导致语义碎片化。",
+    "confidence": "medium",
+    "extraction_method": "human_curated_from_text_link",
+    "status": "active"
+  },
+  "agent_img_002_017_644feb67b2da": {
+    "topic_id": "rag_and_retrieval",
+    "topic_title": "RAG 与检索增强",
+    "claim_type": "workflow",
+    "claim_text": "RAG 质量治理应覆盖五层：幻觉来源三层（解析层文档质量、检索层召回精度、生成层模型约束）、治理优先级（Prompt 约束最快→检索优化最重要→置信度兜底最稳）、拒答机制（相关性阈值+引用覆盖率双重判断）、更新同步（增量索引+版本管理+缓存分层失效）、评测闭环（离线黄金集+在线用户信号+每周回捞迭代）。",
+    "confidence": "medium",
+    "extraction_method": "human_curated_from_image",
+    "status": "active"
+  },
+  "agent_link_002_005_76cb9b23e50d": {
+    "topic_id": "rag_and_retrieval",
+    "topic_title": "RAG 与检索增强",
+    "claim_type": "metric",
+    "claim_text": "动态 RAG 的数据质量评估不能只看单次检索效果，需要从文档质量、检索召回、生成准确性和用户反馈四个维度建立持续评估体系，并在系统迭代中追踪各维度指标变化。",
+    "confidence": "medium",
+    "extraction_method": "human_curated_from_text_link",
+    "status": "active"
+  },
+  "agent_link_002_003_94fb83bf7cee": {
+    "topic_id": "rag_and_retrieval",
+    "topic_title": "RAG 与检索增强",
+    "claim_type": "workflow",
+    "claim_text": "RAG 系统上线后用户反馈答案不对时，应建立 badcase 收集→分类（检索失败/幻觉/路由错误/知识缺失）→按类分配修复→原 case 回归验证→全量回归→灰度发布的完整闭环，而不是临时修改 prompt 或单条规则。",
+    "confidence": "medium",
+    "extraction_method": "human_curated_from_text_link",
+    "status": "active"
+  },
+  "agent_img_001_001_e11ee8244f22": {
+    "topic_id": "rag_and_retrieval",
+    "topic_title": "RAG 与检索增强",
+    "claim_type": "workflow",
+    "claim_text": "文档切分应先识别标题层级再按层级切块：通过按行提取文字和样式特征（字体、加粗、缩进）、正则匹配章节编号生成标题特征、人工标注少量 level1/2/3 和正文样本、训练 XGBoost 小模型自动分类层级、规则后处理修正，最终按层级边界切分生成不割裂语义的高质量 chunk。",
+    "confidence": "medium",
+    "extraction_method": "human_curated_topic_reassignment",
+    "status": "active"
+  },
+  "agent_img_002_002_e11ee8244f22": {
+    "topic_id": "rag_and_retrieval",
+    "topic_title": "RAG 与检索增强",
+    "claim_type": "workflow",
+    "claim_text": "文档切分应先识别标题层级再按层级切块：通过按行提取文字和样式特征（字体、加粗、缩进）、正则匹配章节编号生成标题特征、人工标注少量 level1/2/3 和正文样本、训练 XGBoost 小模型自动分类层级、规则后处理修正，最终按层级边界切分生成不割裂语义的高质量 chunk。",
+    "confidence": "medium",
+    "extraction_method": "human_curated_topic_reassignment",
+    "status": "active"
+  },
+  "agent_img_005_004_0f915a300596": {
+    "topic_id": "finetuning_trajectories",
+    "topic_title": "微调、轨迹与训练数据",
+    "claim_type": "metric",
+    "claim_text": "Agent 工具调用微调评估应覆盖四个维度：工具选择准确率（是否选了正确工具）、参数格式准确率（工具名对但参数格式错）、调用顺序准确率（多工具任务中顺序合理性）和遗忘率（非工具调用任务上的退化）。SFT 存在遗忘风险，应在训练数据中混入约 30% 通用指令数据保持泛化能力；实践中 FC-SFT 5000 样本可将工具调用准确率从 71% 提升到 94%，同时 MMLU 下降仅 0.3% 在误差范围内。",
+    "confidence": "high",
+    "extraction_method": "human_curated_from_image",
+    "status": "active"
+  },
+  "agent_img_005_006_82adbd19533c": {
+    "topic_id": "finetuning_trajectories",
+    "topic_title": "微调、轨迹与训练数据",
+    "claim_type": "workflow",
+    "claim_text": "Agent 训练数据构造应采用人工标注与模型蒸馏组合策略：人工标注员逐条手写几千条高质量核心种子数据保证质量基准，GPT-4 等强模型批量生成几十万条对话样本保证规模，人工抽查过滤做去重去噪质检。风险在于幻觉传递：上游模型错一个、下游学一个。",
+    "confidence": "medium",
+    "extraction_method": "human_curated_from_image",
+    "status": "active"
+  },
+  "agent_img_009_004_7a49da56130f": {
+    "topic_id": "finetuning_trajectories",
+    "topic_title": "微调、轨迹与训练数据",
+    "claim_type": "comparison",
+    "claim_text": "Agent 自进化有两条互补路径：路径一是日常自动 Skill 生成（运行时每 N 轮对话自动触发、后台审查、即时生效、提炼为 Skill Memo），改变的是 Agent 的上下文知识而非模型权重，相当于记笔记；路径二是手动触发的 RL 训练（轨迹采集→质量筛选→GRPO 训练→新模型），改变模型本身的权重，相当于练内功。两条路径构成内外双轮驱动的自进化闭环。",
+    "confidence": "medium",
+    "extraction_method": "human_curated_from_image",
+    "status": "active"
+  },
+  "agent_img_009_007_6d1f81043b69": {
+    "topic_id": "finetuning_trajectories",
+    "topic_title": "微调、轨迹与训练数据",
+    "claim_type": "engineering_judgment",
+    "claim_text": "基于 Skill 沉淀的上下文工程进化存在天花板：无论积累多少 Skill，底层模型权重始终没变，Agent 只是在不断检索外部知识库而非将经验内化为自身能力。对于追求极致性能或特定垂直领域需要突破通用模型瓶颈的场景，必须引入 RL 训练闭环通过改变模型权重实现真正的能力自进化。",
+    "confidence": "medium",
+    "extraction_method": "human_curated_from_image",
+    "status": "active"
+  },
+  "agent_img_001_006_ccc7f5e4f8ea": {
+    "topic_id": "rag_and_retrieval",
+    "topic_title": "RAG 与检索增强",
+    "claim_type": "definition",
+    "claim_text": "FAQ 问答的本质是语义匹配而非关键词搜索：FAQ 库存储的是 Q-A 对，核心任务是把用户 Query 和库中标准问题做语义匹配后返回对应答案。例如用户问退钱要多久与标准问题退款到账时效是多少天字面无重叠但语义相同，因此 FAQ 检索必须用语义匹配而非关键词匹配。",
+    "confidence": "medium",
+    "extraction_method": "human_curated_topic_reassignment",
+    "status": "active"
+  },
+  "agent_img_002_007_ccc7f5e4f8ea": {
+    "topic_id": "rag_and_retrieval",
+    "topic_title": "RAG 与检索增强",
+    "claim_type": "definition",
+    "claim_text": "FAQ 问答的本质是语义匹配而非关键词搜索：FAQ 库存储的是 Q-A 对，核心任务是把用户 Query 和库中标准问题做语义匹配后返回对应答案。例如用户问退钱要多久与标准问题退款到账时效是多少天字面无重叠但语义相同，因此 FAQ 检索必须用语义匹配而非关键词匹配。",
+    "confidence": "medium",
+    "extraction_method": "human_curated_topic_reassignment",
+    "status": "active"
+  },
+  "agent_img_001_013_803b291fe2c9": {
+    "topic_id": "agent_architecture",
+    "topic_title": "Agent 系统架构",
+    "claim_type": "engineering_judgment",
+    "claim_text": "复杂任务不应由单个 Skill 完成，否则会导致 Skill 复杂度过高、多 Skill 执行准确率低和 Skill 编写耗时高三个问题；应将复杂任务拆分为多个单一职责 Skill 并用 Workflow 编排，每一步明确指定使用哪个 Skill。",
+    "confidence": "medium",
+    "extraction_method": "human_curated_topic_reassignment",
+    "status": "active"
+  },
+  "agent_img_006_002_78fd05498fa5": {
+    "topic_id": "planning_execution",
+    "topic_title": "规划、执行与反思",
+    "claim_type": "workflow",
+    "claim_text": "LLM-as-Planner 模式将自然语言问题转换为结构化执行计划：通过上下文示例（In-context Learning）让 LLM 将问题描述映射到 PDDL 领域定义，再经由规划器生成可执行的 PDDL 计划，实现从自然语言到形式化规划的桥接。",
+    "confidence": "medium",
+    "extraction_method": "human_curated_from_image",
+    "status": "active"
+  }
+}

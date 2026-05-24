@@ -1,0 +1,32 @@
+Q: 你刚才提到 Agent 之间可以互相通讯，这个通讯机制是怎么实现的? Agent 之间怎么知道该跟谁说话、能做什么操作?
+A: 我们设计这个的时候，出砾点很直接: 先看人和 Agent 是怎么协作的。用户在前端可以给 Agent 发指令、启动一个新 Agent、中止一个任务、让 Agent 总结进展一一这些操
+作用户天天在做。我们的想法是，Agent 自己也应该有能力对另一个 Agent 做同样的事。
+.
+Agent 间通讯设计 Agent 与人类同权
+用户能做的 . Agent 也能做 . Engine 也能做 一 三种调用方平权, 共享同一组接口,拿到同样的语义
+Skill + CLI . 核心基础设施 / core infrastructure
+skills: mavis-commuamication ' mavis-session  Mmavis-agemt © mavis-team
+'   Sa © 2 eee 2 eS SSS SSeS ee eseeeeeeeeeeeeneee2°22       i
+| PRAM IF MBA EF interface                             Agent - 可协作成员
+-                              有身份 - 可护沟通 . OP
+User                      man              prompt                              spawn                               abort                1
+emer        =    ,       发指令 . 追加要求              开新 Agent / Session               中止当前任务             身份
+1                                                                                                                        |
+i                                                       -一                                                    1
+i                                                                                                                        1
+2                           8                                                    让其总培当前状态                       MALT ASK session                     coment
+Other Agent                         :                                                                                                                        作用于
+另一个 Agent . peer session                              封装的底层基础设施 . infrastructure (调用方无需关心)                                                                    1                        记忆
+-                                                                                                 -                 agent memory , MEMORYmd
+       daemon HTTP API - 127.0.0.1:port (profile / dataDir (ERY)                                                                 1                                             一
+1
+i                                                                                                                       1
+Team Engine                      8      CLI 包装 - mavis communication / session / agent / team / cron                                             :
+AgentTeaen 编排引擎 - 白动调用              1                   _                                       1                         可中途沟通
+   Auth .token - scope 校验 - 调用前自动注入, 调用方无感
+1                                                                                                                       1                                             —
+Ages 与人类网权 Mt                         一                               -
+_ er Le
+Agent 与人类同权 - 共用一组动词 走同一组 skill + CLI
+PUP Foc TY + skill SCHUH) + daemon 关心实现 . 三层各司其职, 调用方对底层切换无感
+«Agen 是有身份/可被沟通/ 可被纠偏的协作成贡 . BARRERA, 也跟人类一样作为接口的作用对象

@@ -1,0 +1,17 @@
+<> Markdown                                                 (ey
+- [user_role_data_scientist](user_role_data_scientist.md) -- 用户是数据科学家，关注数据管道、可观测性和模型评估
+- [user_pref_deep_explanation](user_pref_deep_explanation.md) -- 用户喜欢机制级、源码级、流程级的详细解释
+- [feedback_no_mock_database](feedback_no_mock_database.md) -- 不要在数据库测试中使用 mock，需要真实数据库或测试容
+- [feedback_no_fake_business_data](feedback_no_fake_business_data.md) -- 不要编造业务数据; 不确定时要明确说明假设
+- [project_release_freeze_2626_65 67](project_release_freeze_2626 65 67.md) -- ingest-service 项目在 2026-05-07
+- [project_ingest_refactor](project_ingest_refactor.md) -- ingestion 模块正在从同步批处理改造成异步队列架构
+- [reference_linear_ingest_bug](reference_linear_ingest_bug.md) -- pipeline 延玉问题在 Linear 的 INGEST-4821 ‘11
+- [reference_sentry_dashboard](reference_sentry_dashboard.md) -- ingest-service 的钳误监控入口在 Sentry ingestio
+《人
+你可以先把 MEMORY.md 理解成这样:
+MEMORY .md = 当前项目的记忆目录                                                          ‘eo!
+一一    AN  =  局
+它只告诉模型
+有哪些记忆，                                                                                                                                                                                            O)
+每条记忆大概是什么;
+如果需要详细内容，应该读哪个子 md 文件。

@@ -1,0 +1,15 @@
+© 面试总结
+
+回到开头踩的雷，最大的问题是把 MCP 简单理解成 【Client + Server」 的二元结构，忽略了
+Host 这个角色。
+面试回答这道题，第一个要氮是三层结构要说清楚: 角色层 〈Host / Client / Server)、能力层
+
+(Tools / Resources / Prompts)、协议层 〈JSON-RPC 2.0 + stdio / Streamable HTTP)。
+特别是 Host 和 Client 的区别，Host 是牡主应用本身，Client 是 Host 内部负贡和 Server 通信的
+模块，一个 Host 可以同时连多个 Server，这个一对多的关系是 MCP 的核心设计。
+第二个容易踩的雷是把 Server 暴露的能力全归为 【工具J。Tools、Resources、Prompts 三者
+职贡分明，Tools 有副作用、改变外部状态，Resources 是只读数据、没有副作用，Prompts 是
+提示词模板。面试时说清楚三者的区别，尤其是 Tools 和 Resources 的本质差异〈有无副作
+用)，会让面试官觉得你真正理解了 MCP 的设计意图，而不是只停留在表面。
+第三个要提到的是协议层的解耘设计: 消息格式和传输方式是独立的，JSON-RPC 2.0 定义了消
+息长什么样，stdio 和 Streamable HTTP 定义了消息怎么传，两者互不耦合，这也是 MCP 灵活

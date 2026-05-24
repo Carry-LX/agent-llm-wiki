@@ -1,0 +1,18 @@
+| 二、注入位置: system prompt 的第十段，在 CLAUDE.md 之前
+
+知道了"在 REPL 局动时注入"，下一个问题是: 注入在 system_prompt 的哪个位置?
+
+对应源码: Lbuilder.py:74-135 |， 函数里有完整的 system_prompt Hee
+辑，Memory 段落排在第 10 段。具体顺序是: 系统核心指令 一 环境信息 一 工具摘述
+
+= — Memory ~ CLAUDE md 一 其余动态段落
+
+为什么这个位置重要”大量实验表明，LLM 对 system prompt 不同位置的内容关注度是不均
+匀的，靠近开头和结尾的内容通常有更高的注意力权重，中间位置的内容容易在长上下文里被稀
+释。Memory 排在第 10 段，紧接在工具描述之后、用户项目配置之前，属于
+system_prompt 的中前部，能确保模型在规划行动时能有效读取记忆内容。
+
+排在 Memory 之后的 CLAUDE.md 是用户的项目级指令 (比如 "这个项目用 TypeScript, &
+数命名用驼峰") ，它的优先级比 Memory 高，如果 Memory 里记着"用户喜欢用单引号"，但
+CLAUDE.md 里写了"统一用双引号" ，模型会优先遵从 CLAUDE.md 的指令。这是一个合理的
+设计: 项目级的明确约定应该覆盖历史偏好。

@@ -1,0 +1,37 @@
+会话中途不要切换模型
+Prompt 缓存是模型唯一的。假如你已经和 Opus 对话了 100K tokens, #8/5)/NSI5 Sa, QSSIRU SERRE Leese Opus steel s== 9 Naik eee ee 确
+实需要切换的话，用 Subagent 交接: Opus 准备一条"交接消息"给另一个模型，说明需要完成的任务就行。
+Compaction 的实际实现
+How Compaction Works with Prompt Caching
+BEFORE                                 FORKED COMPACTION CALL            AFTER
+Cet
+1
+1                                                                         1
+System + Tools                         -                      System + Tools                      1                         System + Tools
+1
+1                                                                         1
+I                 Full conversation
+assistant + tool results                       1
+                              +                     (all messages)                      _             Conversation summary
+user message                        :                                                           ;                (replaces all old messages)
+1                                                                         1
+                                                                                                                            1
+assistant + tool results                     |                 cache hit — 1/10 price                  Re-attached files & context
+1
+... Many more turns …                                                                         1                                                        .
+———      ;                                    1         room for new conversation
+            compaction butte:           !         + "Summarize this conversation"
+ae os oo ae as a a a a es ae ee a ee a      1
+                                             1                                                                         I
+context window nearly full        + Summary (~20k tokens max)        :
+1
+                                                                         1
+Mo
+上图是 Compaction (上下文压缩) 的执行流程: 左边是上下文快满时的状态，中间是 Claude Code 开一个 fork 调用，把完整对话历史喂给模型，加一句"Summarize
+this conversation”，这一步命中缓存所以只需 1/10 的价格，右边是压缩完之后，原来几十轮对话被车换成一段 ~20k tokens 的摘要，System + Tools 还在，再挂上之
+前用到的文件引用，腾出空间继续新的轮次。
+直觉上 Plan Mode 应该切换成只读工具集，但这会破坏缓存。实际实现是: “EnterPlaniiode 是模型可以自己调用的工具，检测到复杂问题时自主进入 plan mode,
+工具集不变，缓存不受影响。
+defer loading: 工具的延迟加载
+‘Claude Code SUT MCP TS, SREKSREASRE, ERARRSRTES, 解决方案是发送轻量级 StUb 只有开具名标记“defer_loading: true .
+GSer esearch =] ewe SEH LE schema 只在模型选择后才加载，这样缓存前绥保持稳定。

@@ -1,0 +1,1167 @@
+{
+  "schema_version": 1,
+  "updated_at": "2026-05-18T08:13:06.019578+00:00",
+  "label_model": "codex-manual-labels-v1",
+  "labels": {
+    "agent_img_001_001_e11ee8244f22": {
+      "asset_id": "agent_img_001_001_e11ee8244f22",
+      "label": "文档切块先识别标题层级",
+      "content_signature": "960aa026f6a2aa5a81398806b2839cca849bd2db5b37fb473d79ca027676d0c5",
+      "content_modified_at": "2026-03-17T02:39:48.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "5d15ba75cb002d0c72eefb1ae08c3d97f37a27ee52834bb22efb8906592220ea",
+      "source_url": ""
+    },
+    "agent_img_001_002_cd654a4171e8": {
+      "asset_id": "agent_img_001_002_cd654a4171e8",
+      "label": "RAG 测试集先确定覆盖范围",
+      "content_signature": "1a4644087ca0493438b7569345a6ffbe84abc2a450f89d7cc68515a2daf06c07",
+      "content_modified_at": "2026-03-18T02:58:51.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "e9922edb6aa8c6cbe15b1c2fd7573542dba0cf8c38ecdecd72985c5bf3796d3b",
+      "source_url": "https://mp.weixin.qq.com/s/GUeJCJfd03cSK5aCoefRaA"
+    },
+    "agent_img_001_003_30bfe2dad039": {
+      "asset_id": "agent_img_001_003_30bfe2dad039",
+      "label": "测试集需覆盖多样难题",
+      "content_signature": "834b9ef39623f04c94eb0dead070164f8e65eb2c75355333f3c59143ea83a511",
+      "content_modified_at": "2026-03-18T02:59:23.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "1e601a09815521bcb8da287c6e4f01d6041832ed153556657ce5b9e92e40f852",
+      "source_url": "https://mp.weixin.qq.com/s/GUeJCJfd03cSK5aCoefRaA"
+    },
+    "agent_img_001_004_90500f357b93": {
+      "asset_id": "agent_img_001_004_90500f357b93",
+      "label": "Text2SQL 模板生成训练样本",
+      "content_signature": "e1edd67704a49d52a0eb60776f3a321c1954fc58ca0056c357e83d9971227d1b",
+      "content_modified_at": "2026-03-21T09:26:57.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "f51ddd0e15095d3e25c1134331af940341688c357f386a5a105f8ff545541a3d",
+      "source_url": ""
+    },
+    "agent_img_001_005_ce1638579d53": {
+      "asset_id": "agent_img_001_005_ce1638579d53",
+      "label": "Badcase 闭环提升系统准确率",
+      "content_signature": "e86246ec239a172577fb5eb7616b4f28a3646daa8a219a35d68aaee3323db0f8",
+      "content_modified_at": "2026-03-30T02:37:14.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "4303d53bca126749ac08c90b4ab2505bad713357c2a21e979cad175ae17ffd26",
+      "source_url": ""
+    },
+    "agent_img_001_006_ccc7f5e4f8ea": {
+      "asset_id": "agent_img_001_006_ccc7f5e4f8ea",
+      "label": "FAQ 问答本质是语义匹配",
+      "content_signature": "4b99addd212d533d11789ae3ca1d1b7490cb69dcf0b7d8649cd8f6c8e18cdada",
+      "content_modified_at": "2026-03-30T02:10:06.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "998c9d595f317efc4030999bba659e542aed7eed2c05033f11c89366339ce6fd",
+      "source_url": ""
+    },
+    "agent_img_001_007_d75dc63bc8b4": {
+      "asset_id": "agent_img_001_007_d75dc63bc8b4",
+      "label": "RAG 幻觉来自生成阶段补全",
+      "content_signature": "e9180a2e381360d32d5396fa3fb9cf4fd62447ce883c8988fef6ddc93ef3b258",
+      "content_modified_at": "2026-03-17T06:03:28.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "53e34ed88d70ebe939717b5e16c65fdcc3305c4d582b90d7844f2f2270b08af8",
+      "source_url": "https://mp.weixin.qq.com/s/J3VEfZKh-EedIEnZkhFDJg"
+    },
+    "agent_img_001_008_cd3df81953ab": {
+      "asset_id": "agent_img_001_008_cd3df81953ab",
+      "label": "记忆模块是第二检索源",
+      "content_signature": "4cbbf26c49012d57f2b67b2970ac98b5bfc2713c67f1d7dea77afd6d3d357cd0",
+      "content_modified_at": "2026-03-17T06:24:51.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "cf38f79e4b16bdbe70fda18be11ff094bd179fa1c1d3f19a5b3a816f69b173b4",
+      "source_url": "https://mp.weixin.qq.com/s/We7DOn_LN4LmH9Oqad99YA"
+    },
+    "agent_img_001_009_94911bd17c4e": {
+      "asset_id": "agent_img_001_009_94911bd17c4e",
+      "label": "HyDE 用假设答案增强检索",
+      "content_signature": "39a6fd457bb119d5ed17abb3b3829ceef933d07aebc89fb5f1fef7a5afe88cfc",
+      "content_modified_at": "2026-03-17T06:37:17.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "e0b30cc0444b221eb958aa48b6adb808b0cd97a14762e50d8c54cdc35a7fb5f7",
+      "source_url": "https://mp.weixin.qq.com/s/NmeedQyz7wu8tjNtgu6yTg"
+    },
+    "agent_img_001_010_06e3063fd73c": {
+      "asset_id": "agent_img_001_010_06e3063fd73c",
+      "label": "RAG 权限管理采用三层架构",
+      "content_signature": "941b4eb96fc02b49201e2d093d5f13b5fa0ef7e810e7350ed87e6dd8cbb6f197",
+      "content_modified_at": "2026-03-30T03:12:36.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "ec5adee344b6b5556ef8c38038070d6ccb5714a4422bbfdd93b66099c6ce673f",
+      "source_url": "https://mp.weixin.qq.com/s/M6BiWlGmfijlU9yUQXmRoA"
+    },
+    "agent_img_001_011_6947aa966103": {
+      "asset_id": "agent_img_001_011_6947aa966103",
+      "label": "RAG 权限控制分三层过滤",
+      "content_signature": "dbcce4d5dbdf750cb17df917e7f958a70966b523925a62340fb9d52792343856",
+      "content_modified_at": "2026-03-30T03:09:51.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "cac3f63ad5aea88de3461ee6b32d80bafcf0ad3c57d9ad0dc104c3a1cd622ce4",
+      "source_url": "https://mp.weixin.qq.com/s/M6BiWlGmfijlU9yUQXmRoA"
+    },
+    "agent_img_001_012_922c16272133": {
+      "asset_id": "agent_img_001_012_922c16272133",
+      "label": "不同查询应路由到不同链路",
+      "content_signature": "f23dfed393e607533a67d70474e760422dae8ff0666a49747fc9b9e3669f4414",
+      "content_modified_at": "2026-03-17T05:22:08.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "ee9b3d2d8e0a6ea5e12906ea56541814e582d5f9e08107cb60bc4452a492d99a",
+      "source_url": "https://mp.weixin.qq.com/s/YFCx_dGrsB2ufFzaulpOSw"
+    },
+    "agent_img_001_013_803b291fe2c9": {
+      "asset_id": "agent_img_001_013_803b291fe2c9",
+      "label": "复杂 Skill 任务需要 Workflow 编排",
+      "content_signature": "3b9d30d1e09829f1d1c4e212fbb4158cf028ed5bb3545529c4b2c89cc09a797e",
+      "content_modified_at": "2026-03-16T05:31:23.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "0f10c70e79db40a98b517d0d35f7d67771866b1bce4a5eb15584e95280b2d5b5",
+      "source_url": ""
+    },
+    "agent_img_001_014_65226eff0183": {
+      "asset_id": "agent_img_001_014_65226eff0183",
+      "label": "Workflow 封装业务上下文和编排",
+      "content_signature": "6131a6dc479bc32f74fc7cbd757b033e13d06156288ea424115b5eda103bdf45",
+      "content_modified_at": "2026-03-16T05:31:45.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "f2660a0ad003c710849122d0f4eb77beaf71ef868f42626e44bb524c87549ce9",
+      "source_url": ""
+    },
+    "agent_img_001_015_5be324090a5c": {
+      "asset_id": "agent_img_001_015_5be324090a5c",
+      "label": "Workflow 将多个 Skill 串联执行",
+      "content_signature": "bce8775daa678c67e67faa131001fdafe6ca2bf4118728b0203159fd8f0e37f0",
+      "content_modified_at": "2026-03-16T05:34:03.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "afe90c10faa48425c5d1b42790f4050040edb7625cfbb049440920a83b2ab20a",
+      "source_url": ""
+    },
+    "agent_img_001_016_55162987dd1e": {
+      "asset_id": "agent_img_001_016_55162987dd1e",
+      "label": "CoT 强化推理链完整性",
+      "content_signature": "dafa7353834a6b8df3da69f1ebff7433e6e26ead17491ab0bd2186eb5badf255",
+      "content_modified_at": "2026-03-30T02:22:46.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "a95c2fbaa991f43bcb7730607d2780a166bc8b0fa6556573a916a2546afe6da9",
+      "source_url": ""
+    },
+    "agent_img_001_017_29006a1055a1": {
+      "asset_id": "agent_img_001_017_29006a1055a1",
+      "label": "结构化输出和引用校验压制幻觉",
+      "content_signature": "9905a66a4bb9a5687890b30f18ed0d4470d18968fe1d3ea37c4a0c591745b1eb",
+      "content_modified_at": "2026-03-30T02:22:43.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "fc4551780f6675e627f46ca1c90af7ff24f22824e68933e40fbe5052d88a4f5e",
+      "source_url": ""
+    },
+    "agent_img_001_018_90388fa1fee2": {
+      "asset_id": "agent_img_001_018_90388fa1fee2",
+      "label": "RAG Prompt 限制模型只用文档",
+      "content_signature": "4a10a19b004733d136d127bf691f0e96655b9b02a79c08ed0067d8b0b0c7494c",
+      "content_modified_at": "2026-03-30T02:42:19.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "9dc308a06438092d42280e5c39822fc37b89e9e565d6a20a9fea934d498269e2",
+      "source_url": ""
+    },
+    "agent_img_001_019_e69b9d279a6c": {
+      "asset_id": "agent_img_001_019_e69b9d279a6c",
+      "label": "RAG 专用 Prompt 约束回答来源",
+      "content_signature": "87e4dc6fef03c990ad54b151ceab77caf45a4404abfcfb343b10bcbded55ff40",
+      "content_modified_at": "2026-03-30T02:43:34.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "b21fd422c1a1664fa62221303cf561ad12efa9dff4af894c1f86a51d3c57c96e",
+      "source_url": "https://mp.weixin.qq.com/s/8GKYJtG3SZDA_8KTN55ThQ"
+    },
+    "agent_img_001_020_34269172aa96": {
+      "asset_id": "agent_img_001_020_34269172aa96",
+      "label": "多智能体结果合并需显式规则",
+      "content_signature": "a70ce7a7ecf26961c01080c6fdad5c6e958002b5619b2e76c4b41d665e1e1b1b",
+      "content_modified_at": "2026-03-30T03:06:04.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "4939997cc92f94a330b1e47adbc98f362c86d41ef1bb5ca1b72ad36cb5133958",
+      "source_url": "https://mp.weixin.qq.com/s/BEUadA_OwAVpL1srTmdbxQ"
+    },
+    "agent_img_002_001_dcd9267f7f8b": {
+      "asset_id": "agent_img_002_001_dcd9267f7f8b",
+      "label": "GraphRAG、LightRAG、PathRAG 对比",
+      "content_signature": "c1f2108a5f5c0d8170f17a8c83cd9405464afe7de2a6eb781762bbeaf896ab7d",
+      "content_modified_at": "2026-03-30T05:36:07.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "e8e828b9279c07cbc50107dffe25581279e4529164d8eb925fdeea8fe5a480f6",
+      "source_url": "https://www.53ai.com/news/RAG/2026031839178.html"
+    },
+    "agent_img_002_002_e11ee8244f22": {
+      "asset_id": "agent_img_002_002_e11ee8244f22",
+      "label": "文档切块先识别标题层级",
+      "content_signature": "bd0299696ae0dc86ae232d45b48f0d32d983ae6ee4b249eb389798e58d025e14",
+      "content_modified_at": "2026-03-30T05:35:51.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "5d15ba75cb002d0c72eefb1ae08c3d97f37a27ee52834bb22efb8906592220ea",
+      "source_url": ""
+    },
+    "agent_img_002_003_cd654a4171e8": {
+      "asset_id": "agent_img_002_003_cd654a4171e8",
+      "label": "RAG 测试集先确定覆盖范围",
+      "content_signature": "155fec58e5f73b642af7dd1c933752a5ae2d744e068f8621d05932672ca27859",
+      "content_modified_at": "2026-03-30T05:35:51.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "e9922edb6aa8c6cbe15b1c2fd7573542dba0cf8c38ecdecd72985c5bf3796d3b",
+      "source_url": "https://mp.weixin.qq.com/s/GUeJCJfd03cSK5aCoefRaA"
+    },
+    "agent_img_002_004_30bfe2dad039": {
+      "asset_id": "agent_img_002_004_30bfe2dad039",
+      "label": "测试集需覆盖多样难题",
+      "content_signature": "3dcf841d8818731f1c923c71b1c2463897df80150d1e81767a2d96e6bd470142",
+      "content_modified_at": "2026-03-30T05:35:51.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "1e601a09815521bcb8da287c6e4f01d6041832ed153556657ce5b9e92e40f852",
+      "source_url": "https://mp.weixin.qq.com/s/GUeJCJfd03cSK5aCoefRaA"
+    },
+    "agent_img_002_005_90500f357b93": {
+      "asset_id": "agent_img_002_005_90500f357b93",
+      "label": "Text2SQL 模板生成训练样本",
+      "content_signature": "e68d0b370c5cc039b9621d57dcee0ba62f680f0cc36977d2016172a6cf0f9855",
+      "content_modified_at": "2026-03-30T05:35:51.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "f51ddd0e15095d3e25c1134331af940341688c357f386a5a105f8ff545541a3d",
+      "source_url": ""
+    },
+    "agent_img_002_006_ce1638579d53": {
+      "asset_id": "agent_img_002_006_ce1638579d53",
+      "label": "Badcase 闭环提升系统准确率",
+      "content_signature": "5802bf307efd21687b355c4a221a76bbf6208857bea545bbf5138123572dbcad",
+      "content_modified_at": "2026-03-30T05:35:51.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "4303d53bca126749ac08c90b4ab2505bad713357c2a21e979cad175ae17ffd26",
+      "source_url": ""
+    },
+    "agent_img_002_007_ccc7f5e4f8ea": {
+      "asset_id": "agent_img_002_007_ccc7f5e4f8ea",
+      "label": "FAQ 问答本质是语义匹配",
+      "content_signature": "6715527910566867108831f9330abe14fc9d600f0097447191222216370f5301",
+      "content_modified_at": "2026-03-30T05:35:51.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "998c9d595f317efc4030999bba659e542aed7eed2c05033f11c89366339ce6fd",
+      "source_url": ""
+    },
+    "agent_img_002_008_d75dc63bc8b4": {
+      "asset_id": "agent_img_002_008_d75dc63bc8b4",
+      "label": "RAG 幻觉来自生成阶段补全",
+      "content_signature": "0c7bd21053bd9d1a45516d8461be78165008b7fb81179ea0bf249c2cf656dd7d",
+      "content_modified_at": "2026-03-30T05:35:51.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "53e34ed88d70ebe939717b5e16c65fdcc3305c4d582b90d7844f2f2270b08af8",
+      "source_url": "https://mp.weixin.qq.com/s/J3VEfZKh-EedIEnZkhFDJg"
+    },
+    "agent_img_002_009_cd3df81953ab": {
+      "asset_id": "agent_img_002_009_cd3df81953ab",
+      "label": "记忆模块是第二检索源",
+      "content_signature": "b2fc89c5b490f9d9a3bfe8cc988ec61ab74857fcf214aba152a3d9bceff13549",
+      "content_modified_at": "2026-03-30T05:35:51.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "cf38f79e4b16bdbe70fda18be11ff094bd179fa1c1d3f19a5b3a816f69b173b4",
+      "source_url": "https://mp.weixin.qq.com/s/We7DOn_LN4LmH9Oqad99YA"
+    },
+    "agent_img_002_010_94911bd17c4e": {
+      "asset_id": "agent_img_002_010_94911bd17c4e",
+      "label": "HyDE 用假设答案增强检索",
+      "content_signature": "401343b4dfab6de1c759d51c17ec7bd34da243bd5182dd9d6d1a01a6ef14b880",
+      "content_modified_at": "2026-03-30T05:35:51.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "e0b30cc0444b221eb958aa48b6adb808b0cd97a14762e50d8c54cdc35a7fb5f7",
+      "source_url": "https://mp.weixin.qq.com/s/NmeedQyz7wu8tjNtgu6yTg"
+    },
+    "agent_img_002_011_06e3063fd73c": {
+      "asset_id": "agent_img_002_011_06e3063fd73c",
+      "label": "RAG 权限管理采用三层架构",
+      "content_signature": "f28942ef9b972f66e47938b41c3c436752eca7370a8478a94e9e2c67cfe4284b",
+      "content_modified_at": "2026-03-30T05:35:51.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "ec5adee344b6b5556ef8c38038070d6ccb5714a4422bbfdd93b66099c6ce673f",
+      "source_url": "https://mp.weixin.qq.com/s/M6BiWlGmfijlU9yUQXmRoA"
+    },
+    "agent_img_002_012_6947aa966103": {
+      "asset_id": "agent_img_002_012_6947aa966103",
+      "label": "RAG 权限控制分三层过滤",
+      "content_signature": "23cca605cb4bf5821cdf2394b466064e75e9aa907ea37434dcb73f1ae788f469",
+      "content_modified_at": "2026-03-30T05:35:51.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "cac3f63ad5aea88de3461ee6b32d80bafcf0ad3c57d9ad0dc104c3a1cd622ce4",
+      "source_url": "https://mp.weixin.qq.com/s/M6BiWlGmfijlU9yUQXmRoA"
+    },
+    "agent_img_002_013_046fc4a9b9b8": {
+      "asset_id": "agent_img_002_013_046fc4a9b9b8",
+      "label": "智能 Overlap 提升 Chunk 召回",
+      "content_signature": "29695887301393c5c3504a7e3a46a6a03e05d42ac871aaf473659410a77f7196",
+      "content_modified_at": "2026-04-02T02:17:35.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "c742415e362a36c1f9bbb84442c6de592c3494a9ca024ca5a4854afaa9dc671f",
+      "source_url": "https://mp.weixin.qq.com/s/Mry0c5FsE5dNYMPXGOPMKg"
+    },
+    "agent_img_002_014_997cdfa9a54b": {
+      "asset_id": "agent_img_002_014_997cdfa9a54b",
+      "label": "Reranker 后需设置相关性阈值",
+      "content_signature": "f5bf5105124e95a3df4ce77f9000ecd800ae128d4b1cae15b4d28d21f284d29a",
+      "content_modified_at": "2026-04-06T07:35:18.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "bea383f8173b18e8c1a44c86ded7d88a26957520fc8b3099c9c8b5135b1e85b1",
+      "source_url": "https://mp.weixin.qq.com/s/1GZtibu07K2rzhGF-PZJ2Q"
+    },
+    "agent_img_002_015_f700f7babd51": {
+      "asset_id": "agent_img_002_015_f700f7babd51",
+      "label": "用离线实验标定检索阈值",
+      "content_signature": "95d20f637562fc95699693283596a8507917071cc5a7214de91bcb046388c7c5",
+      "content_modified_at": "2026-04-06T07:36:36.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "e085b18b19257c4da90ad1e4827d5f87cb02be65805cda9c65d16b84e00606d4",
+      "source_url": "https://mp.weixin.qq.com/s/1GZtibu07K2rzhGF-PZJ2Q"
+    },
+    "agent_img_002_016_99f8be553c37": {
+      "asset_id": "agent_img_002_016_99f8be553c37",
+      "label": "SPLADE 融合稀疏匹配与语义泛化",
+      "content_signature": "6a0a23bd4fc50b7726ad6d4c8cf93a357393d4362a43ded55080ff1f1d61b2ff",
+      "content_modified_at": "2026-04-07T02:46:02.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "1a4f7a5ded87238c42a5e1881a0b80ad99363e7a36ee47d571742b7c2c63f725",
+      "source_url": "https://mp.weixin.qq.com/s/wZeLHeOqkHDM8ZRStxzCkg"
+    },
+    "agent_img_002_017_644feb67b2da": {
+      "asset_id": "agent_img_002_017_644feb67b2da",
+      "label": "RAG 质量治理要分层评估",
+      "content_signature": "61c1d6ca15d4c75a4cb931c85e7265bbc227d25e993c562f682b583503119b8c",
+      "content_modified_at": "2026-05-18T06:30:06.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "20dd33b13c083cc44724c2655f938afe5f735436fe2db26970528118096d5e02",
+      "source_url": ""
+    },
+    "agent_img_002_018_21ba6bfa8425": {
+      "asset_id": "agent_img_002_018_21ba6bfa8425",
+      "label": "MCP 三层结构区分 Host 和 Client",
+      "content_signature": "189e3721986b1c1f4d8f754acf445b7c6205935f5a62879e61808ca4b7d11a2d",
+      "content_modified_at": "2026-05-18T06:30:06.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "a71cf924479fa183bbfdc07879d26eebb57cff3e26e75e8807da547ad7ce3467",
+      "source_url": "https://mp.weixin.qq.com/s/8bI19Vfn-5Kqpwp0Yg1kdg"
+    },
+    "agent_img_002_019_6a3f08dd5a27": {
+      "asset_id": "agent_img_002_019_6a3f08dd5a27",
+      "label": "MCP 由角色、能力、协议三层组成",
+      "content_signature": "77bd431963b66773dc2c0c8d72ddaca0d2c7fb9d8f851fb60a4bd003b74c2cd7",
+      "content_modified_at": "2026-05-18T06:30:06.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "701287fd18bff8d73d084e94c81061645b61074ab2b6aa08ef24fdbe21cd92cd",
+      "source_url": "https://mp.weixin.qq.com/s/8bI19Vfn-5Kqpwp0Yg1kdg"
+    },
+    "agent_img_002_020_2223a2a396de": {
+      "asset_id": "agent_img_002_020_2223a2a396de",
+      "label": "MCP 支持本地和远程两种通信",
+      "content_signature": "62bc46ff0ca618f92fc99e1ef1668c970b54d2cf4dd8fe397fa0698bdb1983d3",
+      "content_modified_at": "2026-05-18T06:30:06.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "0aea243933c058885cd9aa9994e44487be54e876b2477385e0cceb343a8da2c3",
+      "source_url": "https://mp.weixin.qq.com/s/8bI19Vfn-5Kqpwp0Yg1kdg"
+    },
+    "agent_img_002_021_9b3378ea7e27": {
+      "asset_id": "agent_img_002_021_9b3378ea7e27",
+      "label": "向量数据库支撑高维相似度检索",
+      "content_signature": "ab41db65aadae645af439d9d148a89493de807acf7d59aaf572d6a6e6bf6eac8",
+      "content_modified_at": "2026-05-18T06:30:06.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "ac7f1b15eed76ab42d8443381eb470101dd353090f7196c474d81898c451451e",
+      "source_url": "https://mp.weixin.qq.com/s/V9S2u4w9RDFMguKjB6trBg"
+    },
+    "agent_img_002_022_14f94fda7909": {
+      "asset_id": "agent_img_002_022_14f94fda7909",
+      "label": "HNSW 用分层图加速向量检索",
+      "content_signature": "369dd61fe8b590cebf462cf0a7eac0c0d934842677e743f02f3f1099914ed9fb",
+      "content_modified_at": "2026-05-18T06:30:06.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "f6a9228690a434d6ca39e42434cca929266bb9a7b63f6e2eca5e6825f3865aa8",
+      "source_url": "https://mp.weixin.qq.com/s/i9L-II6miRrQ1em3O3UFnw"
+    },
+    "agent_img_002_023_94234dd7d215": {
+      "asset_id": "agent_img_002_023_94234dd7d215",
+      "label": "IVF 通过聚类桶缩小搜索范围",
+      "content_signature": "3cfb0ec1cca7943797dd686055707a1f4619dd60492e6e51dd95adc894a43775",
+      "content_modified_at": "2026-05-18T06:30:06.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "ecca14b48d53fe2cb8e1edcb128f4db059a9e90e4b89510dd5d300583e3ebf37",
+      "source_url": "https://mp.weixin.qq.com/s/V9S2u4w9RDFMguKjB6trBg"
+    },
+    "agent_img_002_024_e00ff7ab6236": {
+      "asset_id": "agent_img_002_024_e00ff7ab6236",
+      "label": "向量量化降低 Milvus 内存占用",
+      "content_signature": "f26a026e292a4911ef90873b329e81cc190df8776bac1f1c1941e19d631f4b03",
+      "content_modified_at": "2026-05-18T06:30:06.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "92fffb614cb4b364a8d48295fd5cbbeffe58acf243b249eafd02ff7cf83254ef",
+      "source_url": "https://mp.weixin.qq.com/s/i9L-II6miRrQ1em3O3UFnw"
+    },
+    "agent_img_002_025_f5c936ace146": {
+      "asset_id": "agent_img_002_025_f5c936ace146",
+      "label": "HNSW 分层贪心搜索逐层逼近",
+      "content_signature": "27cdf40e7e4f01740e86d3ea46c1d64c98a4bc4b2748f2da4775a0ec79eac19a",
+      "content_modified_at": "2026-05-18T06:30:06.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "c22ddc345f94bd722d86ed38e7ad5909b92cbd7fcbeb71ea61c7348640024a31",
+      "source_url": ""
+    },
+    "agent_img_002_026_f9760a189147": {
+      "asset_id": "agent_img_002_026_f9760a189147",
+      "label": "小批量错峰写入降低索引抖动",
+      "content_signature": "5bdac332fc706c2d740b23a469ca03f7246009e8b0791a069cbfef390d2b671c",
+      "content_modified_at": "2026-05-18T06:30:06.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "0fe073f6f18e23d54eaca46ffb6397f94cc70379b2a05470adfc4cbd609e16b8",
+      "source_url": "https://mp.weixin.qq.com/s/i9L-II6miRrQ1em3O3UFnw"
+    },
+    "agent_img_002_027_e76d357cd694": {
+      "asset_id": "agent_img_002_027_e76d357cd694",
+      "label": "内存不足会导致向量检索延迟飙升",
+      "content_signature": "3377d8bdb9a1ee8bc18ea9886527f888165c51dbdcc55bb4496693d78f3d9b7e",
+      "content_modified_at": "2026-05-18T06:30:06.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "3901b3e98e0d43a6882631c8b9f78349b31cdadff889a094c7b1f261d4b8873e",
+      "source_url": "https://mp.weixin.qq.com/s/i9L-II6miRrQ1em3O3UFnw"
+    },
+    "agent_img_002_028_b64d5058598d": {
+      "asset_id": "agent_img_002_028_b64d5058598d",
+      "label": "Metadata 先过滤再做 ANN 搜索",
+      "content_signature": "cc1f71b691af4c889c44e0fa98c7281b635cf8fc73d458b2910550d1ba7ea00f",
+      "content_modified_at": "2026-05-18T06:30:06.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "7b7ae0d99f413020179cc89a5e891d394b0e8357f6efbbfc0398c294b18f7a06",
+      "source_url": "https://mp.weixin.qq.com/s/V9S2u4w9RDFMguKjB6trBg"
+    },
+    "agent_img_002_029_b54e7ba8ca9a": {
+      "asset_id": "agent_img_002_029_b54e7ba8ca9a",
+      "label": "Embedding 模型需用业务数据评估",
+      "content_signature": "cabe2a60325d5a731255e4fc36d60f8e131b109719ffb236398fffde70a2a82e",
+      "content_modified_at": "2026-05-18T06:30:06.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "f264d54f708b07acae5d64828c0ce2a4a9a745dd129cd88c93e7fa524daf2aa7",
+      "source_url": "https://mp.weixin.qq.com/s?__biz=MzUxODAzNDg4NQ==&mid=2247557278&idx=2&sn=5b5d668106c8e22815e2c6ee7b11d64f&chksm=f8a82ac5c656d582e7bb4d21fd51190027ff526ce250b7ce9eaf41d00645c4642fe1a461acab&scene=126&sessionid=1778916220&subscene=91&clicktime=1778922497&enterid=1778922497#rd"
+    },
+    "agent_img_002_030_7d149ed57d08": {
+      "asset_id": "agent_img_002_030_7d149ed57d08",
+      "label": "中文 RAG 优先考虑 BGE Embedding",
+      "content_signature": "ffa770f0262719fa49e2d5426d0c5f31b4f01d7bedd4fbcd2bd382672c2ac50b",
+      "content_modified_at": "2026-05-18T06:30:06.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "22d2199f758bba7b0d93a29e6f07b2f9485724215dcdd45dc1d3e0f57c92d5e6",
+      "source_url": "https://mp.weixin.qq.com/s?__biz=MzUxODAzNDg4NQ==&mid=2247557278&idx=2&sn=5b5d668106c8e22815e2c6ee7b11d64f&chksm=f8a82ac5c656d582e7bb4d21fd51190027ff526ce250b7ce9eaf41d00645c4642fe1a461acab&scene=126&sessionid=1778916220&subscene=91&clicktime=1778922497&enterid=1778922497#rd"
+    },
+    "agent_img_002_031_6f0b11003f01": {
+      "asset_id": "agent_img_002_031_6f0b11003f01",
+      "label": "Embedding 从词向量演进到语义检索",
+      "content_signature": "3dae267090ed0026359d89d21c63f0b9ae9985ff0520c8cae16648ea70cd7eca",
+      "content_modified_at": "2026-05-18T06:30:06.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "0ccd2a84222f80f58330e11b30312d90e9ea00e60cb2cb67ef38b7df61a5a3e6",
+      "source_url": "https://mp.weixin.qq.com/s?__biz=MzY4NTE2NjU5MQ==&mid=2247484165&idx=1&sn=a000b9dc61a558a08bbf0a8884786832&scene=21&poc_token=HIt6CWqjkMz7vDGBEnm3QbD_qJ2EJuhu4tyC4xmg"
+    },
+    "agent_img_002_032_4819f89e3efc": {
+      "asset_id": "agent_img_002_032_4819f89e3efc",
+      "label": "RAG 评估需拆分检索和生成",
+      "content_signature": "ea25a8ca9856fa0024d93d7a328b82e7b0b38589a15b94d71e9d94f6cc031590",
+      "content_modified_at": "2026-05-18T06:30:06.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "2eafab6b801b57e18e967fb584b5dfe7ceccda3351165a2bc3e5ac53ab166409",
+      "source_url": "https://mp.weixin.qq.com/s/uIHCaA1bUo8d8m5bfOQ0TQ"
+    },
+    "agent_img_002_033_cd1a0caf748a": {
+      "asset_id": "agent_img_002_033_cd1a0caf748a",
+      "label": "RAG 评估指标覆盖召回与忠实度",
+      "content_signature": "cd45550ce26a5470c938c7a9f70b3636af4ba6c751a7624fc1c5601cc1240307",
+      "content_modified_at": "2026-05-18T06:30:06.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "8609c24ab20bc2dd358ff8c11fe23d1b28d3f6fee158bc234b27ccc3667db7f7",
+      "source_url": "https://mp.weixin.qq.com/s/uIHCaA1bUo8d8m5bfOQ0TQ"
+    },
+    "agent_img_002_034_dc0373ea17a7": {
+      "asset_id": "agent_img_002_034_dc0373ea17a7",
+      "label": "动态 RAG 数据质量用五维打分",
+      "content_signature": "ca3f5c09e7d7f55265f6b5e8ee4570d4496f3d2fdcf9bcf38009a7c6e4865025",
+      "content_modified_at": "2026-05-18T06:25:23.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "ddbff4a5d1c6fd666194b9a0891c64c0de8cab456917aec284df7b65e3c41ba5",
+      "source_url": "https://mp.weixin.qq.com/s?__biz=MzkzMDIwMzg1Mw==&mid=2247489172&idx=1&sn=bf3a10e4f280767835a66be85ee602eb&chksm=c27c8736f50b0e20fb7342bf349260ba061c6c2b45ac26955232dfc71a809fba098a671a904a&cur_album_id=3045414873540739074&scene=189#wechat_redirect"
+    },
+    "agent_img_004_001_c7a560785213": {
+      "asset_id": "agent_img_004_001_c7a560785213",
+      "label": "Text2SQL 需要执行前后双校验",
+      "content_signature": "cad772dd2ef6e965dfe07697d13f011263289d7e6e738bd51edebb822a90cc64",
+      "content_modified_at": "2026-03-31T02:09:38.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "b1f814d5407dc2d0f7b54f57c27991aebb1c41e01f7c11306e5bb505e349b44f",
+      "source_url": ""
+    },
+    "agent_img_005_001_bad29a1acc99": {
+      "asset_id": "agent_img_005_001_bad29a1acc99",
+      "label": "Agent 轨迹包含思考、工具和观察",
+      "content_signature": "56dd48ec751a77af8433b34f74fb06d73451b32a739e307fa71432059a15caba",
+      "content_modified_at": "2026-03-31T02:33:25.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "b0b60f36175d5fc970832b0ff12729dc0e434f75b60f47312543e2813ecefbb8",
+      "source_url": ""
+    },
+    "agent_img_005_002_2a1ff9be530f": {
+      "asset_id": "agent_img_005_002_2a1ff9be530f",
+      "label": "SFT 数据通过多策略扩充轨迹",
+      "content_signature": "9ebe79a6e911fbd2eee8e13f4e6640765056b8bc8ad7ddfc301a5dbb35d2160f",
+      "content_modified_at": "2026-05-13T08:32:37.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "971eaf09d50c932a2f193cba1503324e2303ebcd7ca0d0482f0bb6045ea5a267",
+      "source_url": "https://mp.weixin.qq.com/s?__biz=MzkzMDIwMzg1Mw==&mid=2247490352&idx=1&sn=c939b0dfe04ec996333465dc36104aa1&chksm=c3200f0c6778a816179a634c3baef843f29a5519029d240cd521dc2de2dc8cf95f9c34523edc&scene=126&sessionid=1778660362&subscene=91&clicktime=1778660363&enterid=1778660363#rd"
+    },
+    "agent_img_005_003_90624dde4170": {
+      "asset_id": "agent_img_005_003_90624dde4170",
+      "label": "微调效果要用三层测试集验证",
+      "content_signature": "344b22b81994d0156a031b7329216cba24b4e562009919587ecbb1054bd9c6da",
+      "content_modified_at": "2026-05-18T06:22:48.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "8a43d4205d341e81a421d21bf5c5f2514d9581bbab46ef7bccec4e02b0884bcb",
+      "source_url": "https://mp.weixin.qq.com/s?__biz=MzkzMDIwMzg1Mw==&mid=2247490352&idx=1&sn=c939b0dfe04ec996333465dc36104aa1&chksm=c3200f0c6778a816179a634c3baef843f29a5519029d240cd521dc2de2dc8cf95f9c34523edc&scene=126&sessionid=1778660362&subscene=91&clicktime=1778660363&enterid=1778660363#rd"
+    },
+    "agent_img_005_004_0f915a300596": {
+      "asset_id": "agent_img_005_004_0f915a300596",
+      "label": "工具调用评估需拆分多个维度",
+      "content_signature": "1960728affcfb170d0710451ce38f94b8c2c3a0fc8f5629e4949e2d4f02dd346",
+      "content_modified_at": "2026-05-18T06:22:48.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "69e19a74bf80e70afe10210bce81a16c90785b57cbe6a7858194e0120416e715",
+      "source_url": ""
+    },
+    "agent_img_005_005_1e3f27dfddbc": {
+      "asset_id": "agent_img_005_005_1e3f27dfddbc",
+      "label": "SFT 学调用流程，RLHF 学边界",
+      "content_signature": "0efdfc9308b55ca77288a1d38aee08fcce5ad133f0200690568e98e9c3443bce",
+      "content_modified_at": "2026-05-18T06:22:48.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "90845dadda06d1a064cefe76d1628dfec25ecd2e92472ad51335e3f5816a8a67",
+      "source_url": "https://mp.weixin.qq.com/s/vOh3qVl9jStG8MSPSnF6jw"
+    },
+    "agent_img_005_006_82adbd19533c": {
+      "asset_id": "agent_img_005_006_82adbd19533c",
+      "label": "人工标注结合蒸馏扩展训练数据",
+      "content_signature": "47ad7afef9eddd6978e2a809020cda7719c47f0d025d161cac3324bac8b15562",
+      "content_modified_at": "2026-05-18T06:22:48.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "a35f6c74559bbe62def7366bb66583acb94337dc36f9bbc41d89a143f00ac458",
+      "source_url": ""
+    },
+    "agent_img_005_007_16a0017a3bf3": {
+      "asset_id": "agent_img_005_007_16a0017a3bf3",
+      "label": "工具调用数据需覆盖多种场景",
+      "content_signature": "658ba594a097dbc11d4500bae268bbb88fb27989562442ed5e975d5a7010df91",
+      "content_modified_at": "2026-05-18T06:22:48.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "97364e5904c87faadaf21754a68b66ffebd9829987cb9d903f363b26289f88f1",
+      "source_url": "https://mp.weixin.qq.com/s/vOh3qVl9jStG8MSPSnF6jw"
+    },
+    "agent_img_005_008_8e11e3ef39a2": {
+      "asset_id": "agent_img_005_008_8e11e3ef39a2",
+      "label": "SFT 与 RLHF 共同训练工具判断",
+      "content_signature": "4ce4818774f4bbe8d0eeea8b235f7a2c0c3a7c4dfae3a585dfdb6f869f2bb346",
+      "content_modified_at": "2026-05-18T06:22:48.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "d56b34b473bd38d9e239a9432084d8be78c5893c17866735289c48af3d78fd99",
+      "source_url": "https://mp.weixin.qq.com/s/vOh3qVl9jStG8MSPSnF6jw"
+    },
+    "agent_img_006_001_8ddd31f50291": {
+      "asset_id": "agent_img_006_001_8ddd31f50291",
+      "label": "Plan-Execute 构成 Agent 执行闭环",
+      "content_signature": "c023c4c966e3ce51ce83ad5784f952819e71c44a9fee6637173e8d637d9d848d",
+      "content_modified_at": "2026-04-01T06:19:44.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "e9c1567c02ec6604846b8b41671bda44847231372d20e2492c95a20ad0d1f5a4",
+      "source_url": "https://mp.weixin.qq.com/s/_ph5OcNIBEDWKrNHLhOwsg"
+    },
+    "agent_img_006_002_78fd05498fa5": {
+      "asset_id": "agent_img_006_002_78fd05498fa5",
+      "label": "LLM 规划器将问题转为执行计划",
+      "content_signature": "4b06ec15a2ec5e5a6a9acd31a2ed082b34e4baa9d932a386af3b5d8e1f639de7",
+      "content_modified_at": "2026-04-01T06:20:09.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "af54f7e452b7b89bf3b11d612f62d1278ffe71ea7c123368fb16a9cbe2ec6d23",
+      "source_url": ""
+    },
+    "agent_img_007_001_e34249d9df55": {
+      "asset_id": "agent_img_007_001_e34249d9df55",
+      "label": "Prompt 要明确工具调用边界",
+      "content_signature": "8024924a2eb492a1f8228fafc150355c5932954ae8297f45b39a3e1ac8e83ec1",
+      "content_modified_at": "2026-03-31T05:46:51.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "7e1eb8188732d735a75415bcb9b2171c2620db45abd2e0bf07cac64fac615099",
+      "source_url": "https://mp.weixin.qq.com/s/uU5Q8K2hYpqsc0PDxoyFUQ"
+    },
+    "agent_img_008_001_28c3e7496fff": {
+      "asset_id": "agent_img_008_001_28c3e7496fff",
+      "label": "容错要让模型感知失败",
+      "content_signature": "4efcec6360642f7a58caef0e33c1ba385c26a6393885cbfcd605e8e2ba8a23e4",
+      "content_modified_at": "2026-05-13T11:42:55.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "52b2ad24f88fd0b805038adfcf5f64544ca9509809c96fd7bcb9398e2c7f47aa",
+      "source_url": "https://mp.weixin.qq.com/s/nvZE1pOGPIH2sJP4yJQxjA"
+    },
+    "agent_img_009_001_e84966ff036b": {
+      "asset_id": "agent_img_009_001_e84966ff036b",
+      "label": "文本生成流水线结合采样与质检",
+      "content_signature": "6b42fae5107f26dabb24bce1f0614b4c2a8c8e5c1552275925d2fd92928e81b4",
+      "content_modified_at": "2026-04-01T06:54:05.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "c5d0945b5f32edc37fc559fda6b7906352d930dcb14607a05a96c0772ebd501e",
+      "source_url": ""
+    },
+    "agent_img_009_002_7af3c22a8eaf": {
+      "asset_id": "agent_img_009_002_7af3c22a8eaf",
+      "label": "模型训练内存由参数梯度优化器组成",
+      "content_signature": "23923ad404aebe7204ce84871f8bd84ed59221304d703a9bab71c44053f0458d",
+      "content_modified_at": "2026-04-01T07:15:47.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "9f42f3f6298299174d9452776d5d2cfe9d8c2e91c84bc4edcb29582edb80033e",
+      "source_url": ""
+    },
+    "agent_img_009_003_61e2922ef802": {
+      "asset_id": "agent_img_009_003_61e2922ef802",
+      "label": "Map-Reduce 处理长上下文评审",
+      "content_signature": "cda3cd6963244038815009f4c69bab8a222e07fc94333a479abdca25b67ae562",
+      "content_modified_at": "2026-04-07T08:32:25.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "fd1c385539919b934db1d86201c39a67cacda6a0eeff1320fc5716620a19f021",
+      "source_url": "https://www.bestblogs.dev/article/288cbab6"
+    },
+    "agent_img_009_004_7a49da56130f": {
+      "asset_id": "agent_img_009_004_7a49da56130f",
+      "label": "Hermes 通过 Skill 与 RL 双路径自进化",
+      "content_signature": "49399125dcdaa576de0ef90344584c4d94a380e30648d949781c22664d41272f",
+      "content_modified_at": "2026-05-14T01:42:05.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "5f86a438055fc05d6a612d066e5243bee90ace232dd8c8d84fe045ac69f9dc95",
+      "source_url": ""
+    },
+    "agent_img_009_005_9da3fe710b2a": {
+      "asset_id": "agent_img_009_005_9da3fe710b2a",
+      "label": "Hermes 将复杂任务复盘成 Skill",
+      "content_signature": "413fceb819fb892e16538c9f6d55863d1e66b351a85b6adf32c3f64c1cc86899",
+      "content_modified_at": "2026-05-18T06:23:48.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "49e9913aff96d80d990775ffb1848948b1e9f230a69bbea117f87f471f968875",
+      "source_url": "https://developer.aliyun.com/article/1732681?spm=a2c6h.24874632.expert-profile.13.16451bb6uGrOtt"
+    },
+    "agent_img_009_006_406455c22467": {
+      "asset_id": "agent_img_009_006_406455c22467",
+      "label": "Hermes 后台审查触发记忆与技能沉淀",
+      "content_signature": "9c94e79dbf109000d29afacd3e750853ba0c3c811bdea2626b4077a5aafd45e4",
+      "content_modified_at": "2026-05-18T06:23:48.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "6ea714e7c902525d6cfcb8e1279961ac70143f9b87dbd7b0324683a533219a55",
+      "source_url": "https://developer.aliyun.com/article/1732681?spm=a2c6h.24874632.expert-profile.13.16451bb6uGrOtt"
+    },
+    "agent_img_009_007_6d1f81043b69": {
+      "asset_id": "agent_img_009_007_6d1f81043b69",
+      "label": "RL 训练将经验内化到模型权重",
+      "content_signature": "2924e439e809eedf2e832ab0b6f23892d46f3158e48e7eae2ed2cf1ed40dcebf",
+      "content_modified_at": "2026-05-18T06:23:48.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "4718bacebf130f3a004fe4136d6e7bbb3d42f7bd7c0ad2331676f7d05c6d0f72",
+      "source_url": ""
+    },
+    "agent_img_009_008_71cb71df22d7": {
+      "asset_id": "agent_img_009_008_71cb71df22d7",
+      "label": "Hermes 通过头尾保护压缩上下文",
+      "content_signature": "8c323fe195e3f25df2074778c245121f65993a45a6a65a2ec4e57c64170ce3c1",
+      "content_modified_at": "2026-05-18T06:23:48.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "12f6fd84f86404d87b5c88a3493da8e42a194aa6b1808884790a31bfcf711e70",
+      "source_url": ""
+    },
+    "agent_img_009_009_fd719d4b2dcf": {
+      "asset_id": "agent_img_009_009_fd719d4b2dcf",
+      "label": "结构化输出技术路线各有取舍",
+      "content_signature": "0ef83e6687787adc0b55af7ffa5479493ab56e37b855e610d3dc7db172365593",
+      "content_modified_at": "2026-05-18T06:23:48.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "b889c3b76653e8f4c9c320c8e2875ac807f43bbc587a07abc19f210c2c187839",
+      "source_url": ""
+    },
+    "agent_img_009_010_1123d496a7e0": {
+      "asset_id": "agent_img_009_010_1123d496a7e0",
+      "label": "结构化输出从 Prompt 到硬约束演进",
+      "content_signature": "c16f0b5e0da4936784029dd4c1db718e919521937f904e27883003bdac936357",
+      "content_modified_at": "2026-05-14T06:30:52.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "",
+      "source_url": ""
+    },
+    "agent_img_009_011_f3f3422d45ce": {
+      "asset_id": "agent_img_009_011_f3f3422d45ce",
+      "label": "多 Agent 有四种常见编排模式",
+      "content_signature": "94b51951d8683c92a989ad0a691548717ceac5a920f64ab043a9ff469c25c28c",
+      "content_modified_at": "2026-05-18T06:23:48.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "acfb9fa2a92a4948ffbf2fab5aade47d34e026314cf62a093edd67a4f5b5c2ce",
+      "source_url": ""
+    },
+    "agent_img_009_012_b07abd5153e2": {
+      "asset_id": "agent_img_009_012_b07abd5153e2",
+      "label": "多 Agent 协作成本来自交接共享聚合",
+      "content_signature": "0ac0205ef2d9d937044b43c94bde2fc2478a159516af641c37bd41a6c7afc75c",
+      "content_modified_at": "2026-05-18T06:23:48.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "a3ac27ee7a7d71615f5bc70ec61dd8e372560142cc871b8cc8477e386f63a65c",
+      "source_url": "https://www.bestblogs.dev/article/f0deaa0c?entry=explore_card&from=%2Fexplore"
+    },
+    "agent_img_009_013_79ba71d907a8": {
+      "asset_id": "agent_img_009_013_79ba71d907a8",
+      "label": "Agent 间通讯复用用户操作能力",
+      "content_signature": "61c14a7ba6ac7e0d8729390c90ff17d61c27c869ed2a12e930675ea4483bb588",
+      "content_modified_at": "2026-05-18T06:23:48.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "fd225c97ff67420310a4249122fbe0b56ae97e43c6418f21e07cecff8e1fc8fd",
+      "source_url": "https://www.bestblogs.dev/article/f0deaa0c?entry=explore_card&from=%2Fexplore"
+    },
+    "agent_img_009_014_8bd0eb29ad10": {
+      "asset_id": "agent_img_009_014_8bd0eb29ad10",
+      "label": "AgentTeam 是持续协作而非任务派发",
+      "content_signature": "d06a65fce42e2c370d4cd10764349849da7344301543d3c81be6f717b13e1008",
+      "content_modified_at": "2026-05-18T06:23:48.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "5514bf88f13b3dbede8dbe6053cf5d024489274387cf9a140b72fea70b11b214",
+      "source_url": "https://www.bestblogs.dev/article/f0deaa0c?entry=explore_card&from=%2Fexplore"
+    },
+    "agent_img_009_015_8caf164bbed7": {
+      "asset_id": "agent_img_009_015_8caf164bbed7",
+      "label": "RAG 首字延迟卡在检索前链路",
+      "content_signature": "2a7ecee048e79389ff0028777da49a7c6eb3f6381bff1a3a52824fe443329a5a",
+      "content_modified_at": "2026-05-18T06:23:48.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "1dab4fe53b786c6565803cd0a52d812498efc35ddb74513f3c57c1ebe59538b6",
+      "source_url": "https://mp.weixin.qq.com/s?__biz=MzkzMDIwMzg1Mw==&mid=2247489138&idx=1&sn=b15f1722d0d19f23fb4649c29659298b&chksm=c27c87d0f50b0ec601eec037a2671480c77dae6e922c910c25168acd581af2ffc3868dc8759a&cur_album_id=3045414873540739074&scene=189#wechat_redirect"
+    },
+    "agent_img_009_016_93a7879f1211": {
+      "asset_id": "agent_img_009_016_93a7879f1211",
+      "label": "Embedding 缓存减少重复向量计算",
+      "content_signature": "9a96ea40e9de4a6cae95bf4dad44788f8ec3cb45098b8a8f911b25b1d6acd6ad",
+      "content_modified_at": "2026-05-18T06:23:48.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "1611fb2a2bcb7211dbff472585f7e4fe9ec259c6213aaafd148b16f0e2186a66",
+      "source_url": "https://mp.weixin.qq.com/s?__biz=MzkzMDIwMzg1Mw==&mid=2247489138&idx=1&sn=b15f1722d0d19f23fb4649c29659298b&chksm=c27c87d0f50b0ec601eec037a2671480c77dae6e922c910c25168acd581af2ffc3868dc8759a&cur_album_id=3045414873540739074&scene=189#wechat_redirect"
+    },
+    "agent_img_009_017_456194efbeca": {
+      "asset_id": "agent_img_009_017_456194efbeca",
+      "label": "三层缓存降低 RAG 调用成本",
+      "content_signature": "338e937d69db9d70279ff2b643acbb8fa5efcd505dbf9b78c94c9d02ca0dd354",
+      "content_modified_at": "2026-05-18T06:23:48.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "4a492039e09f679c7b8d0ce908994dfd1e34ae88196c2875a2e55d361f0a87cf",
+      "source_url": "https://mp.weixin.qq.com/s?__biz=MzkzMDIwMzg1Mw==&mid=2247489138&idx=1&sn=b15f1722d0d19f23fb4649c29659298b&chksm=c27c87d0f50b0ec601eec037a2671480c77dae6e922c910c25168acd581af2ffc3868dc8759a&cur_album_id=3045414873540739074&scene=189#wechat_redirect"
+    },
+    "agent_img_009_018_674942d618e0": {
+      "asset_id": "agent_img_009_018_674942d618e0",
+      "label": "RAG 延迟优化依赖异步与缓存",
+      "content_signature": "efe49b66fb0d72b6da12ad148d0f267780b44469b94688ae527a08e8c04e7e1b",
+      "content_modified_at": "2026-05-18T06:23:48.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "d64537cbb7aeab5ff68007ad983dbb3376a3a296e2fef59076b54c2240ed6302",
+      "source_url": "https://mp.weixin.qq.com/s?__biz=MzkzMDIwMzg1Mw==&mid=2247489138&idx=1&sn=b15f1722d0d19f23fb4649c29659298b&chksm=c27c87d0f50b0ec601eec037a2671480c77dae6e922c910c25168acd581af2ffc3868dc8759a&cur_album_id=3045414873540739074&scene=189#wechat_redirect"
+    },
+    "agent_img_010_001_e39c23430755": {
+      "asset_id": "agent_img_010_001_e39c23430755",
+      "label": "Claude Code 双层限制工具结果大小",
+      "content_signature": "60aca7d5a64b8ba92a9d8592a21b35b0f31b4558d9c9f9ed54be15fc1006109e",
+      "content_modified_at": "2026-05-18T06:23:49.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "74866e18db670ba8ac7b6b5273ae265b2aa21713d8963b89576b631cf4601476",
+      "source_url": "https://zhanghandong.github.io/harness-engineering-from-cc-to-ai-coding/part1/ch02.html"
+    },
+    "agent_img_010_002_059f630d18fa": {
+      "asset_id": "agent_img_010_002_059f630d18fa",
+      "label": "Claude Code 延迟加载工具 Schema",
+      "content_signature": "a156acaced431181d80504ae21a390a1726d04aa6f54c76d152a84e956d19a19",
+      "content_modified_at": "2026-05-18T06:23:49.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "b481b50e4f64892aad3b7a5d4b981464c6fc45e2b6431bedd9f294395fa4e412",
+      "source_url": "https://zhanghandong.github.io/harness-engineering-from-cc-to-ai-coding/part1/ch02.html#28-%E6%A8%A1%E5%BC%8F%E6%8F%90%E7%82%BC"
+    },
+    "agent_img_010_003_df2c941682fd": {
+      "asset_id": "agent_img_010_003_df2c941682fd",
+      "label": "searchHint 用于工具检索匹配",
+      "content_signature": "b0f1ec942c3a29a2e369bd80c8f0bce61c8a3a7e7f08f9923eb29e36839879d2",
+      "content_modified_at": "2026-05-18T06:23:49.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "6acc12ac079cac56443b3ee58676b49bc7ea4e183e039a161128d76429fcd694",
+      "source_url": ""
+    },
+    "agent_img_010_004_7748829a7526": {
+      "asset_id": "agent_img_010_004_7748829a7526",
+      "label": "Claude Code 工具系统采用安全默认值",
+      "content_signature": "3d5fb0a8c464a1e83b2e7a3cced894fd66bafee18e3d84799b5e27b52d5b735a",
+      "content_modified_at": "2026-05-18T06:23:49.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "6df799017c22d7c86fb7aee679e33778406ea20b1c79b41934f8a038be8a78c3",
+      "source_url": ""
+    },
+    "agent_img_010_005_772065f10bc8": {
+      "asset_id": "agent_img_010_005_772065f10bc8",
+      "label": "AskUserQuestion 工具让提问显式暂停",
+      "content_signature": "06a3f61fe052d4bef0c9d2bf0862daabb3efc10100ba9942b6c5b94dbc952fa1",
+      "content_modified_at": "2026-05-18T06:23:49.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "804f17de7a380083e19b1bba2410485794b6f02408e90b97f08874ebecfa6b59",
+      "source_url": "https://www.bestblogs.dev/article/5c79977a"
+    },
+    "agent_img_010_006_91f3a9315fd6": {
+      "asset_id": "agent_img_010_006_91f3a9315fd6",
+      "label": "Hooks 适合轻量阻断和自动化",
+      "content_signature": "4002549785b8abf609e92ad17d328dc9b17b3c2f5d03284d67f842b323474315",
+      "content_modified_at": "2026-05-18T06:23:49.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "023c977a1be250e9e421ef9c77049519335a515fcc48be78498f8df59bb71fd6",
+      "source_url": "https://www.bestblogs.dev/article/5c79977a"
+    },
+    "agent_img_010_007_6a0c1a08f3ce": {
+      "asset_id": "agent_img_010_007_6a0c1a08f3ce",
+      "label": "会话中途切模型会破坏缓存",
+      "content_signature": "f3b4e8e99a30af137d77142a8bdc7e37b6a6eff918578a758226af320d324580",
+      "content_modified_at": "2026-05-18T06:23:49.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "db27bc7bbe4244985c8a072e250cdca68e2dd33ad668d8210e53b4aaf665b292",
+      "source_url": "https://www.bestblogs.dev/article/5c79977a"
+    },
+    "agent_img_010_008_39a6a4c7207f": {
+      "asset_id": "agent_img_010_008_39a6a4c7207f",
+      "label": "Claude Code 通过工具循环检索代码",
+      "content_signature": "946127e368a135cf760b44b8ecbe608acba92780da0bef232e699f01e47bb92b",
+      "content_modified_at": "2026-05-18T06:23:49.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "7befbfe671e6eb3dafe5ba89c17392da47817080f3f97c5d43b9b7c36746d35b",
+      "source_url": "https://mp.weixin.qq.com/s/dDczjoNM3URc8ExcJL1hPg"
+    },
+    "agent_img_010_009_fc55588560a1": {
+      "asset_id": "agent_img_010_009_fc55588560a1",
+      "label": "ToolSearch 按需加载延迟工具",
+      "content_signature": "a788c227022284dadb4758776ef3e78786fb43c2fc47ac180ba2aa686b6bad4d",
+      "content_modified_at": "2026-05-18T06:23:49.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "8c78fce4b461100e68ff3373b82af060fbec538e839879fde323b1d9b43837ad",
+      "source_url": "https://zhanghandong.github.io/harness-engineering-from-cc-to-ai-coding/part1/ch02.html"
+    },
+    "agent_img_010_010_900f839d220c": {
+      "asset_id": "agent_img_010_010_900f839d220c",
+      "label": "Claude Code 与 Codex 都用 grep 检索",
+      "content_signature": "9d063de3782e600187304140d6b2247d30a98031405c6a8f93a2e50c7304be19",
+      "content_modified_at": "2026-05-18T06:23:49.000Z",
+      "label_generated_at": "2026-05-18T08:13:06.019578+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "51bd8c6b2e7ba728ac5a13a3b6d30eddc4e86477fb86c68b3b15a9ccf56f167a",
+      "source_url": "https://mp.weixin.qq.com/s/dDczjoNM3URc8ExcJL1hPg"
+    },
+    "agent_img_010_011_2fe9a3cb897f": {
+      "asset_id": "agent_img_010_011_2fe9a3cb897f",
+      "label": "代码检索中 grep 可优于向量搜索",
+      "content_signature": "9eb3c80976d04faec08c7edd6b1be92fde220b3f4ffac5a4738db809267ccc91",
+      "content_modified_at": "2026-05-18T06:23:49.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "cb37829ff06492e675c0febb8731f965b520c5b41c5ea2225c23017be5f4ad4b",
+      "source_url": "https://mp.weixin.qq.com/s/dDczjoNM3URc8ExcJL1hPg"
+    },
+    "agent_img_010_012_450cba6d1d68": {
+      "asset_id": "agent_img_010_012_450cba6d1d68",
+      "label": "Memory 保留关键决策而非实现细节",
+      "content_signature": "622f8bfc432b4a911102ffb5589044862d3fe6a4905332b49fd72f78ddab7441",
+      "content_modified_at": "2026-05-18T06:23:49.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "e4fa17a0a4f5600d2191fe8e3f3df4f73eeb77211e86917107e98a7dbd0df2e4",
+      "source_url": ""
+    },
+    "agent_img_010_013_a7f193bf605f": {
+      "asset_id": "agent_img_010_013_a7f193bf605f",
+      "label": "Claude Code Memory 按项目存储文件",
+      "content_signature": "0cab9745ef9dd86cbf31790ea3ee5bcb041a37e08c49ce954e329615c454222a",
+      "content_modified_at": "2026-04-30T08:32:25.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "fd031e3ed3520082fd0121dbea4fc472ed4f1ca50df6561071e36c01af18cd17",
+      "source_url": ""
+    },
+    "agent_img_010_014_190a24782f95": {
+      "asset_id": "agent_img_010_014_190a24782f95",
+      "label": "用户角色记忆指导回答关注点",
+      "content_signature": "2dc21dd58d69018b6f461d1151482793d9ade8e094b1d74f863f2a9cc01442e1",
+      "content_modified_at": "2026-05-18T06:23:49.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "2f9653d4413825724433c99257e0585de72e8a0e14b67638650150d23d32700f",
+      "source_url": ""
+    },
+    "agent_img_010_015_8da4dcbcb47c": {
+      "asset_id": "agent_img_010_015_8da4dcbcb47c",
+      "label": "Memory 索引汇总用户偏好和反馈",
+      "content_signature": "9fb26bef981550f5c2b381f2967881e86cf00711aad62652c6edf8cff86cabf5",
+      "content_modified_at": "2026-05-18T06:23:49.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "358f344315da03e9a2533f3caeb528143380e810cce41afb212140f41743505a",
+      "source_url": ""
+    },
+    "agent_img_010_016_10147080437a": {
+      "asset_id": "agent_img_010_016_10147080437a",
+      "label": "Session 是会话日志，Memory 是项目记忆",
+      "content_signature": "32418e8eff806c2f29233bf22aadf78d7a7af3f47b0e8333f92c533b349646f8",
+      "content_modified_at": "2026-05-18T06:23:49.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "5aff1754521ce6a0005c8fed7e9fa50b51242ed80757c31a377bb76df76e108e",
+      "source_url": ""
+    },
+    "agent_img_010_017_51c9eb8de69e": {
+      "asset_id": "agent_img_010_017_51c9eb8de69e",
+      "label": "Memory 按用户、反馈、项目、引用分类",
+      "content_signature": "784f2d055a5c0616b1d29a3c8b4a57952f90c5c51bf7cc0ae816d3d4d3ffe8e3",
+      "content_modified_at": "2026-05-18T06:23:49.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "b01b5416b1eed4c9088a9b9c2ff11f306a80354ee7bc669c9d20e03e036bdcec",
+      "source_url": "https://mp.weixin.qq.com/s?__biz=MzkzMDIwMzg1Mw==&mid=2247490229&idx=1&sn=1bfab0f67ac2cdc8d9ee687fb189908e&scene=21&poc_token=HDzo8mmjloYvbyhQm-gyoqJu2zAa4vAhsV29motT"
+    },
+    "agent_img_010_018_b5f17153c5f1": {
+      "asset_id": "agent_img_010_018_b5f17153c5f1",
+      "label": "记忆提取触发需平衡成本和覆盖",
+      "content_signature": "46033e0952a1fdb073aa93529822ab6d5972033c5d0999c064a0c802877daaac",
+      "content_modified_at": "2026-05-18T06:23:49.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "679a2420c1230018d084bfcea47fe7c70fed25f26627ad4f819d18fe1213bad0",
+      "source_url": "https://mp.weixin.qq.com/s?__biz=MzkzMDIwMzg1Mw==&mid=2247490253&idx=1&sn=673f4845b0501552126cc02c0725dd66&scene=21&poc_token=HKX98mmjiFWUto8Z1GoMPL2brhU9fgmmno9yRWdt"
+    },
+    "agent_img_010_019_209453d6a810": {
+      "asset_id": "agent_img_010_019_209453d6a810",
+      "label": "Coalescing 合并后台记忆提取请求",
+      "content_signature": "23e0eee505ac192f6b1ba5541593c3357dba5ae628957856411894619c7f135d",
+      "content_modified_at": "2026-05-18T06:23:49.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "995a0bb551012e660bc54089f82107f43b3f469a1a7dfe90635b36e56b7efbc2",
+      "source_url": ""
+    },
+    "agent_img_010_020_b527d8b886ff": {
+      "asset_id": "agent_img_010_020_b527d8b886ff",
+      "label": "Memory 设计要主动管理时效和优先级",
+      "content_signature": "72cc796ae32a7c218ae137849fd5032e312969ecb9cd1b02dea88cfd5377f26b",
+      "content_modified_at": "2026-05-18T06:23:49.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "bd8b8d5a3f922a1be669d888fd001e9f3410e5758b3ff5cffdd585473b9a99ab",
+      "source_url": ""
+    },
+    "agent_img_010_021_b3c82f1477b0": {
+      "asset_id": "agent_img_010_021_b3c82f1477b0",
+      "label": "Memory 从大杂烩改为分层管理",
+      "content_signature": "dd29af77fd799fb5f464cb12c15e53505dcc23901eb61cd0ba6a9667a44f4c46",
+      "content_modified_at": "2026-05-18T06:23:49.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "c934c6a7d14ebd16208496f9b759c036f1cf3ccd07be3546ed05eb39a8f6fd04",
+      "source_url": ""
+    },
+    "agent_img_010_022_c5deb2fdfd12": {
+      "asset_id": "agent_img_010_022_c5deb2fdfd12",
+      "label": "四类 Memory 采用不同检索策略",
+      "content_signature": "988c653e3c9e701e944a5229d4459611d87d1676b88e3df0f44114880e9aa6b5",
+      "content_modified_at": "2026-05-18T06:23:49.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "505d327a2bb6a41c2bd8f5adc7a434a4d400af851d3363224884bc8f7b1c7b39",
+      "source_url": "onenote:寒假学习计划.one#section-id={8483C54A-2B20-4C38-9AB7-BC9C3FE80851}&end&base-pathhttps://mp.weixin.qq.com/s?__biz=MzkzMDIwMzg1Mw==&mid=2247490260&idx=1&sn=f6333703ae1dd29bcdbc1cdaf793240b&scene=21&poc_token=HD7o8mmjpCgrAZoES-7ihqWrvS3eYaKesLJ1AafT"
+    },
+    "agent_img_010_023_d582b70d06a2": {
+      "asset_id": "agent_img_010_023_d582b70d06a2",
+      "label": "Memory 注入在 system prompt 中前部",
+      "content_signature": "155f4d36f6d607083fb2ae9e63a5d7a26479763e98efa8de01ca37b27bb8ff92",
+      "content_modified_at": "2026-05-18T06:23:49.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "6ea6017e3393f51d366cde091ea45f862a7fea6a9d37fc83888235473b427869",
+      "source_url": "https://mp.weixin.qq.com/s/TYNg6RT79DHW8n8LxP8Rag"
+    },
+    "agent_img_010_024_4ec2339a3a62": {
+      "asset_id": "agent_img_010_024_4ec2339a3a62",
+      "label": "Claude Code system prompt 分段构建",
+      "content_signature": "75bc47e9ab4bd943a9865848a397645da77f10541706f60d1b71442816ad25ed",
+      "content_modified_at": "2026-05-18T06:23:49.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "b60b716a402e1bac7e29258cb9d024d29012ec56b98f24f359f82d0cd182c2e9",
+      "source_url": "https://mp.weixin.qq.com/s/TYNg6RT79DHW8n8LxP8Rag"
+    },
+    "agent_img_010_025_fa1c65c42292": {
+      "asset_id": "agent_img_010_025_fa1c65c42292",
+      "label": "queryLoop 用分层恢复避免无限循环",
+      "content_signature": "5a83659b2e80ebd10e24010b9bce003cf2bfe49650a6dd1d431dde078699b115",
+      "content_modified_at": "2026-05-18T06:23:49.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "31d9117a3d665a636f95f1e1c383a20eef93d58bc3835b7d00c932904d3bf927",
+      "source_url": "https://zhanghandong.github.io/harness-engineering-from-cc-to-ai-coding/part1/ch02.html"
+    },
+    "agent_img_010_026_92e884da861b": {
+      "asset_id": "agent_img_010_026_92e884da861b",
+      "label": "稳定 Prompt 前缀提升缓存命中率",
+      "content_signature": "c7d967ae7bdce0a7288bfeef39c1e8e779098b6c9860f46f6937bce04b806bbe",
+      "content_modified_at": "2026-05-18T06:23:49.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "5aaf43b2437526ed75bb60ac69c813b42ab30819765bee5d5f705e228800d520",
+      "source_url": ""
+    },
+    "agent_img_010_027_8cb3c4541134": {
+      "asset_id": "agent_img_010_027_8cb3c4541134",
+      "label": "系统 Prompt 应建立分段注册表",
+      "content_signature": "e2d496f3e6b0172e2691d75478cd9dc9783bf9c2f1f16d7242e8270fa761d901",
+      "content_modified_at": "2026-05-18T06:23:49.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "0418d8b35642e85a57a0790e5d00349f6cf73be55dfdd7d1c5a1102a1cd19faa",
+      "source_url": ""
+    },
+    "agent_img_010_028_deae5c10a6f8": {
+      "asset_id": "agent_img_010_028_deae5c10a6f8",
+      "label": "指数退避重试需加入随机抖动",
+      "content_signature": "f59343c1754cc0cce28aed29a4560011e6474b70af351ed3b883c4c9a72c5c17",
+      "content_modified_at": "2026-05-18T06:23:49.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "1c659c221dd1be65a3cc5b922b2a9753f11d8624faeb0fe4b1f709d977144dd0",
+      "source_url": ""
+    },
+    "agent_img_010_029_ea01ad355cb5": {
+      "asset_id": "agent_img_010_029_ea01ad355cb5",
+      "label": "重试机制需要预算、分类和可观测",
+      "content_signature": "41353a7cb959dfcd07298cc5545ae0d97529f249d2c52af4f213ab091c127790",
+      "content_modified_at": "2026-05-18T06:23:49.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "cb75914e03e42d2f93f811985157730ab5cd1d2d378c6a468d04db0be3e43a95",
+      "source_url": ""
+    },
+    "agent_img_010_030_907dbaa011f8": {
+      "asset_id": "agent_img_010_030_907dbaa011f8",
+      "label": "文件编辑前必须先读取文件",
+      "content_signature": "4f8b8ab7c073bb2ccb7212e487d50249be6c23e96ae76e2ce97981a9b80e8267",
+      "content_modified_at": "2026-05-18T06:23:49.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "7e4f6ac96c24e4bf691e80934a38164af4b31a581b5e241bfbef786e89e0370a",
+      "source_url": ""
+    },
+    "agent_img_010_031_94b80bbf7ca5": {
+      "asset_id": "agent_img_010_031_94b80bbf7ca5",
+      "label": "Claude Code 用提示和工具双层防御",
+      "content_signature": "15135963b0c5702b8bb6ad66dff654b06e693292ae2dbde8280eb4451042668c",
+      "content_modified_at": "2026-05-18T06:23:49.000Z",
+      "label_generated_at": "2026-05-18T08:02:50.443418+00:00",
+      "label_model": "codex-manual-labels-v1",
+      "source_text_sha256": "e4bd04fcdc41ba219bff4d87d35cc42086d2c8f48e657c25055b4152e2d1c74a",
+      "source_url": ""
+    }
+  }
+}

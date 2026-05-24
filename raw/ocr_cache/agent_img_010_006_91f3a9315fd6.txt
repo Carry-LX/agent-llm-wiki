@@ -1,0 +1,14 @@
+当前支持的 Hook 点
+                       CW   WELT   =          -
+个   ©
+) /hooks
+Hooks
+      8 hooks
+1. PreToolUse - Before tool execution
+) 2. PostToolUse - After tool execution
+3. PostToolUseFailure - After tool execution fails
+4. Notification - When notifications are sent
+J’ 5. UserPromptSubmit - When the user submits a prompt
+适合 vs 不适合放到 Hooks 的
+适合: 阻断修改受保护文件、Edit 后自动格式化/int/轻量校验、SessionStart 后注入动态上下文 (Git 分支、环境变量) 、任务完成后推送通知。
+不适合: 需要读大量上下文的复杂语义判断、长时间运行的业务流程、需要多步推理和权衡的决策，这些该在 Skill 或Subagent 里。

@@ -1,0 +1,10 @@
+RAG专用Prompt结构设计
+System Prompt                                  User Prompt
+角色定义                           参考文档
+”金融保险智能客服                      格式化的检索片段
+回答规则                          ee   ee
+。 只用文档 。 引用来源 。 数字核实                    ame
+用户问题+回答指令
+负面约束                       |        ,
+ ie ~ Senn            用户的问题内容和具体的回答要求
+RAG专用Prompt结构设计

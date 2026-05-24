@@ -1,0 +1,15 @@
+我看到 Claude Code 团队内部工具的这段演进时，感觉还挺有意思。像这种需要在任务中途停下来问用户的场景，他们前后试了三种做法:
+第一版: 给已有工具 (如 Bash) 加一个“auestion ” 参数，让 Claude 在调用工具时顺带提问。结果 Claude 大多数时候直接忽略这个参数，继续往下跑，根本不
+停下来问。
+第二版: BK Claude 在输出里写特定 markdown 格式，外层解析到这个格式就暂停。问题是没有强制约束，Claude 经常"忘了"按格式写，提问逻辑非常胸弱。
+第三版: 做成独立的“AskUserQuestion TH. Claude 想提问就必须显式调用它，调用即暂停，没有歧义。效果显著好于前两版。
+下面这张图刚好能解释，为什么第三版明显更稳:
+FINDING THE SWEET SPOT
+NO STRUCTURE                                                                                         TOO RIGID
+modified markdown                AskUserQuestion                     ExitPlanTool
+output                                   tool                                 parameter
+model free but messy,                     structured + composable,                     plan already formed,
+hard to format                                clear UI surface                          questions come too late
+左边 (markdown 自由输出) 太松，模型格式随意、外层解析脆弱; 右边 (ExitPlanTool 参数) 太死，等到退出计划阶段提问已经太晚; “AskUserQuestion ”独立工具
+落在中间，结构化且随时可调用，是这三者里最稳定的设计。
+说白了，既然你就是要 Claude 停下来问一句，那就直接给它一个专门的工具。加个 flag 或者约定一段输出格式，很多时候它一顺手就略过去了。

@@ -1,0 +1,12 @@
+°     . 6        ”        Z      =       66    *      ”
+Self-Evolving: “内外”双路径驱动的“目进化
+Hermes Agent之所以可以做到“自进化”，最主要就是依赖于两条路径: 一是日常的自动skil生成 (Skill Generation) ，可以快速、轻
+量、即时生效; 至是可以手动触发的RE训练(Reinforcement Learning) ，从更深度、根本上改变模型本身的能力。这两种路径共同构成
+了Hermes Agent的“内外”双轮驱动的“自进化闭环”。
+路径一: 自动Skill生成 (日常运行时)
+ag Meets       二 生效速度: 即时     + 改变什么: Agent. Fs
+1D) 10 轮对话自动触发         (下一轮对话就能用) ”下文知识 (SNE) ，不改模型
+路径二: RL训练〈需手动触发)
+<      质量 =>    GRPO <i}         &
+Pl MAB: 用户通过     =) 生效速度: 慢 改变什么: 模型本身的
+rl cli.py 手动发起     =Y  (训练需要数小时)    lem ee (内在能力)     |

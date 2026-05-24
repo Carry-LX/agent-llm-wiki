@@ -1,0 +1,172 @@
+??????
+root	1
+page	10
+topic	8
+evidence	116
+source	7
+concept	2
+method	2
+infrastructure	1
+system	2
+workflow	2
+control	3
+training	1
+evaluation	1
+
+??????
+concept		GraphRAG
+concept		LightRAG
+control		Prompt 与 Schema 约束
+control		容错与失败感知
+control		权限与安全边界
+evaluation		评测集构造
+evidence	agent_img_005_001_bad29a1acc99	Agent 轨迹包含思考、工具和观察
+evidence	agent_img_009_013_79ba71d907a8	Agent 间通讯复用用户操作能力
+evidence	agent_img_009_014_8bd0eb29ad10	AgentTeam 是持续协作而非任务派发
+evidence	agent_img_010_005_772065f10bc8	AskUserQuestion 工具让提问显式暂停
+evidence	agent_img_002_006_ce1638579d53	Badcase 闭环提升系统准确率
+evidence	agent_img_001_005_ce1638579d53	Badcase 闭环提升系统准确率
+evidence	agent_img_010_013_a7f193bf605f	Claude Code Memory 按项目存储文件
+evidence	agent_img_010_024_4ec2339a3a62	Claude Code system prompt 分段构建
+evidence	agent_img_010_010_900f839d220c	Claude Code 与 Codex 都用 grep 检索
+evidence	agent_img_010_001_e39c23430755	Claude Code 双层限制工具结果大小
+evidence	agent_img_010_004_7748829a7526	Claude Code 工具系统采用安全默认值
+evidence	agent_img_010_002_059f630d18fa	Claude Code 延迟加载工具 Schema
+evidence	agent_img_010_031_94b80bbf7ca5	Claude Code 用提示和工具双层防御
+evidence	agent_img_010_008_39a6a4c7207f	Claude Code 通过工具循环检索代码
+evidence	agent_img_001_016_55162987dd1e	CoT 强化推理链完整性
+evidence	agent_img_010_019_209453d6a810	Coalescing 合并后台记忆提取请求
+evidence	agent_img_002_031_6f0b11003f01	Embedding 从词向量演进到语义检索
+evidence	agent_img_002_029_b54e7ba8ca9a	Embedding 模型需用业务数据评估
+evidence	agent_img_009_016_93a7879f1211	Embedding 缓存减少重复向量计算
+evidence	agent_img_001_006_ccc7f5e4f8ea	FAQ 问答本质是语义匹配
+evidence	agent_img_002_007_ccc7f5e4f8ea	FAQ 问答本质是语义匹配
+evidence	agent_img_002_001_dcd9267f7f8b	GraphRAG、LightRAG、PathRAG 对比
+evidence	agent_img_002_025_f5c936ace146	HNSW 分层贪心搜索逐层逼近
+evidence	agent_img_002_022_14f94fda7909	HNSW 用分层图加速向量检索
+evidence	agent_img_009_006_406455c22467	Hermes 后台审查触发记忆与技能沉淀
+evidence	agent_img_009_005_9da3fe710b2a	Hermes 将复杂任务复盘成 Skill
+evidence	agent_img_009_004_7a49da56130f	Hermes 通过 Skill 与 RL 双路径自进化
+evidence	agent_img_009_008_71cb71df22d7	Hermes 通过头尾保护压缩上下文
+evidence	agent_img_010_006_91f3a9315fd6	Hooks 适合轻量阻断和自动化
+evidence	agent_img_002_010_94911bd17c4e	HyDE 用假设答案增强检索
+evidence	agent_img_001_009_94911bd17c4e	HyDE 用假设答案增强检索
+evidence	agent_img_002_023_94234dd7d215	IVF 通过聚类桶缩小搜索范围
+evidence	agent_img_006_002_78fd05498fa5	LLM 规划器将问题转为执行计划
+evidence	agent_img_002_018_21ba6bfa8425	MCP 三层结构区分 Host 和 Client
+evidence	agent_img_002_020_2223a2a396de	MCP 支持本地和远程两种通信
+evidence	agent_img_002_019_6a3f08dd5a27	MCP 由角色、能力、协议三层组成
+evidence	agent_img_009_003_61e2922ef802	Map-Reduce 处理长上下文评审
+evidence	agent_img_010_021_b3c82f1477b0	Memory 从大杂烩改为分层管理
+evidence	agent_img_010_012_450cba6d1d68	Memory 保留关键决策而非实现细节
+evidence	agent_img_010_017_51c9eb8de69e	Memory 按用户、反馈、项目、引用分类
+evidence	agent_img_010_023_d582b70d06a2	Memory 注入在 system prompt 中前部
+evidence	agent_img_010_015_8da4dcbcb47c	Memory 索引汇总用户偏好和反馈
+evidence	agent_img_010_020_b527d8b886ff	Memory 设计要主动管理时效和优先级
+evidence	agent_img_002_028_b64d5058598d	Metadata 先过滤再做 ANN 搜索
+evidence	agent_img_006_001_8ddd31f50291	Plan-Execute 构成 Agent 执行闭环
+evidence	agent_img_007_001_e34249d9df55	Prompt 要明确工具调用边界
+evidence	agent_img_001_018_90388fa1fee2	RAG Prompt 限制模型只用文档
+evidence	agent_img_001_019_e69b9d279a6c	RAG 专用 Prompt 约束回答来源
+evidence	agent_img_002_008_d75dc63bc8b4	RAG 幻觉来自生成阶段补全
+evidence	agent_img_001_007_d75dc63bc8b4	RAG 幻觉来自生成阶段补全
+evidence	agent_img_009_018_674942d618e0	RAG 延迟优化依赖异步与缓存
+evidence	agent_img_002_012_6947aa966103	RAG 权限控制分三层过滤
+evidence	agent_img_001_011_6947aa966103	RAG 权限控制分三层过滤
+evidence	agent_img_001_010_06e3063fd73c	RAG 权限管理采用三层架构
+evidence	agent_img_002_011_06e3063fd73c	RAG 权限管理采用三层架构
+evidence	agent_img_001_002_cd654a4171e8	RAG 测试集先确定覆盖范围
+evidence	agent_img_002_003_cd654a4171e8	RAG 测试集先确定覆盖范围
+evidence	agent_img_002_033_cd1a0caf748a	RAG 评估指标覆盖召回与忠实度
+evidence	agent_img_002_032_4819f89e3efc	RAG 评估需拆分检索和生成
+evidence	agent_img_002_017_644feb67b2da	RAG 质量治理要分层评估
+evidence	agent_img_009_015_8caf164bbed7	RAG 首字延迟卡在检索前链路
+evidence	agent_img_009_007_6d1f81043b69	RL 训练将经验内化到模型权重
+evidence	agent_img_002_014_997cdfa9a54b	Reranker 后需设置相关性阈值
+evidence	agent_img_005_008_8e11e3ef39a2	SFT 与 RLHF 共同训练工具判断
+evidence	agent_img_005_005_1e3f27dfddbc	SFT 学调用流程，RLHF 学边界
+evidence	agent_img_005_002_2a1ff9be530f	SFT 数据通过多策略扩充轨迹
+evidence	agent_img_002_016_99f8be553c37	SPLADE 融合稀疏匹配与语义泛化
+evidence	agent_img_010_016_10147080437a	Session 是会话日志，Memory 是项目记忆
+evidence	agent_img_001_004_90500f357b93	Text2SQL 模板生成训练样本
+evidence	agent_img_002_005_90500f357b93	Text2SQL 模板生成训练样本
+evidence	agent_img_004_001_c7a560785213	Text2SQL 需要执行前后双校验
+evidence	agent_img_010_009_fc55588560a1	ToolSearch 按需加载延迟工具
+evidence	agent_img_001_014_65226eff0183	Workflow 封装业务上下文和编排
+evidence	agent_img_001_015_5be324090a5c	Workflow 将多个 Skill 串联执行
+evidence	agent_img_010_025_fa1c65c42292	queryLoop 用分层恢复避免无限循环
+evidence	agent_img_010_003_df2c941682fd	searchHint 用于工具检索匹配
+evidence	agent_img_009_017_456194efbeca	三层缓存降低 RAG 调用成本
+evidence	agent_img_001_012_922c16272133	不同查询应路由到不同链路
+evidence	agent_img_002_030_7d149ed57d08	中文 RAG 优先考虑 BGE Embedding
+evidence	agent_img_005_006_82adbd19533c	人工标注结合蒸馏扩展训练数据
+evidence	agent_img_010_011_2fe9a3cb897f	代码检索中 grep 可优于向量搜索
+evidence	agent_img_010_007_6a0c1a08f3ce	会话中途切模型会破坏缓存
+evidence	agent_img_002_027_e76d357cd694	内存不足会导致向量检索延迟飙升
+evidence	agent_img_002_034_dc0373ea17a7	动态 RAG 数据质量用五维打分
+evidence	agent_img_002_021_9b3378ea7e27	向量数据库支撑高维相似度检索
+evidence	agent_img_002_024_e00ff7ab6236	向量量化降低 Milvus 内存占用
+evidence	agent_img_010_022_c5deb2fdfd12	四类 Memory 采用不同检索策略
+evidence	agent_img_001_013_803b291fe2c9	复杂 Skill 任务需要 Workflow 编排
+evidence	agent_img_009_012_b07abd5153e2	多 Agent 协作成本来自交接共享聚合
+evidence	agent_img_009_011_f3f3422d45ce	多 Agent 有四种常见编排模式
+evidence	agent_img_001_020_34269172aa96	多智能体结果合并需显式规则
+evidence	agent_img_008_001_28c3e7496fff	容错要让模型感知失败
+evidence	agent_img_002_026_f9760a189147	小批量错峰写入降低索引抖动
+evidence	agent_img_005_007_16a0017a3bf3	工具调用数据需覆盖多种场景
+evidence	agent_img_005_004_0f915a300596	工具调用评估需拆分多个维度
+evidence	agent_img_005_003_90624dde4170	微调效果要用三层测试集验证
+evidence	agent_img_010_028_deae5c10a6f8	指数退避重试需加入随机抖动
+evidence	agent_img_010_030_907dbaa011f8	文件编辑前必须先读取文件
+evidence	agent_img_009_001_e84966ff036b	文本生成流水线结合采样与质检
+evidence	agent_img_001_001_e11ee8244f22	文档切块先识别标题层级
+evidence	agent_img_002_002_e11ee8244f22	文档切块先识别标题层级
+evidence	agent_img_002_013_046fc4a9b9b8	智能 Overlap 提升 Chunk 召回
+evidence	agent_img_009_002_7af3c22a8eaf	模型训练内存由参数梯度优化器组成
+evidence	agent_img_001_003_30bfe2dad039	测试集需覆盖多样难题
+evidence	agent_img_002_004_30bfe2dad039	测试集需覆盖多样难题
+evidence	agent_img_010_014_190a24782f95	用户角色记忆指导回答关注点
+evidence	agent_img_002_015_f700f7babd51	用离线实验标定检索阈值
+evidence	agent_img_010_026_92e884da861b	稳定 Prompt 前缀提升缓存命中率
+evidence	agent_img_010_027_8cb3c4541134	系统 Prompt 应建立分段注册表
+evidence	agent_img_009_010_1123d496a7e0	结构化输出从 Prompt 到硬约束演进
+evidence	agent_img_001_017_29006a1055a1	结构化输出和引用校验压制幻觉
+evidence	agent_img_009_009_fd719d4b2dcf	结构化输出技术路线各有取舍
+evidence	agent_img_010_018_b5f17153c5f1	记忆提取触发需平衡成本和覆盖
+evidence	agent_img_002_009_cd3df81953ab	记忆模块是第二检索源
+evidence	agent_img_001_008_cd3df81953ab	记忆模块是第二检索源
+evidence	agent_img_010_029_ea01ad355cb5	重试机制需要预算、分类和可观测
+infrastructure		向量数据库
+method		Text2SQL 双重校验
+method		混合检索
+page		Agent
+page		Claude code
+page		Planning
+page		RAG
+page		Text2SQL
+page		容错 / 权限
+page		微调
+page		提示词
+page		杂项
+page		记忆
+root		Agent 分区知识网络
+source		developer.aliyun.com
+source		mp.weixin.qq.com
+source		pdf.hanspub.org
+source		www.53ai.com
+source		www.bestblogs.dev
+source		www.doubao.com
+source		zhanghandong.github.io
+system		Agent 工具循环
+system		多 Agent 协作
+topic		Agent 系统架构
+topic		Prompt 约束与上下文设计
+topic		RAG 与检索增强
+topic		Text2SQL 与查询校验
+topic		容错、权限与安全边界
+topic		微调、轨迹与训练数据
+topic		规划、执行与反思
+topic		评测集与数据构造
+training		工具调用 SFT
+workflow		Observe / Reflection
+workflow		Plan-Execute

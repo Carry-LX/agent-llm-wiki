@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<one:Page xmlns:one="http://schemas.microsoft.com/office/onenote/2013/onenote" ID="{562373E5-70B0-4337-962E-0E6F1486F4B9}{1}{E19464380063934887814820152316303997307012151}" name="记忆" dateTime="2026-03-30T07:14:20.000Z" lastModifiedTime="2026-03-31T01:58:55.000Z" pageLevel="1" lang="zh-CN"><one:QuickStyleDef index="0" name="PageTitle" fontColor="automatic" highlightColor="automatic" font="Calibri Light" fontSize="20.0" spaceBefore="0.0" spaceAfter="0.0"/><one:QuickStyleDef index="1" name="p" fontColor="automatic" highlightColor="automatic" font="Calibri" fontSize="11.0" spaceBefore="0.0" spaceAfter="0.0"/><one:PageSettings RTL="false" color="automatic"><one:PageSize><one:Automatic/></one:PageSize><one:RuleLines visible="false"/></one:PageSettings><one:Title lang="zh-CN"><one:OE author="李鑫" authorInitials="李鑫" lastModifiedBy="李鑫" lastModifiedByInitials="李鑫" creationTime="2026-03-30T07:14:22.000Z" lastModifiedTime="2026-03-30T07:14:23.000Z" objectID="{64986DBD-DDA0-4F55-974A-63E712BB880B}{16}{B0}" alignment="left" quickStyleIndex="0" style="font-family:'Microsoft YaHei Light';font-size:20.0pt"><one:T><![CDATA[记忆]]></one:T></one:OE></one:Title><one:Outline author="李鑫" authorInitials="李鑫" lastModifiedBy="李鑫" lastModifiedByInitials="李鑫" lastModifiedTime="2026-03-30T07:19:23.000Z" objectID="{64986DBD-DDA0-4F55-974A-63E712BB880B}{37}{B0}"><one:Position x="54.0" y="86.4000015258789" z="0"/><one:Size width="689.2069091796874" height="221.5153198242187" isSetByUser="true"/><one:OEChildren><one:OE creationTime="2026-03-30T07:14:29.000Z" lastModifiedTime="2026-03-30T07:15:07.000Z" objectID="{64986DBD-DDA0-4F55-974A-63E712BB880B}{38}{B0}" alignment="center" quickStyleIndex="1" style="font-family:'Microsoft YaHei';font-size:20.0pt;text-align:&#xA;center"><one:T><![CDATA[<span style='background:#CCFFFF'>什么时候使用记忆</span>]]></one:T></one:OE><one:OE creationTime="2026-03-30T07:15:32.000Z" lastModifiedTime="2026-03-30T07:18:53.000Z" objectID="{64986DBD-DDA0-4F55-974A-63E712BB880B}{52}{B0}" alignment="left" quickStyleIndex="1" style="font-family:SimSun;font-size:18.0pt"><one:T><![CDATA[<span
+lang=zh-CN>我们这样考虑：什么时候我们需要使用到记忆呢？<br />
+一般是</span><span lang=en-US> </span><span
+lang=zh-CN>问题改写</span><span lang=en-US> </span><span lang=zh-CN>的时候，无论是代词依赖，背景补充等等情况，最终指向的功能模块就是</span><span
+lang=en-US> </span><span style='font-weight:bold' lang=zh-CN>问题改写</span><span
+lang=zh-CN>。</span>]]></one:T></one:OE><one:OE creationTime="2026-03-30T07:16:23.000Z" lastModifiedTime="2026-03-30T07:19:23.000Z" objectID="{64986DBD-DDA0-4F55-974A-63E712BB880B}{58}{B0}" alignment="left" quickStyleIndex="1" style="font-family:SimSun;font-size:18.0pt"><one:T><![CDATA[<span
+lang=zh-CN>那么我们按照常理来说，什么时候使用记忆</span><span lang=en-US> == </span><span
+lang=zh-CN>什么时候需要问题改写<br />
+来了：</span><span style='font-weight:bold'
+lang=zh-CN>规则先行（代词等）</span><span style='font-weight:bold' lang=en-US> --&gt; </span><span
+style='font-weight:bold' lang=zh-CN>深度学习模型（文本分类）</span><span style='font-weight:
+bold' lang=en-US> --&gt; </span><span style='font-weight:bold;text-decoration:
+underline' lang=zh-CN>大模型兜底</span><span lang=zh-CN><br />
+这里面其实大模型兜底是比较有意思的，因为这个大模型其实本质上我们不仅仅让其输出</span><span
+lang=en-US> 0/1 </span><span lang=zh-CN>代表是否改写，这样太亏了，</span><span
+style='font-weight:bold' lang=zh-CN>我们让其输出</span><span style='font-weight:bold'
+lang=en-US> </span><span style='font-weight:bold' lang=zh-CN>是否改写，若是则输出</span><span
+style='font-weight:bold' lang=en-US>1</span><span style='font-weight:bold'
+lang=zh-CN>后，再输出改写后的</span><span style='font-weight:bold' lang=en-US>query</span><span
+lang=zh-CN>，这样的话会好一点。</span>]]></one:T></one:OE></one:OEChildren></one:Outline></one:Page>

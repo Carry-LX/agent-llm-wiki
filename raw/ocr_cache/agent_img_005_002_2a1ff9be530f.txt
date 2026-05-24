@@ -1,0 +1,9 @@
+、                 造流程
+SFT 训练数据构造流程
+              bine              hte
+3     略                轨迹              筛选70%       、
+种子数据               扩充后                                     最终训练集
+200条 fF 12008 Fy wales ES 840%
+(         .        ，                            @ 问题改写 x1.5                             as V3                                格式标准化
+Thought Acti               SFT微调
+cans | SRS         。 Haim as              Raunt ction            Fox

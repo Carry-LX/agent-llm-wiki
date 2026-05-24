@@ -1,0 +1,12 @@
+Memory 设计改进: 从大杂烩到分层管理
+优化前                                                                优化后
+向量库 (无分类)                                                  user                  feedback
+用户是后端工程师                                                    用户是后端工程师| | 不要mock数据库
+下周四截止               引入四类分型管理
+不要mock数据库                        [一>              project                reference
+Linear tracking bugs
+项目用PostgreSQL                                                 |       ——
+用户今天调试bug
+@ feedback 优先级最高
+Ay 时效性不同但混存 /                                            @ project 自动检查时效
+过期信息难清除 / 检索噪声大                                     四Memory A Or aoe!

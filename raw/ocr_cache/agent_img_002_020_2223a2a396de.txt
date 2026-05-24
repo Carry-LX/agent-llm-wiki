@@ -1,0 +1,19 @@
+MCP的两种通信方式
+stdio (本地)                  Streamable HTTP (远程)
+Host (本地)
+Host 进程                                                  Host
+(Claude Desktop)                                                              (Claude Desktop)
+| 派生
+HTTP 连接
+MCP Server 子进程
+(本地工具)                              -         =
+远程服务器 / 云端
+MCP Server          |
+stdin  +> __— stdout                         (远程服务)        CE
+管道通信                   Ge)
+© 延迟低、无网络、无端口                   © BMS. FS Client 共享
+@ 适合本地工具                     @ serverless 友好
+适合的场景
+“a  stdio (本地)                         Streamable HTTP (远程)
+Ay tA0R. wisxexe TA          pid  团队共用服务、跨机器访问
+开发调试、低延迟场景                       生产环境、云端部署

@@ -1,0 +1,10 @@
+Ex         多Agent的四种编排模式
+顺序管道                     Map-Reduce
+ax Fi}
+BRIA                 适合并行任务，难点在汇总
+ao: Xt
+ISSR"
+ERRE                     BADR
+子Agent + 孙Agent           代码Agent   数据Agent
+适合深层复杂任务，但要限深                                    适合请求类型多样的系统
+卡码笔记: https://notes.kamacoder.com/

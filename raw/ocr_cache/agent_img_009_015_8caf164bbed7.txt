@@ -1,0 +1,12 @@
+一 首字延迟到底卡在哪?
+RAG 的全链路可以拆成四步:
+1. Embedding (OpenAl 或自建模型)
+2. 向量检索 (Milvus / Chroma / Faiss / PgVector)
+3. Prompt 拼装
+4. 大模型生成 (LLM Completion / Streaming)
+其中影响 TTFT (Time-to-First-Token) 的主要瓶颈是:
+。Embedding API 等待时间
+。 向量检索耗时
+。 系统缺乏并发 / 缓存
+换句话说，卡的并不在 LLM, Mee LLM 之前的链路。
+优化 TTFT，本质就是“把 Embedding 和检索变快，把重复计算干掉，把链路做成流水
