@@ -1,13 +1,13 @@
 # LLM-WIKI 交接说明
 
-更新时间：2026-05-23
+更新时间：2026-05-24
 
 本项目是用户的个人 `llm-wiki` 知识库，主题是 Agent / RAG / Claude Code / Text2SQL / Prompt / Memory 等材料。当前工作重点不是继续堆 raw 资料，而是把已有 OneNote 导出的证据层，逐步整理成可维护、可重建、可审校的 LLM-WIKI。
 
 ## 项目位置
 
 ```text
-C:\Users\李鑫\Documents\Codex\2026-05-18\codex-onenote\llm_wiki_agent
+E:\projects\person
 ```
 
 ## 当前 Git 状态

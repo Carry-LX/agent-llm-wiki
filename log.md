@@ -1,5 +1,12 @@
 # LLM-WIKI 运行日志
 
+## 2026-05-24 项目迁移
+
+- 操作：将项目从 `C:\Users\李鑫\Documents\Codex\2026-05-18\codex-onenote\llm_wiki_agent` 迁移至 `E:\projects\person`。
+- 更新：`last_sync_manifest.json` 中的 output_root。
+- 验证：全部 6 个 Python 脚本编译通过，lint 0 errors，search 正常。
+- 旧位置保留原文件，新位置重新 init git。
+
 ## 2026-05-20
 
 - 操作：根据 Karpathy LLM-WIKI 思路补项目维护骨架。
