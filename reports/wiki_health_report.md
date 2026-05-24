@@ -1,7 +1,7 @@
 # LLM-WIKI 健康检查报告
 
 - 节点：275；边：509；搜索语料：139；资产：139；claims：139。
-- 报告生成时间：2026-05-24T03:33:12.780581+00:00。
+- 报告生成时间：2026-05-24T03:33:58.244244+00:00。
 
 ## 结论
 - ERROR：0 项。
@@ -46,10 +46,10 @@
 ## claim 类型
 | 项 | 数量 |
 |---|---:|
-| engineering_judgment | 47 |
+| engineering_judgment | 46 |
 | workflow | 28 |
+| risk | 19 |
 | metric | 18 |
-| risk | 18 |
 | definition | 16 |
 | comparison | 7 |
 | example | 5 |
