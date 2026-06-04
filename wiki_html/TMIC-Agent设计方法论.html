@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agent 设计方法论：从 TMIC AI 小新架构演进看上下文工程驱动的 Agent 系统设计</title>
+<style>
+  /* ============================================================
+     学术论文风格 — Agent Design Methodology
+     ============================================================ */
+  :root {
+    --bg: #fefef7;
+    --text: #1a1a1a;
+    --muted: #555;
+    --accent: #8b0000;
+    --accent-light: #a52a2a;
+    --border: #d5d0c8;
+    --code-bg: #f4f1ea;
+    --highlight-bg: #fdf8f0;
+    --table-stripe: #f9f6f0;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Georgia', 'Times New Roman', 'Noto Serif SC', 'Source Han Serif SC', serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.75;
+    font-size: 17px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ---- 主容器 ---- */
+  .paper {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 60px 40px 80px;
+  }
+
+  /* ---- 标题区 ---- */
+  .title {
+    font-size: 1.65rem;
+    font-weight: 700;
+    text-align: center;
+    line-height: 1.35;
+    margin-bottom: 6px;
+    letter-spacing: 0.02em;
+  }
+  .subtitle {
+    font-size: 0.9rem;
+    text-align: center;
+    color: var(--muted);
+    margin-bottom: 28px;
+    font-style: italic;
+  }
+  .meta-bar {
+    text-align: center;
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-bottom: 32px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* ---- 摘要框 ---- */
+  .abstract {
+    background: var(--highlight-bg);
+    border-left: 4px solid var(--accent);
+    padding: 16px 20px;
+    margin-bottom: 36px;
+    font-size: 0.88rem;
+    line-height: 1.65;
+  }
+  .abstract strong {
+    color: var(--accent);
+    font-size: 0.92rem;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  /* ---- 标题层级 ---- */
+  h2 {
+    font-size: 1.2rem;
+    margin: 44px 0 12px;
+    color: var(--accent);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 6px;
+  }
+  h3 {
+    font-size: 1rem;
+    margin: 28px 0 8px;
+    color: #2c2c2c;
+  }
+  h4 {
+    font-size: 0.9rem;
+    margin: 20px 0 6px;
+    color: #3a3a3a;
+    font-style: italic;
+  }
+
+  p {
+    margin-bottom: 12px;
+    text-align: justify;
+  }
+
+  /* ---- 列表 ---- */
+  ul, ol {
+    margin: 8px 0 14px 24px;
+  }
+  li {
+    margin-bottom: 6px;
+    padding-left: 4px;
+  }
+  li > strong:first-child {
+    color: var(--accent);
+  }
+
+  /* ---- 代码块 ---- */
+  pre {
+    background: var(--code-bg);
+    padding: 12px 16px;
+    border-radius: 4px;
+    font-family: 'Fira Code', 'Consolas', 'Courier New', monospace;
+    font-size: 0.78rem;
+    line-height: 1.55;
+    overflow-x: auto;
+    margin: 10px 0 16px;
+    border: 1px solid var(--border);
+  }
+  code {
+    font-family: 'Fira Code', 'Consolas', 'Courier New', monospace;
+    font-size: 0.82em;
+    background: var(--code-bg);
+    padding: 1px 5px;
+    border-radius: 2px;
+  }
+  pre code {
+    background: none;
+    padding: 0;
+  }
+
+  /* ---- 引用块 ---- */
+  blockquote {
+    border-left: 3px solid var(--accent);
+    margin: 14px 0;
+    padding: 8px 16px;
+    background: var(--highlight-bg);
+    font-style: italic;
+    color: #444;
+  }
+  blockquote strong {
+    color: var(--accent);
+    font-style: normal;
+  }
+
+  /* ---- 表格 ---- */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0 20px;
+    font-size: 0.85rem;
+  }
+  thead th {
+    background: #f0ece4;
+    border-bottom: 2px solid var(--accent);
+    padding: 8px 12px;
+    text-align: left;
+    font-weight: 700;
+    font-size: 0.8rem;
+  }
+  tbody td {
+    padding: 7px 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  tbody tr:nth-child(even) {
+    background: var(--table-stripe);
+  }
+
+  /* ---- 脚注 ---- */
+  .footnotes {
+    margin-top: 48px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border);
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+  .footnotes ol { margin-left: 20px; }
+  .footnotes li { margin-bottom: 3px; }
+
+  /* ---- 分割线 ---- */
+  hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 32px 0;
+  }
+
+  /* ---- 重点标注 ---- */
+  .key-point {
+    background: #fdf3e7;
+    border: 1px solid #e8cba0;
+    border-radius: 4px;
+    padding: 12px 16px;
+    margin: 14px 0;
+    font-size: 0.88rem;
+  }
+  .key-point::before {
+    content: '★ ';
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  /* ---- 行内高亮 ---- */
+  .hl { background: #fef0d9; padding: 1px 3px; }
+
+  /* ---- 响应式 ---- */
+  @media (max-width: 600px) {
+    .paper { padding: 30px 18px 50px; }
+    .title { font-size: 1.3rem; }
+    table { font-size: 0.72rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="paper">
+
+  <!-- ======== 标题 ======== -->
+  <h1 class="title">Agent 设计方法论<br>从 TMIC AI 小新架构演进看上下文工程驱动的 Agent 系统设计</h1>
+  <p class="subtitle">Agent Design Methodology: Context-Engineering-Driven Agent Architecture<br>Learned from TMIC AI Xiaoxin's Evolution from Custom Workflow to DeepAgent</p>
+  <div class="meta-bar">基于大淘宝技术 · TMIC 团队工程实践总结 &nbsp;|&nbsp; 2026年5月</div>
+
+  <!-- ======== 摘要 ======== -->
+  <div class="abstract">
+    <strong>摘要</strong>
+    本文从 TMIC AI 小新从定制化 Workflow 到 DeepAgent 模式的架构演进中，提炼出一套可迁移的 Agent 设计框架。核心论点是：<span class="hl">当前基模的推理能力已足够强，Agent 失败的主因并非模型"不聪明"，而是上下文信息不够精炼、不够贴合当前任务。</span>全文提出五层设计方法论——私有知识注入（Skills + RAG）、上下文过滤（场景识别前置）、参数预加载、多轮方向锚定（TodoList）、以及执行效率优化（Tree Action + SubAgent）——并逐一展开每个设计决策背后的问题本质、候选方案的取舍逻辑、以及具体的技术实现。所有设计均可回溯至同一原则：让基模在正确时刻只看到正确的信息。
+  </div>
+
+  <!-- ======== 正文 ======== -->
+
+  <!-- 第1章 -->
+  <h2>1. 基石信念：上下文工程决定 Agent 上限</h2>
+
+  <p>全文所有设计决策都建立在一个判断之上：<strong>当前基模的推理能力已经足够强了。Agent 失败，绝大多数时候不是因为模型"笨"，而是因为它看到的上下文不对</strong>——要么信息太多淹没了关键信号，要么信息不够导致判断依据缺失。</p>
+
+  <p>因此，团队的全部工程精力不是花在"怎么写更好的 Prompt"，而是花在"如何让模型在正确的时刻只看到正确的信息"。这一判断贯穿了从 v1 到 v2 的每一次架构决策。理解了这个前提，后续所有组件——Skills、RAG、业务场景识别、TodoList、Tree Action、SubAgent、异步 Summary——就不再是零散的设计技巧，而是这个核心原则在不同维度的展开。</p>
+
+  <div class="key-point">
+    让基模在每一刻看到的上下文是<strong>对的、够的、不冗余的</strong>——这就是本文所有技术决策的唯一评价标准。
+  </div>
+
+  <!-- 第2章 -->
+  <h2>2. 第一层：私有知识的注入 — Skills 与 RAG</h2>
+
+  <h3>2.1 问题本质</h3>
+
+  <p>业务场景下，Agent 缺的不是通用推理能力，缺的是<strong>这个业务特有的领域知识</strong>。以 TMIC 为例：</p>
+
+  <ul>
+    <li><strong>用户问"潜力最高的类目"</strong>——产品语言翻译为"竞争强度最低的叶子类目"（竞争强度 = Top10 品牌 GMV 占比）。这不是推理能推出来的，是领域约定。</li>
+    <li><strong>用户问"竞品如何起量"</strong>——产品语言翻译为"竞品的成长路径（广告、派样、直播等方式）"。同样是领域知识。</li>
+    <li><strong>多个价格带时取哪一个？</strong>——业务规则是"取 GMV 占比最高的"。换一个业务可能规则不同。</li>
+  </ul>
+
+  <p>这些知识不是通用推理能力能覆盖的，必须显式注入。文章采用了两种互补的机制：</p>
+
+  <h3>2.2 Skills：手写的业务规则</h3>
+
+  <p>每个业务模块维护一份 Markdown 文档，内容包括：</p>
+
+  <ul>
+    <li><strong>默认选择逻辑</strong>：用户没指定价格带 → 默认取 GMV 占比最高的价格带，并在思考中告知用户</li>
+    <li><strong>业务定制规则</strong>：获取不到类目 → 用主营类目兜底；不要硬分析空数据</li>
+    <li><strong>工具组合指导</strong>：该模块推荐使用哪些工具、什么顺序、什么场景用什么组合</li>
+  </ul>
+
+  <p>Skills 在加载上下文阶段根据识别出的业务模块注入。它的作用是<strong>约束行为边界</strong>——"在这个业务里，不管谁来问，你都应该这么干。"</p>
+
+  <h3>2.3 RAG：历史案例作为参考模板</h3>
+
+  <p>RAG 库中每条记录包含：用户原问题、涉及的业务模块、所需的数据字段、以及<strong>具体的分析步骤</strong>。Planning 拿到相似案例后，就有了一个经过验证的参考路径。</p>
+
+  <p>在 DeepAgent 模式下，RAG 的角色比传统用法更重——它不仅是 FAQ，更是<strong>DeepAgent 模式下的核心纠偏手段</strong>。因为 DeepAgent 把决策权交给了 AI，当 AI 分析思路跑偏时，你不能再像 workflow 那样改代码修正。RAG 就是你在这个模式下的干预入口：通过提供正确的参考路径，让 AI 自己纠正回来。</p>
+
+  <table>
+    <thead>
+      <tr><th>维度</th><th>Skills</th><th>RAG</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>本质</strong></td><td>手写的业务规则文档</td><td>历史案例的向量检索</td></tr>
+      <tr><td><strong>覆盖范围</strong></td><td>通用规则，整个业务模块适用</td><td>具体案例，与当前问题最相似</td></tr>
+      <tr><td><strong>内容举例</strong></td><td>"无价格带→默认GMV最高"</td><td>"上次有人问'潜力最高的类目'，分析路径是筛选竞争强度最低的叶子类目"</td></tr>
+      <tr><td><strong>作用</strong></td><td>约束行为边界</td><td>提供参考模板</td></tr>
+      <tr><td><strong>形式</strong></td><td>直接注入上下文的 Markdown</td><td>向量检索后的结构化 JSON</td></tr>
+    </tbody>
+  </table>
+
+  <p>两者不是替代关系，是互补关系：<strong>Skills 管通用规则，RAG 管具体参照。</strong>一个告诉你"在这个业务里你得这么干"，一个告诉你"跟你类似的问题别人是这么一步步走的"。</p>
+
+  <!-- 第3章 -->
+  <h2>3. 第二层：上下文过滤 — 用小步骤换取更高的信息密度</h2>
+
+  <h3>3.1 问题本质</h3>
+
+  <p>这是被很多 Agent 设计忽略的一点：<strong>上下文不是越多越好。</strong>把全量工具、全量规则、全量案例全部塞给 Planning，只会让它决策更慢、更容易出错。文章给出了一个具体数字：平均每个业务模块有 10–20 个工具，AI 小新对接了多个业务模块，如果全量加载，Planning 需要在上百个工具中做选择。</p>
+
+  <p>这会导致三个具体后果：</p>
+  <ol>
+    <li><strong>决策容易出错</strong>：用户问的是 A 业务的事，但 Planning 看到了 B、C、D 业务的工具，可能误选</li>
+    <li><strong>上下文成本高</strong>：大量无关工具的 description 占满 token 预算</li>
+    <li><strong>速度慢</strong>：工具越多，Planning 每次推理越慢</li>
+  </ol>
+
+  <h3>3.2 两套候选方案</h3>
+
+  <h4>方案 A：提前决策（采用）</h4>
+
+  <p>在 DeepAgent 启动前，用一个独立的轻量步骤做"业务模块识别"——由一个专门的小模型判断用户问题跟哪几个业务模块相关。然后只加载相关模块的工具、Skills 和 RAG。核心改动是：<strong>多了一次前置调用，但后续每一步的决策质量都更高。</strong></p>
+
+  <p>优点：</p>
+  <ul>
+    <li>Planning 看到的工具少（从 100+ 降到 10–20），决策准确率和速度都提升</li>
+    <li>业务模块识别这一步效果稳定、可观测、可评测</li>
+    <li>连带效应：确定业务范围后，Skills、RAG、上下文参数也可以按范围过滤</li>
+  </ul>
+
+  <p>缺点（也是核心风险）：</p>
+  <ul>
+    <li><strong>业务模块识别不能错。错一步，后面全错。</strong>如果用户需要"新品管理"但被识别成"类目趋势报告"，加载的就是错的工具集，Planning 再怎么聪明也没用。</li>
+  </ul>
+
+  <h4>方案 B：Planning 自行按需加载（放弃）</h4>
+
+  <p>给 Planning 一个"获取工具列表"的工具，Planning 在推理过程中自己决定去拉哪些工具。</p>
+
+  <p>放弃原因：</p>
+  <ul>
+    <li>效果不稳定——Planning 可能在大量无关工具中选错</li>
+    <li>速度慢——多了一步"获取工具列表"的 LLM 调用</li>
+    <li>成本高——所有工具信息都需准备好等待 Planning 拉取</li>
+    <li>调试困难——出问题后无法定位是"工具选错了"还是"推理逻辑错了"</li>
+  </ul>
+
+  <h3>3.3 最终选择的分析</h3>
+
+  <p>团队最终选择方案 A。逻辑是：方案 A 虽然引入了"识别错误则全盘皆输"的风险，但这个风险是<strong>可控的</strong>——它是一个边界清晰的分类任务，可以针对性优化 Prompt、可以离线评测准确率、可以监控线上表现。而方案 B 把决策完全交给 Planning，反而更不可控——出了问题你不知道是 Planning 选错了工具，还是选对了但后续逻辑错了，调试链路更长。</p>
+
+  <div class="key-point">
+    用一个小步骤（可控、可评测）换取整个上下文环境的信息贴合度提升——这个 trade-off 是值得的。
+  </div>
+
+  <h3>3.4 与 Coding Agent 的类比</h3>
+
+  <p>这个模式在 coding agent 场景下完全适用。一个好的 coding agent 也不是上来就把整个代码仓库全塞进上下文——它应该先判断涉及哪个项目、加载对应的 CLAUDE.md、读取相关的入口文件，再进入真正的编码推理。这就是同一个"上下文加载阶段"在不同领域的展开。</p>
+
+  <!-- 第4章 -->
+  <h2>4. 第三层：全局参数的预加载</h2>
+
+  <h3>4.1 问题本质</h3>
+
+  <p>Planning 在执行过程中需要一些通用参数：userId、主营类目、时间范围、新品列表……如果每次都让 Planning 自己去调接口获取，会产生大量额外的 LLM 往返。一个简单参数的获取可能需要：</p>
+
+  <pre><code>Planning → "调getUserId" → 等待 → Observation → Planning → "好，现在调getCategory" → 等待 → ...</code></pre>
+
+  <p>每一步都是完整的大模型推理，而这些推理完全不需要"智能"——就是机械的参数收集。</p>
+
+  <h3>4.2 解决方案</h3>
+
+  <p>在加载上下文阶段，<strong>并行预取</strong>所有通用参数。识别完业务模块后，系统同时发起多个参数获取请求：</p>
+
+  <ul>
+    <li><strong>系统参数</strong>（全量加载）：userId、用户来源、当前页面、主营类目、提问时间</li>
+    <li><strong>业务模块参数</strong>（智能截断）：新品列表前 5 条、报告列表前 5 条、识别到的类目信息</li>
+  </ul>
+
+  <p>对于数据量大的列表类参数，只加载前 5 条命中率最高的，其余的提供公共接口入口，让 Planning 在需要时按需调用分页数据。</p>
+
+  <h3>4.3 设计动机</h3>
+
+  <p>本质上是<strong>把"非核心决策"从 Agent 执行循环中剥离</strong>——常用的参数提前备好，Agent 把精力留给真正需要推理的决策。这和上下文过滤是同一个思路的两个方向：一个做减法（去掉无关的），一个做加法（补上必需的），最终目标都是让 Agent 在执行循环中只处理"值得让大模型思考"的信息。</p>
+
+  <!-- 第5章 -->
+  <h2>5. 第四层：多轮 Agent 的方向感 — TodoList</h2>
+
+  <h3>5.1 问题本质</h3>
+
+  <p><strong>这是一个不下场做工程很难体会到的问题。</strong></p>
+
+  <p>标准 ReAct 的循环是：<code>Observation → Thought → Action → 等结果 → Observation → ...</code>。每一步只看当前状态，没有全局视角。在简单任务（2-3 步）中这不是问题。但当面对一个需要 5-10 步的复杂分析任务时：</p>
+
+  <blockquote>
+    先取类目 → 再下钻价格带 → 再筛选机会类目 → 再取竞品数据 → 再交叉分析 → 再给出建议
+  </blockquote>
+
+  <p>Agent 走到第 4 步时，它可能已经完全忘了第 1 步为什么要取那个类目、最初的用户问题是什么。它看到的只是"当前获取到的数据和当前这一步要做的事"，方向感逐渐丢失。结果可能是：跑偏了、漏掉了关键步骤、或者重复执行了已经做过的操作。</p>
+
+  <h3>5.2 TodoList 作为"锚"</h3>
+
+  <p>TodoList 不改变 ReAct 的核心循环，只是在每次 <code>Thought</code> 的时候，额外注入了一个全局参考系：</p>
+
+  <pre><code>┌─────────────────────────────────────────┐
+│ TodoList（每轮都带着）                     │
+│ [✅ 已完成] 获取类目数据                    │
+│ [⏳ 进行中] 下钻价格带分析                  │
+│ [ 待执行 ] 筛选竞争强度最低的10个叶子类目      │
+│ [ 待执行 ] 获取竞品Top20数据                │
+│ [ 待执行 ] 综合分析并输出建议                │
+└─────────────────────────────────────────┘
+
+Planning 第N轮的思考:
+  "我现在在'下钻价格带分析'这一步，
+   数据已经拿到了，该进入下一步'筛选叶子类目'了。
+   我最初的目标是帮用户找到适合研发新品的机会类目，
+   所以筛选标准应该是竞争强度最低。"
+  → Action: 调筛选工具</code></pre>
+
+  <p>关键设计细节：</p>
+  <ul>
+    <li><strong>首轮生成</strong>：Planning 在第一轮先生成完整的执行计划，而不是直接执行</li>
+    <li><strong>全量输出</strong>：每一轮都输出完整 TodoList（不是增量），防止中间遗漏</li>
+    <li><strong>状态三元</strong>：pending → in_progress → completed，简单够用</li>
+    <li><strong>支持动态修改</strong>：可以中途添加、删除、修改任务项——遇到意外情况可以调整计划</li>
+  </ul>
+
+  <h3>5.3 本质：ReAct 的结构性补丁</h3>
+
+  <p>TodoList 解决的，是 ReAct 原生模式的一个天生缺陷——每一步都局部最优，但多步累积可能全局漂移。它不是在让 Agent 变聪明，而是在<strong>帮 Agent 记住"我从哪来、要到哪去、现在在哪"</strong>。</p>
+
+  <div class="key-point">
+    如果你做的 Agent 场景每次只需要 1-3 步就能完成任务，你不需要 TodoList。但如果你的任务需要 5 步以上，不加上这个"锚"，Agent 的方向感一定会退化。
+  </div>
+
+  <!-- 第6章 -->
+  <h2>6. 第五层：Tree Action — 编排逻辑与大模型解耦</h2>
+
+  <h3>6.1 问题本质</h3>
+
+  <p>这是全文最有原创性的一个设计。问题起源于一个很具体的执行场景：</p>
+
+  <p>Agent 经常需要执行有依赖关系的工具链。比如：</p>
+
+  <pre><code>Step 1: 获取"保湿面霜"类目ID
+    ↓ (依赖Step 1的输出)
+Step 2: 用类目ID查询价格带
+    ↓ (依赖Step 2的输出)
+Step 3: 筛选GMV占比最高的价格带
+    ↓ (依赖Step 3的输出)
+Step 4: 用"类目ID + 价格带"拉Top20商品</code></pre>
+
+  <p>四个步骤严格串行——每一步的输入都依赖上一步的输出。</p>
+
+  <p><strong>标准 ReAct 的做法</strong>：4 轮完整的 LLM 往返。每轮都是：读完整上下文 → 理解当前进度 → 决定下一步 → 等待工具返回。4 步就是 4 次大模型推理。</p>
+
+  <p><strong>但这 4 次推理中，大量是重复的</strong>：Round 2 的 Planning 看到 Round 1 的类目结果后，判断"下一步应该是查价格带"——这个判断在 Round 1 的时候完全能做出来，根本不需要再走一遍完整的上下文理解。</p>
+
+  <h3>6.2 为什么传统的工程手段不行</h3>
+
+  <p>最直觉的解法是封装：把 A→B→C→D 四个步骤封装成一个"大 Tool"。但行不通——<strong>工具的组合关系不可枚举</strong>。</p>
+
+  <ul>
+    <li>有时是"获取类目 → 获取价格带 → 获取商品"</li>
+    <li>有时是"获取类目 → 获取竞争强度 → 筛选低竞争类目"（不需要价格带和商品）</li>
+    <li>有时是"获取商品 → 获取人群画像 → 获取沟通策略"</li>
+    <li>不同业务模块还有不同的组合变体……</li>
+  </ul>
+
+  <p>如果每种组合都封装，维护成本爆炸。定制 SubAgent 也面临同样的问题——不可能为每一种串行链路写一个专用的 SubAgent。</p>
+
+  <h3>6.3 Tree Action 的方案</h3>
+
+  <p>核心思路两句话：</p>
+  <ol>
+    <li>让 Planning <strong>在一轮中</strong>输出多个 Action，并标注它们之间的依赖关系</li>
+    <li>让系统自动按依赖层级调度执行，依赖之间的参数传递用小模型完成</li>
+  </ol>
+
+  <p>Planning 不再输出单个 Action，而是输出一个树形结构：</p>
+
+  <pre><code>Action Tree (一次 Planning 输出):
+├── [层级0，无依赖，可并行]
+│   ├── Action A: 获取"保湿面霜"类目ID
+│   └── Action B: 获取用户主营类目信息（与A无关，并行）
+│
+├── [层级1，依赖层级0]
+│   └── Action C: 用Action A的类目ID，查询价格带
+│
+├── [层级2，依赖层级1]
+│   └── Action D: 从价格带中选GMV占比最高的
+│
+└── [层级3，依赖层级2]
+    └── Action E: 用类目ID + 价格带，拉Top20商品</code></pre>
+
+  <p>系统收到这个树后：先并行跑完层级0的所有 Action → 拿结果传给层级1 → 执行层级1 → 传给层级2 → … → 全部完成后，把所有结果打包还给 Planning。</p>
+
+  <h3>6.4 关键细节：依赖之间的参数传递用小模型</h3>
+
+  <p>这是 Tree Action 最精妙的一处。Action C 需要 Action A 的类目 ID 作为输入——谁负责把 A 的输出映射到 C 的入参？</p>
+
+  <p><strong>答案：一个小模型。</strong></p>
+
+  <p>因为这里的串联逻辑极其简单。Action A 返回了 <code>{cateId: 1801005, cateName: "保湿面霜"}</code>，Action C 需要的入参是 <code>cateId</code>。这个映射不需要大模型的推理能力——"把上一个返回的 cateId 填到下一个的 cateId 参数里"，一个小模型完全够用，而且比大模型快得多、便宜得多。</p>
+
+  <h3>6.5 三层分工</h3>
+
+  <table>
+    <thead>
+      <tr><th>角色</th><th>负责什么</th><th>为什么是它</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>大模型</strong></td><td>规划依赖关系：决定先做什么、后做什么、哪些可以并行</td><td>需要全局理解能力，这是大模型的强项</td></tr>
+      <tr><td><strong>小模型</strong></td><td>串联参数：把上一个Action的输出映射到下一个Action的入参</td><td>机械映射，不需要推理，小模型快且便宜</td></tr>
+      <tr><td><strong>系统调度器</strong></td><td>按层级自动执行、等待、汇总</td><td>确定性编排逻辑，不需要任何模型参与</td></tr>
+  </tbody>
+  </table>
+
+  <p>Tree Action 的本质就是把"编排逻辑从大模型身上剥离"。大模型只做它最擅长的事——看到全局后做出规划决策。至于"把 A 的输出传给 B 的输入"这种机械操作，交给更便宜的组件。</p>
+
+  <h3>6.6 实测效果</h3>
+
+  <p>在 TMIC 的测试集上，Tree Action 将 Planning 平均次数从 <strong>3.20 降到 2.44</strong>。省掉的不是工具执行时间（工具本身耗时不变），而是大模型重复推理的次数——这正是 Agent 场景下最昂贵的开销。</p>
+
+  <h3>6.7 Tree Action 与 SubAgent 的关系</h3>
+
+  <p>Tree Action 这套"系统自动按依赖关系串联执行"的机制，其实已经带有 SubAgent 的味道了——它相当于一个轻量级的"执行子 Agent"，只是不做推理、不做规划，只负责按图执行。而文章中完整的 SubAgent 则更进一步：有独立的上下文窗口、可以自主 Planning、用于处理真正复杂的独立子任务。</p>
+
+  <!-- 第7章 -->
+  <h2>7. SubAgent：任务分解与上下文隔离</h2>
+
+  <h3>7.1 问题本质</h3>
+
+  <p>复杂任务中经常有"分别下钻、各自分析"的场景。比如：分别获取类目 A、B、C 的价格带和典型商品数据。三个类目的分析链路互相独立，严格并行。但如果在同一上下文里串行执行，不仅慢，还会让上下文塞满三个类目的中间结果，Planning 很难区分哪个数据属于哪个类目。</p>
+
+  <h3>7.2 SubAgent 的机制</h3>
+
+  <ul>
+    <li><strong>上下文隔离</strong>：每个 SubAgent 拥有独立上下文窗口，不污染主 Agent</li>
+    <li><strong>任务承包</strong>：主 Agent 通过 <code>subAgentDescription</code> 告诉 SubAgent：你要用什么工具、类目 ID 是多少、任务目标是什么。SubAgent 的上下文加载（Skills、RAG、参数）由主 Agent 事先完成并传递</li>
+    <li><strong>并行执行</strong>：多个 SubAgent 实例同时启动，互不干扰</li>
+    <li><strong>简洁返回</strong>：主 Agent 只拿到最终结论，不需要关心中间几十步工具调用</li>
+  </ul>
+
+  <h3>7.3 工程优化：砍掉不需要的能力</h3>
+
+  <p>初版 SubAgent 照搬了主 Agent 的完整能力（含 TodoList 规划 + 详细分析过程），但 SubAgent 处理的都是子任务，不需要这么重的流程。平均耗时 103 秒。</p>
+
+  <p>优化思路很简单——<strong>砍</strong>：</p>
+  <ul>
+    <li>砍掉 TodoList：子任务不需要全局规划，直接执行</li>
+    <li>砍掉 Analysis 过程输出：只返回结论，不输出分析过程</li>
+    <li>限制不能再调用 SubAgent 和 Human：防止嵌套过深</li>
+  </ul>
+
+  <p>优化后耗时从 <strong>103 秒降到 20 秒</strong>。</p>
+
+  <h3>7.4 还有一个重要的反向决策：FileSystem 为什么没用</h3>
+
+  <p>FileSystem 是 DeepAgent 的标准组件——自动将大型工具结果保存到文件系统，避免上下文溢出。但在 AI 小新中，团队<strong>主动放弃了这个组件</strong>。原因很务实：</p>
+
+  <ul>
+    <li>他们的工具都是预设的、有明确目的（取数/参数识别），Planning 既然调了它，说明返回的全是有用信息，不存在需要卸载的"大型无用结果"</li>
+    <li>走 FileSystem（先上传再按需拉取）增加额外时间开销和系统复杂度</li>
+    <li>风险控制：文件系统读写可能带来额外风险（文件丢失、读取失败），直接保留在上下文中更简单可靠</li>
+    <li>Summary 组件的异步压缩已经能有效管理上下文窗口</li>
+  </ul>
+
+  <p>这个决策说明了一点：<strong>不是所有标准组件都适合你的场景。砍掉不需要的能力，比盲目加功能更重要。</strong></p>
+
+  <!-- 第8章 -->
+  <h2>8. 辅助组件：Summary 与 Analysis</h2>
+
+  <h3>8.1 异步 Summary：不让压缩阻塞主流程</h3>
+
+  <p>Summary 负责在上下文接近窗口上限时自动压缩历史消息。单次压缩可能耗时 60 秒。串行模式下 Planning 必须等着。团队将 Summary 改为<strong>异步执行</strong>——Summary 在后台压缩历史消息，Planning 继续往下走，两者并行。</p>
+
+  <p>Summary 的压缩策略是 <strong>需求驱动</strong>而非机械保留最近 N 轮：先看 TodoList 中哪些任务还在 pending/in_progress，判断 Planning 下一步需要什么信息。"贯穿性信息"（整个任务都需要的关键参数）即使来自很早的轮次也保留；"阶段性信息"（某个已完成子任务的细节）可以大幅压缩。</p>
+
+  <h3>8.2 Analysis 独立节点：支持流式输出</h3>
+
+  <p>初版报告生成放在 Planning 里，但 Planning 同时输出执行动作、TodoList 等内部信息，不能透给前端，导致整个报告必须一次生成完才能返回——用户盯着空白页等。团队将 Analysis 单独拆出：只输出报告内容（无内部字段），可流式输出，用户实时看到内容生成。</p>
+
+  <!-- 第9章 -->
+  <h2>9. 总骨架：一个可迁移的 Agent 设计框架</h2>
+
+  <p>将以上所有设计决策收敛，得到一个四阶段框架：</p>
+
+  <table>
+    <thead>
+      <tr><th>阶段</th><th>做什么</th><th>解决什么问题</th><th>核心原则</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>上下文加载</strong></td>
+        <td>识别业务场景 → 过滤工具/Skills/RAG → 预取全局参数</td>
+        <td>让 Agent 看到的信息高度贴合当前任务</td>
+        <td>用一个可控的小步骤换上下文贴合度</td>
+      </tr>
+      <tr>
+        <td><strong>规划 Planning</strong></td>
+        <td>首轮生成 TodoList → 每轮带计划做决策</td>
+        <td>防止多轮 Agent 执行中丢失方向感</td>
+        <td>ReAct + 全局参考系 = 不漂移</td>
+      </tr>
+      <tr>
+        <td><strong>执行 Execute</strong></td>
+        <td>Tree Action 一轮多Action（带依赖） + SubAgent 并行委托</td>
+        <td>减少大模型往返次数，简单编排逻辑降级</td>
+        <td>能提前决定的就不要等下一轮；能不经过大模型的就不经过</td>
+      </tr>
+      <tr>
+        <td><strong>分析输出</strong></td>
+        <td>Analysis 独立节点，流式输出</td>
+        <td>不阻塞主流程，用户体验友好</td>
+        <td>职责分离，可独立优化</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+  <div class="key-point" style="font-size:0.95rem;">
+    <strong>核心原则只需要一句话：</strong>相信基模的推理能力，把全部工程精力投入到"让基模在每一刻看到的上下文是对的、够的、不冗余的"。Skills、RAG、场景识别、TodoList、Tree Action、SubAgent、异步 Summary——都是这句话在不同维度的实现。
+  </div>
+
+  <!-- ======== 脚注 ======== -->
+  <div class="footnotes">
+    <p><strong>参考来源</strong></p>
+    <ol>
+      <li>大淘宝技术，"从定制Workflow到AI自主决策的架构演进——以TMIC AI小新为例"，2026年5月29日</li>
+      <li>腾讯云开发者，"万字入门AI Infra：深入理解大模型中的数学与Infra优化"，2026年5月27日</li>
+      <li>DeepAgent 设计思路：TodoList、SubAgent、Summary、FileSystem 四大核心组件</li>
+    </ol>
+  </div>
+
+</div><!-- /paper -->
+
+</body>
+</html>

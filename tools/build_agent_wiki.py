@@ -197,7 +197,6 @@ def build_graph(assets, corpus_by_aid):
             edges.append({'source': topic_by_id[tid], 'target': nid, 'relation': 'contains_page'})
 
     # 证据节点 + 概念节点
-    source_nodes = {}
     concept_nodes = set()
 
     for a in assets:
@@ -230,15 +229,8 @@ def build_graph(assets, corpus_by_aid):
             add_node(hnid, 'evidence', f'image_{img_hash}')
             edges.append({'source': enid, 'target': hnid, 'relation': 'semantic_evidence'})
 
-        # source_url 节点
-        surl = a.get('source_url', '')
-        if surl and surl.startswith('http'):
-            domain = re.sub(r'^https?://([^/]+).*', r'\1', surl)
-            snid = f'source_{domain.replace(".", "_")}'
-            if snid not in source_nodes:
-                source_nodes[snid] = surl
-                add_node(snid, 'source', domain)
-            edges.append({'source': enid, 'target': snid, 'relation': 'from_source'})
+        # source_url 节点已废弃：域名级 source 节点无实际辨识度，文本乱码，且 evidence
+        # 节点自身已携带 source_url。人工整理的 source 节点见 wiki_manual/manifest.js。
 
     return nodes, edges
 
@@ -304,13 +296,16 @@ def build_wiki_pages(assets, corpus_by_aid):
             aid = a['asset_id']
             c = corpus_by_aid.get(aid, {})
             label = c.get('evidence_label', '')
-            text = c.get('text', '')[:200]
+            text = c.get('text', '')
+            ipath = a.get('image_path', '')
             if label and text:
-                lines.append(f'- {label}：{text} `[{aid}]`')
+                lines.append(f'- {label}：{text}')
             elif label:
-                lines.append(f'- {label} `[{aid}]`')
+                lines.append(f'- {label}')
             elif text:
-                lines.append(f'- {text} `[{aid}]`')
+                lines.append(f'- {text}')
+            if ipath:
+                lines.append(f'  ![evidence](../{ipath})')
 
         lines.append('')
         lines.append('## 证据表')
@@ -325,10 +320,10 @@ def build_wiki_pages(assets, corpus_by_aid):
             surl = a.get('source_url', '')
             ipath = a.get('image_path', '')
             label = corpus_by_aid.get(aid, {}).get('evidence_label', '')
-            text = a.get('clean_text', '')[:100]
+            text = a.get('best_text', '') or a.get('clean_text', '')
 
             url_cell = f'[source]({surl})' if surl and surl.startswith('http') else (surl if surl else '')
-            img_cell = f'[image](../{ipath})' if ipath else ''
+            img_cell = f'![evidence](../{ipath})' if ipath else ''
 
             lines.append(f'| {aid} | {atype} | {page} | {url_cell} | {img_cell} | {label}: {text} |')
 
@@ -407,6 +402,11 @@ def main():
     print('[4/4] 生成 wiki 页面...')
     build_wiki_pages(assets, corpus_by_aid)
     print(f'  -> {WIKI_DIR}/*.md')
+
+    # 5. 构建 wiki 浏览器内容
+    print('[5/5] 构建 wiki 浏览器内容...')
+    import build_wiki_content
+    build_wiki_content.main()
 
     print('\n构建完成。')
 

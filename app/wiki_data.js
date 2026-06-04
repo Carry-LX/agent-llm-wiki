@@ -1,4 +1,4 @@
-const WIKI_DATA = {
+WIKI_DATA = {
   "generated_at": "2026-05-19T03:08:19.564Z",
   "pages": [
     {
@@ -343,14 +343,6 @@ const WIKI_DATA = {
         "text_source": "tesseract_chi_sim_eng"
       },
       {
-        "id": "source_mp_weixin_qq_com",
-        "type": "source",
-        "title": "mp.weixin.qq.com",
-        "url": "https://mp.weixin.qq.com/s/GUeJCJfd03cSK5aCoefRaA",
-        "text": "执行后，我会对结果做合理性验证，并结合日志和用户反馈持续优化 few-shot 示例，从而形成稳定可迭代的闭环系统。",
-        "page_title": "Text2SQL"
-      },
-      {
         "id": "asset_imgsha_dcd9267f7f8b",
         "type": "evidence",
         "title": "GraphRAG、LightRAG、PathRAG 对比",
@@ -379,12 +371,6 @@ const WIKI_DATA = {
         "image_sha256": "dcd9267f7f8b9a8e24d9ec323cb64ab22931818463691cbedf0cf07a796b55c7",
         "text": "特性 GraphRAG LightRAG PathRAG 子图/社区检索: 利用社区检测 ” 双阶段检索: 结合快速的局部检索和深 BARR: 使用基于流的剪枝算法识检索机制算法找到相关社区，并聚合其所 ”入的全局检索。 别并提取最相关的关系路径。 有信息。 将整个相关社区或子图的信息在保证效率的前提下，从图中检索相关 ”将检索出的关系路径转换为文本，作信息处理方式 (可能包含大量节点和边) 进行 ”信息片段。 为上下文提供给生成模型。 RA. 1. BMPR: 擅长发现群体社 1. RRBM: 在速度和深度间取得平 1. WHBIRKAK: 能更好地理解实区和全局趋势。 衡。 体间的复杂联系。 2，信息全面: 提供整个社区的 2.计算轻量: 兼顾了性能和效率。 2. MORE: 有效过滤宛余信息， 背景信息。 提升答案质量。 1. BAR: 可能包含大量不”1， 深度可能不足: 为避免元余而可能路径提取算法可能复杂，且依赖路径相关信息，引入噪声。 牺牲对复杂关系的深度探索。 的质量和覆盖度。 MESS 5 推理深度不足: 可能忽略复。 2，仍有关键信息遗漏的风险。 杂的多跳关系路径。 适用场景需要宏观分析、社区发现和趋势 “对响应速度和检索效率有较高要求的实 ”需要精确理解实体间复杂关系和多中概括的总结性任务。 时应用场景。 推理的问答任务。",
         "text_source": "tesseract_chi_sim_eng"
-      },
-      {
-        "id": "source_www_53ai_com",
-        "type": "source",
-        "title": "www.53ai.com",
-        "url": "https://www.53ai.com/news/RAG/2026031839178.html"
       },
       {
         "id": "asset_imgsha_2fe9a3cb897f",
@@ -1167,14 +1153,6 @@ const WIKI_DATA = {
         "text_source": "tesseract_chi_sim_eng"
       },
       {
-        "id": "source_developer_aliyun_com",
-        "type": "source",
-        "title": "developer.aliyun.com",
-        "url": "https://developer.aliyun.com/article/1675940",
-        "text": "那么话说回来，这个意图识别和槽位抽取具体如何操作呢？ AI 智能体意图识别与槽位抽取的实战演进方案 - 开发者社区 - 阿里云 核心的是这里面的第四个方案，其中有个点需要解释一下，就是如何判断一个意图是否结束了呢？ 这里我们使用 语义相似度 and 上一轮意图的槽位完整。 否则仍为当前意图，需要带着几轮的记忆。",
-        "page_title": "Agent"
-      },
-      {
         "id": "asset_imgsha_e84966ff036b",
         "type": "evidence",
         "title": "文本生成流水线结合采样与质检",
@@ -1238,12 +1216,6 @@ const WIKI_DATA = {
         "image_sha256": "79ba71d907a8a4e6a410cd843f5b0794ecb1e3fad813a7e45e01fde933efeef6",
         "text": "Q: 你刚才提到 Agent 之间可以互相通讯，这个通讯机制是怎么实现的? Agent 之间怎么知道该跟谁说话、能做什么操作? A: 我们设计这个的时候，出砾点很直接: 先看人和 Agent 是怎么协作的。用户在前端可以给 Agent 发指令、启动一个新 Agent、中止一个任务、让 Agent 总结进展——这些操作用户天天在做。我们的想法是，Agent 自己也应该有能万对另一个 Agent 做同样的事。 . Agent 间通讯设计 Agent 与人类同权用户能做的 . Agent 也能做 . Engine 也能做一三种调用方平权, 共享同一组接口,拿到同样的语义 Skill + CLI . 核心基础设施 / core infrastructure skills: mavis-commuamication ' mavis-session Mmavis-agemt © mavis-team ' Sa © 2 eee 2 eS SSS SSeS ee eseeeeeeeeeeeeneee2°22 i | PRAM IF MBA EF interface Agent - 可协作成员 - 有身份 - 可护沟通 . OP User man prompt spawn abort 1 emer = , 发指令 . 追加要求开新 Agent / Session 中止当前任务身份 1 | i -一 1 i 1 2 8 让其总培当前状态 MALT ASK session coment Other Agent : 作用于另一个 Agent . peer session 封装的底层基础设施 . infrastructure (调用方无需关心) 1 记忆 - - agent memory , MEMORYmd daemon HTTP API - 127.0.0.1:port (profile / dataDir (ERY) 1 一 1 i 1 Team Engine 8 CLI 包装 - mavis communication / session / agent / team / cron : AgentTeaen 编排引擎 - 白动调用 1 _ 1 可中途沟通 Auth .token - scope 校验 - 调用前自动注入, 调用方无感 1 1 — Ages 与人类网权 Mt 一 - _ er Le Agent 与人类同权 - 共用一组动词走同一组 skill + CLI PUP Foc TY + skill SCHUH) + daemon 关心实现 . 三层各司其职, 调用方对底层切换无感 «Agen 是有身份/可被沟通/ 可被纠偏的协作成贡 . BARRERA, 也跟人类一样作为接口的作用对象",
         "text_source": "tesseract_chi_sim_eng"
-      },
-      {
-        "id": "source_www_bestblogs_dev",
-        "type": "source",
-        "title": "www.bestblogs.dev",
-        "url": "https://www.bestblogs.dev/article/5c79977a"
       },
       {
         "id": "asset_imgsha_39a6a4c7207f",
@@ -1394,12 +1366,6 @@ const WIKI_DATA = {
         "image_sha256": "059f630d18fa6c5f2b7204d872ecd06f532f5ec36b81855c5d324a55f23bba09",
         "text": "当工具很多时，Claude Code 不会在一开始把所有工具的完整 schema 都发给模型，而是只把一部分核心工具完整加载; 对标记为 deferred 的工具，初始提示里通常只暴露“工具名 + 这是延迟加载的标记”\"，不附带完整参数定义。 模型如果觉得当前任务可能需要某个 deferred 工具，并不是直接调用它，而是先调用 ToolsearchTool 做一次按需搜索。搜索时不会只靠工具名硬匹配，更重要的是利用每个工具预先写好的 searchHint 做语义匹 Be. 比如某个工具初始只暴露名字 GrepTool , 但它背后还有一个 hint: search file contents with regex (ripgrep) 当模型搜索'find text in files’ regex search in repo'这类关键词时， ToolsearchTool 就会把这个 hint 作为索引线索，匹配出 GrepTool，然后把它的完整定义返回给模型，包括 : © 工具说明。 BA schema ° 必填字段。 可选字段模型拿到这个完整 schema 后，才真正知道这个工具怎么调用; 所以“只暴露名字”“不是说模型靠名字直接猜参数，而是先知道“有这么个工具存在“，再通过 ToolSearch 按名字和 hint 找回完整说明书。 再压缩一点，可以记成: deferred tool 在首轮只做“目录项“，不做“完整文档\"; 真正的文档是在模型通过 ToolSearch 搜到后，才按需加载进上下文。",
         "text_source": "tesseract_chi_sim_eng"
-      },
-      {
-        "id": "source_zhanghandong_github_io",
-        "type": "source",
-        "title": "zhanghandong.github.io",
-        "url": "https://zhanghandong.github.io/harness-engineering-from-cc-to-ai-coding/part1/ch02.html"
       },
       {
         "id": "asset_imgsha_7748829a7526",
@@ -2182,14 +2148,6 @@ const WIKI_DATA = {
         "text_source": "tesseract_chi_sim_eng"
       },
       {
-        "id": "source_www_doubao_com",
-        "type": "source",
-        "title": "www.doubao.com",
-        "url": "https://www.doubao.com/thread/w4f9e93dc6a8ca880",
-        "text": "https://www.doubao.com/thread/w4f9e93dc6a8ca880",
-        "page_title": "Agent"
-      },
-      {
         "id": "topic_planning_execution",
         "type": "topic",
         "title": "规划、执行与反思",
@@ -2918,14 +2876,6 @@ const WIKI_DATA = {
         "image_sha256": "f9760a189147f79f901589a7a6c384dbe1aea6fe3e6ec4ba44dd7ce120398722",
         "text": "瓶颈二: iS SAR Segment AFH, Agta 内存问题解决了，又来了新问题。每天知识库有增量更新，一次性写入几十万条新数据时， its. 一是时间上错峰，把批量写入改到业务低峰期 (比如凌晨)，避开查询高峰， LE Segment 合并在用户不活跃时静默完成。二是量上化整为矢，把每批写入量控制在 500 ~ 1000 条以内，分成多批写，每批之间间隔几秒。这样 Segment 合并的冲击变成多次小冲击， 而不是一次大冲击，每次合并规模小、耗时得，查询服务基本感知不到持动。 写入抖动优化示意图 「大批量一次写入1 [小批量分散写入1、 300ms+、 合并触发 — 同一时间段多个小尖刺 (持续几分钟) 用户几乎无感严重影响用户 8oms “90ms “85ms 60ms 60ms 优化解法示例 * OSD eae ¢ () GD 错峰到凌晨 SSIS) © Sit 500-1000 s + Mia",
         "text_source": "tesseract_chi_sim_eng"
-      },
-      {
-        "id": "source_pdf_hanspub_org",
-        "type": "source",
-        "title": "pdf.hanspub.org",
-        "url": "https://pdf.hanspub.org/csa_1543666.pdf",
-        "text": "中国电科十所的研究实验了这套\"双向增强\"框架 （问题→SQL正向 + SQL→问题逆向），与仅用少量人工标注语料的LoRA微调相比，模型执行准确率提升了 16.3% ，相较few-shot提示学习提升了 35.7% 。",
-        "page_title": "RAG"
       },
       {
         "id": "topic_finetuning_trajectories",
@@ -3991,13 +3941,6 @@ const WIKI_DATA = {
         "weight": 1
       },
       {
-        "source": "asset_imgsha_9b3378ea7e27",
-        "target": "source_mp_weixin_qq_com",
-        "relation": "from_source",
-        "relation_label": "来自网页",
-        "weight": 1
-      },
-      {
         "source": "topic_rag_and_retrieval",
         "target": "asset_imgsha_dcd9267f7f8b",
         "relation": "supported_by",
@@ -4009,13 +3952,6 @@ const WIKI_DATA = {
         "target": "asset_imgsha_dcd9267f7f8b",
         "relation": "contains_evidence",
         "relation_label": "页面包含证据",
-        "weight": 1
-      },
-      {
-        "source": "asset_imgsha_dcd9267f7f8b",
-        "target": "source_www_53ai_com",
-        "relation": "from_source",
-        "relation_label": "来自网页",
         "weight": 1
       },
       {
@@ -4033,13 +3969,6 @@ const WIKI_DATA = {
         "weight": 1
       },
       {
-        "source": "asset_imgsha_2fe9a3cb897f",
-        "target": "source_mp_weixin_qq_com",
-        "relation": "from_source",
-        "relation_label": "来自网页",
-        "weight": 1
-      },
-      {
         "source": "topic_rag_and_retrieval",
         "target": "asset_imgsha_94911bd17c4e",
         "relation": "supported_by",
@@ -4052,13 +3981,6 @@ const WIKI_DATA = {
         "relation": "contains_evidence",
         "relation_label": "页面包含证据",
         "weight": 1
-      },
-      {
-        "source": "asset_imgsha_94911bd17c4e",
-        "target": "source_mp_weixin_qq_com",
-        "relation": "from_source",
-        "relation_label": "来自网页",
-        "weight": 2
       },
       {
         "source": "page_001",
@@ -4082,13 +4004,6 @@ const WIKI_DATA = {
         "weight": 1
       },
       {
-        "source": "asset_imgsha_b54e7ba8ca9a",
-        "target": "source_mp_weixin_qq_com",
-        "relation": "from_source",
-        "relation_label": "来自网页",
-        "weight": 1
-      },
-      {
         "source": "topic_rag_and_retrieval",
         "target": "asset_imgsha_7d149ed57d08",
         "relation": "supported_by",
@@ -4100,13 +4015,6 @@ const WIKI_DATA = {
         "target": "asset_imgsha_7d149ed57d08",
         "relation": "contains_evidence",
         "relation_label": "页面包含证据",
-        "weight": 1
-      },
-      {
-        "source": "asset_imgsha_7d149ed57d08",
-        "target": "source_mp_weixin_qq_com",
-        "relation": "from_source",
-        "relation_label": "来自网页",
         "weight": 1
       },
       {
@@ -4124,13 +4032,6 @@ const WIKI_DATA = {
         "weight": 1
       },
       {
-        "source": "asset_imgsha_922c16272133",
-        "target": "source_mp_weixin_qq_com",
-        "relation": "from_source",
-        "relation_label": "来自网页",
-        "weight": 1
-      },
-      {
         "source": "topic_rag_and_retrieval",
         "target": "asset_imgsha_cd3df81953ab",
         "relation": "supported_by",
@@ -4145,13 +4046,6 @@ const WIKI_DATA = {
         "weight": 1
       },
       {
-        "source": "asset_imgsha_cd3df81953ab",
-        "target": "source_mp_weixin_qq_com",
-        "relation": "from_source",
-        "relation_label": "来自网页",
-        "weight": 2
-      },
-      {
         "source": "topic_rag_and_retrieval",
         "target": "asset_imgsha_e00ff7ab6236",
         "relation": "supported_by",
@@ -4166,13 +4060,6 @@ const WIKI_DATA = {
         "weight": 1
       },
       {
-        "source": "asset_imgsha_e00ff7ab6236",
-        "target": "source_mp_weixin_qq_com",
-        "relation": "from_source",
-        "relation_label": "来自网页",
-        "weight": 1
-      },
-      {
         "source": "topic_rag_and_retrieval",
         "target": "asset_imgsha_b64d5058598d",
         "relation": "supported_by",
@@ -4184,13 +4071,6 @@ const WIKI_DATA = {
         "target": "asset_imgsha_b64d5058598d",
         "relation": "contains_evidence",
         "relation_label": "页面包含证据",
-        "weight": 1
-      },
-      {
-        "source": "asset_imgsha_b64d5058598d",
-        "target": "source_mp_weixin_qq_com",
-        "relation": "from_source",
-        "relation_label": "来自网页",
         "weight": 1
       },
       {
@@ -4208,13 +4088,6 @@ const WIKI_DATA = {
         "weight": 1
       },
       {
-        "source": "asset_imgsha_8caf164bbed7",
-        "target": "source_mp_weixin_qq_com",
-        "relation": "from_source",
-        "relation_label": "来自网页",
-        "weight": 1
-      },
-      {
         "source": "topic_rag_and_retrieval",
         "target": "asset_imgsha_99f8be553c37",
         "relation": "supported_by",
@@ -4226,13 +4099,6 @@ const WIKI_DATA = {
         "target": "asset_imgsha_99f8be553c37",
         "relation": "contains_evidence",
         "relation_label": "页面包含证据",
-        "weight": 1
-      },
-      {
-        "source": "asset_imgsha_99f8be553c37",
-        "target": "source_mp_weixin_qq_com",
-        "relation": "from_source",
-        "relation_label": "来自网页",
         "weight": 1
       },
       {
@@ -4257,13 +4123,6 @@ const WIKI_DATA = {
         "weight": 1
       },
       {
-        "source": "asset_imgsha_6f0b11003f01",
-        "target": "source_mp_weixin_qq_com",
-        "relation": "from_source",
-        "relation_label": "来自网页",
-        "weight": 1
-      },
-      {
         "source": "topic_rag_and_retrieval",
         "target": "asset_imgsha_674942d618e0",
         "relation": "supported_by",
@@ -4275,13 +4134,6 @@ const WIKI_DATA = {
         "target": "asset_imgsha_674942d618e0",
         "relation": "contains_evidence",
         "relation_label": "页面包含证据",
-        "weight": 1
-      },
-      {
-        "source": "asset_imgsha_674942d618e0",
-        "target": "source_mp_weixin_qq_com",
-        "relation": "from_source",
-        "relation_label": "来自网页",
         "weight": 1
       },
       {
@@ -4299,13 +4151,6 @@ const WIKI_DATA = {
         "weight": 1
       },
       {
-        "source": "asset_imgsha_456194efbeca",
-        "target": "source_mp_weixin_qq_com",
-        "relation": "from_source",
-        "relation_label": "来自网页",
-        "weight": 1
-      },
-      {
         "source": "topic_rag_and_retrieval",
         "target": "asset_imgsha_046fc4a9b9b8",
         "relation": "supported_by",
@@ -4320,13 +4165,6 @@ const WIKI_DATA = {
         "weight": 1
       },
       {
-        "source": "asset_imgsha_046fc4a9b9b8",
-        "target": "source_mp_weixin_qq_com",
-        "relation": "from_source",
-        "relation_label": "来自网页",
-        "weight": 1
-      },
-      {
         "source": "topic_rag_and_retrieval",
         "target": "asset_imgsha_94234dd7d215",
         "relation": "supported_by",
@@ -4338,13 +4176,6 @@ const WIKI_DATA = {
         "target": "asset_imgsha_94234dd7d215",
         "relation": "contains_evidence",
         "relation_label": "页面包含证据",
-        "weight": 1
-      },
-      {
-        "source": "asset_imgsha_94234dd7d215",
-        "target": "source_mp_weixin_qq_com",
-        "relation": "from_source",
-        "relation_label": "来自网页",
         "weight": 1
       },
       {
@@ -4360,13 +4191,6 @@ const WIKI_DATA = {
         "relation": "contains_evidence",
         "relation_label": "页面包含证据",
         "weight": 1
-      },
-      {
-        "source": "asset_imgsha_d75dc63bc8b4",
-        "target": "source_mp_weixin_qq_com",
-        "relation": "from_source",
-        "relation_label": "来自网页",
-        "weight": 2
       },
       {
         "source": "page_001",
@@ -4390,13 +4214,6 @@ const WIKI_DATA = {
         "weight": 1
       },
       {
-        "source": "asset_imgsha_93a7879f1211",
-        "target": "source_mp_weixin_qq_com",
-        "relation": "from_source",
-        "relation_label": "来自网页",
-        "weight": 1
-      },
-      {
         "source": "topic_rag_and_retrieval",
         "target": "asset_imgsha_6947aa966103",
         "relation": "supported_by",
@@ -4409,13 +4226,6 @@ const WIKI_DATA = {
         "relation": "contains_evidence",
         "relation_label": "页面包含证据",
         "weight": 1
-      },
-      {
-        "source": "asset_imgsha_6947aa966103",
-        "target": "source_mp_weixin_qq_com",
-        "relation": "from_source",
-        "relation_label": "来自网页",
-        "weight": 2
       },
       {
         "source": "topic_rag_and_retrieval",
@@ -4460,13 +4270,6 @@ const WIKI_DATA = {
         "weight": 1
       },
       {
-        "source": "asset_imgsha_14f94fda7909",
-        "target": "source_mp_weixin_qq_com",
-        "relation": "from_source",
-        "relation_label": "来自网页",
-        "weight": 1
-      },
-      {
         "source": "page_001",
         "target": "asset_imgsha_6947aa966103",
         "relation": "contains_evidence",
@@ -4502,13 +4305,6 @@ const WIKI_DATA = {
         "weight": 1
       },
       {
-        "source": "asset_imgsha_997cdfa9a54b",
-        "target": "source_mp_weixin_qq_com",
-        "relation": "from_source",
-        "relation_label": "来自网页",
-        "weight": 1
-      },
-      {
         "source": "topic_rag_and_retrieval",
         "target": "asset_imgsha_b3c82f1477b0",
         "relation": "supported_by",
@@ -4538,20 +4334,6 @@ const WIKI_DATA = {
       },
       {
         "source": "topic_rag_and_retrieval",
-        "target": "source_mp_weixin_qq_com",
-        "relation": "references_source",
-        "relation_label": "参考来源",
-        "weight": 6
-      },
-      {
-        "source": "page_002",
-        "target": "source_mp_weixin_qq_com",
-        "relation": "references_source",
-        "relation_label": "参考来源",
-        "weight": 3
-      },
-      {
-        "source": "topic_rag_and_retrieval",
         "target": "asset_imgsha_f5c936ace146",
         "relation": "supported_by",
         "relation_label": "由证据支撑",
@@ -4563,27 +4345,6 @@ const WIKI_DATA = {
         "relation": "contains_evidence",
         "relation_label": "页面包含证据",
         "weight": 1
-      },
-      {
-        "source": "topic_rag_and_retrieval",
-        "target": "source_developer_aliyun_com",
-        "relation": "references_source",
-        "relation_label": "参考来源",
-        "weight": 1
-      },
-      {
-        "source": "page_002",
-        "target": "source_developer_aliyun_com",
-        "relation": "references_source",
-        "relation_label": "参考来源",
-        "weight": 1
-      },
-      {
-        "source": "page_010",
-        "target": "source_mp_weixin_qq_com",
-        "relation": "references_source",
-        "relation_label": "参考来源",
-        "weight": 4
       },
       {
         "source": "topic_rag_and_retrieval",
@@ -4621,13 +4382,6 @@ const WIKI_DATA = {
         "weight": 1
       },
       {
-        "source": "asset_imgsha_79ba71d907a8",
-        "target": "source_www_bestblogs_dev",
-        "relation": "from_source",
-        "relation_label": "来自网页",
-        "weight": 1
-      },
-      {
         "source": "topic_agent_architecture",
         "target": "asset_imgsha_39a6a4c7207f",
         "relation": "supported_by",
@@ -4639,13 +4393,6 @@ const WIKI_DATA = {
         "target": "asset_imgsha_39a6a4c7207f",
         "relation": "contains_evidence",
         "relation_label": "页面包含证据",
-        "weight": 1
-      },
-      {
-        "source": "asset_imgsha_39a6a4c7207f",
-        "target": "source_mp_weixin_qq_com",
-        "relation": "from_source",
-        "relation_label": "来自网页",
         "weight": 1
       },
       {
@@ -4663,13 +4410,6 @@ const WIKI_DATA = {
         "weight": 1
       },
       {
-        "source": "asset_imgsha_406455c22467",
-        "target": "source_developer_aliyun_com",
-        "relation": "from_source",
-        "relation_label": "来自网页",
-        "weight": 1
-      },
-      {
         "source": "topic_agent_architecture",
         "target": "asset_imgsha_b07abd5153e2",
         "relation": "supported_by",
@@ -4684,13 +4424,6 @@ const WIKI_DATA = {
         "weight": 1
       },
       {
-        "source": "asset_imgsha_b07abd5153e2",
-        "target": "source_www_bestblogs_dev",
-        "relation": "from_source",
-        "relation_label": "来自网页",
-        "weight": 1
-      },
-      {
         "source": "topic_agent_architecture",
         "target": "asset_imgsha_8bd0eb29ad10",
         "relation": "supported_by",
@@ -4702,13 +4435,6 @@ const WIKI_DATA = {
         "target": "asset_imgsha_8bd0eb29ad10",
         "relation": "contains_evidence",
         "relation_label": "页面包含证据",
-        "weight": 1
-      },
-      {
-        "source": "asset_imgsha_8bd0eb29ad10",
-        "target": "source_www_bestblogs_dev",
-        "relation": "from_source",
-        "relation_label": "来自网页",
         "weight": 1
       },
       {
@@ -4723,13 +4449,6 @@ const WIKI_DATA = {
         "target": "asset_imgsha_059f630d18fa",
         "relation": "contains_evidence",
         "relation_label": "页面包含证据",
-        "weight": 1
-      },
-      {
-        "source": "asset_imgsha_059f630d18fa",
-        "target": "source_zhanghandong_github_io",
-        "relation": "from_source",
-        "relation_label": "来自网页",
         "weight": 1
       },
       {
@@ -4772,13 +4491,6 @@ const WIKI_DATA = {
         "target": "asset_imgsha_6a0c1a08f3ce",
         "relation": "contains_evidence",
         "relation_label": "页面包含证据",
-        "weight": 1
-      },
-      {
-        "source": "asset_imgsha_6a0c1a08f3ce",
-        "target": "source_www_bestblogs_dev",
-        "relation": "from_source",
-        "relation_label": "来自网页",
         "weight": 1
       },
       {
@@ -4796,13 +4508,6 @@ const WIKI_DATA = {
         "weight": 1
       },
       {
-        "source": "asset_imgsha_34269172aa96",
-        "target": "source_mp_weixin_qq_com",
-        "relation": "from_source",
-        "relation_label": "来自网页",
-        "weight": 1
-      },
-      {
         "source": "topic_agent_architecture",
         "target": "asset_imgsha_fc55588560a1",
         "relation": "supported_by",
@@ -4817,13 +4522,6 @@ const WIKI_DATA = {
         "weight": 1
       },
       {
-        "source": "asset_imgsha_fc55588560a1",
-        "target": "source_zhanghandong_github_io",
-        "relation": "from_source",
-        "relation_label": "来自网页",
-        "weight": 1
-      },
-      {
         "source": "topic_agent_architecture",
         "target": "asset_imgsha_b5f17153c5f1",
         "relation": "supported_by",
@@ -4835,13 +4533,6 @@ const WIKI_DATA = {
         "target": "asset_imgsha_b5f17153c5f1",
         "relation": "contains_evidence",
         "relation_label": "页面包含证据",
-        "weight": 1
-      },
-      {
-        "source": "asset_imgsha_b5f17153c5f1",
-        "target": "source_mp_weixin_qq_com",
-        "relation": "from_source",
-        "relation_label": "来自网页",
         "weight": 1
       },
       {
@@ -4859,13 +4550,6 @@ const WIKI_DATA = {
         "weight": 1
       },
       {
-        "source": "asset_imgsha_16a0017a3bf3",
-        "target": "source_mp_weixin_qq_com",
-        "relation": "from_source",
-        "relation_label": "来自网页",
-        "weight": 1
-      },
-      {
         "source": "topic_agent_architecture",
         "target": "asset_imgsha_9da3fe710b2a",
         "relation": "supported_by",
@@ -4877,13 +4561,6 @@ const WIKI_DATA = {
         "target": "asset_imgsha_9da3fe710b2a",
         "relation": "contains_evidence",
         "relation_label": "页面包含证据",
-        "weight": 1
-      },
-      {
-        "source": "asset_imgsha_9da3fe710b2a",
-        "target": "source_developer_aliyun_com",
-        "relation": "from_source",
-        "relation_label": "来自网页",
         "weight": 1
       },
       {
@@ -4929,13 +4606,6 @@ const WIKI_DATA = {
         "weight": 1
       },
       {
-        "source": "asset_imgsha_fa1c65c42292",
-        "target": "source_zhanghandong_github_io",
-        "relation": "from_source",
-        "relation_label": "来自网页",
-        "weight": 1
-      },
-      {
         "source": "topic_agent_architecture",
         "target": "asset_imgsha_e39c23430755",
         "relation": "supported_by",
@@ -4950,13 +4620,6 @@ const WIKI_DATA = {
         "weight": 1
       },
       {
-        "source": "asset_imgsha_e39c23430755",
-        "target": "source_zhanghandong_github_io",
-        "relation": "from_source",
-        "relation_label": "来自网页",
-        "weight": 1
-      },
-      {
         "source": "topic_agent_architecture",
         "target": "asset_imgsha_4ec2339a3a62",
         "relation": "supported_by",
@@ -4968,13 +4631,6 @@ const WIKI_DATA = {
         "target": "asset_imgsha_4ec2339a3a62",
         "relation": "contains_evidence",
         "relation_label": "页面包含证据",
-        "weight": 1
-      },
-      {
-        "source": "asset_imgsha_4ec2339a3a62",
-        "target": "source_mp_weixin_qq_com",
-        "relation": "from_source",
-        "relation_label": "来自网页",
         "weight": 1
       },
       {
@@ -5059,13 +4715,6 @@ const WIKI_DATA = {
         "target": "asset_imgsha_900f839d220c",
         "relation": "contains_evidence",
         "relation_label": "页面包含证据",
-        "weight": 1
-      },
-      {
-        "source": "asset_imgsha_900f839d220c",
-        "target": "source_mp_weixin_qq_com",
-        "relation": "from_source",
-        "relation_label": "来自网页",
         "weight": 1
       },
       {
@@ -5111,13 +4760,6 @@ const WIKI_DATA = {
         "weight": 1
       },
       {
-        "source": "asset_imgsha_2223a2a396de",
-        "target": "source_mp_weixin_qq_com",
-        "relation": "from_source",
-        "relation_label": "来自网页",
-        "weight": 1
-      },
-      {
         "source": "topic_agent_architecture",
         "target": "asset_imgsha_ce1638579d53",
         "relation": "supported_by",
@@ -5161,34 +4803,6 @@ const WIKI_DATA = {
       },
       {
         "source": "topic_agent_architecture",
-        "target": "source_mp_weixin_qq_com",
-        "relation": "references_source",
-        "relation_label": "参考来源",
-        "weight": 3
-      },
-      {
-        "source": "page_001",
-        "target": "source_mp_weixin_qq_com",
-        "relation": "references_source",
-        "relation_label": "参考来源",
-        "weight": 2
-      },
-      {
-        "source": "topic_agent_architecture",
-        "target": "source_developer_aliyun_com",
-        "relation": "references_source",
-        "relation_label": "参考来源",
-        "weight": 2
-      },
-      {
-        "source": "page_001",
-        "target": "source_developer_aliyun_com",
-        "relation": "references_source",
-        "relation_label": "参考来源",
-        "weight": 2
-      },
-      {
-        "source": "topic_agent_architecture",
         "target": "asset_imgsha_51c9eb8de69e",
         "relation": "supported_by",
         "relation_label": "由证据支撑",
@@ -5199,13 +4813,6 @@ const WIKI_DATA = {
         "target": "asset_imgsha_51c9eb8de69e",
         "relation": "contains_evidence",
         "relation_label": "页面包含证据",
-        "weight": 1
-      },
-      {
-        "source": "asset_imgsha_51c9eb8de69e",
-        "target": "source_mp_weixin_qq_com",
-        "relation": "from_source",
-        "relation_label": "来自网页",
         "weight": 1
       },
       {
@@ -5234,20 +4841,6 @@ const WIKI_DATA = {
         "target": "asset_imgsha_deae5c10a6f8",
         "relation": "contains_evidence",
         "relation_label": "页面包含证据",
-        "weight": 1
-      },
-      {
-        "source": "topic_agent_architecture",
-        "target": "source_www_doubao_com",
-        "relation": "references_source",
-        "relation_label": "参考来源",
-        "weight": 1
-      },
-      {
-        "source": "page_001",
-        "target": "source_www_doubao_com",
-        "relation": "references_source",
-        "relation_label": "参考来源",
         "weight": 1
       },
       {
@@ -5269,13 +4862,6 @@ const WIKI_DATA = {
         "target": "asset_imgsha_8ddd31f50291",
         "relation": "contains_evidence",
         "relation_label": "页面包含证据",
-        "weight": 1
-      },
-      {
-        "source": "asset_imgsha_8ddd31f50291",
-        "target": "source_mp_weixin_qq_com",
-        "relation": "from_source",
-        "relation_label": "来自网页",
         "weight": 1
       },
       {
@@ -5328,13 +4914,6 @@ const WIKI_DATA = {
         "weight": 1
       },
       {
-        "source": "asset_imgsha_e34249d9df55",
-        "target": "source_mp_weixin_qq_com",
-        "relation": "from_source",
-        "relation_label": "来自网页",
-        "weight": 1
-      },
-      {
         "source": "topic_prompt_engineering",
         "target": "asset_imgsha_7af3c22a8eaf",
         "relation": "supported_by",
@@ -5363,13 +4942,6 @@ const WIKI_DATA = {
         "weight": 1
       },
       {
-        "source": "asset_imgsha_d582b70d06a2",
-        "target": "source_mp_weixin_qq_com",
-        "relation": "from_source",
-        "relation_label": "来自网页",
-        "weight": 1
-      },
-      {
         "source": "topic_prompt_engineering",
         "target": "asset_imgsha_61e2922ef802",
         "relation": "supported_by",
@@ -5384,13 +4956,6 @@ const WIKI_DATA = {
         "weight": 1
       },
       {
-        "source": "asset_imgsha_61e2922ef802",
-        "target": "source_www_bestblogs_dev",
-        "relation": "from_source",
-        "relation_label": "来自网页",
-        "weight": 1
-      },
-      {
         "source": "topic_prompt_engineering",
         "target": "asset_imgsha_772065f10bc8",
         "relation": "supported_by",
@@ -5402,13 +4967,6 @@ const WIKI_DATA = {
         "target": "asset_imgsha_772065f10bc8",
         "relation": "contains_evidence",
         "relation_label": "页面包含证据",
-        "weight": 1
-      },
-      {
-        "source": "asset_imgsha_772065f10bc8",
-        "target": "source_www_bestblogs_dev",
-        "relation": "from_source",
-        "relation_label": "来自网页",
         "weight": 1
       },
       {
@@ -5426,13 +4984,6 @@ const WIKI_DATA = {
         "weight": 1
       },
       {
-        "source": "asset_imgsha_e69b9d279a6c",
-        "target": "source_mp_weixin_qq_com",
-        "relation": "from_source",
-        "relation_label": "来自网页",
-        "weight": 1
-      },
-      {
         "source": "topic_prompt_engineering",
         "target": "asset_imgsha_21ba6bfa8425",
         "relation": "supported_by",
@@ -5447,13 +4998,6 @@ const WIKI_DATA = {
         "weight": 1
       },
       {
-        "source": "asset_imgsha_21ba6bfa8425",
-        "target": "source_mp_weixin_qq_com",
-        "relation": "from_source",
-        "relation_label": "来自网页",
-        "weight": 1
-      },
-      {
         "source": "topic_prompt_engineering",
         "target": "asset_imgsha_91f3a9315fd6",
         "relation": "supported_by",
@@ -5465,13 +5009,6 @@ const WIKI_DATA = {
         "target": "asset_imgsha_91f3a9315fd6",
         "relation": "contains_evidence",
         "relation_label": "页面包含证据",
-        "weight": 1
-      },
-      {
-        "source": "asset_imgsha_91f3a9315fd6",
-        "target": "source_www_bestblogs_dev",
-        "relation": "from_source",
-        "relation_label": "来自网页",
         "weight": 1
       },
       {
@@ -5528,13 +5065,6 @@ const WIKI_DATA = {
         "target": "asset_imgsha_6a3f08dd5a27",
         "relation": "contains_evidence",
         "relation_label": "页面包含证据",
-        "weight": 1
-      },
-      {
-        "source": "asset_imgsha_6a3f08dd5a27",
-        "target": "source_mp_weixin_qq_com",
-        "relation": "from_source",
-        "relation_label": "来自网页",
         "weight": 1
       },
       {
@@ -5587,13 +5117,6 @@ const WIKI_DATA = {
         "weight": 1
       },
       {
-        "source": "asset_imgsha_06e3063fd73c",
-        "target": "source_mp_weixin_qq_com",
-        "relation": "from_source",
-        "relation_label": "来自网页",
-        "weight": 2
-      },
-      {
         "source": "page_002",
         "target": "asset_imgsha_06e3063fd73c",
         "relation": "contains_evidence",
@@ -5612,13 +5135,6 @@ const WIKI_DATA = {
         "target": "asset_imgsha_28c3e7496fff",
         "relation": "contains_evidence",
         "relation_label": "页面包含证据",
-        "weight": 1
-      },
-      {
-        "source": "asset_imgsha_28c3e7496fff",
-        "target": "source_mp_weixin_qq_com",
-        "relation": "from_source",
-        "relation_label": "来自网页",
         "weight": 1
       },
       {
@@ -5679,20 +5195,6 @@ const WIKI_DATA = {
       },
       {
         "source": "topic_text2sql",
-        "target": "source_mp_weixin_qq_com",
-        "relation": "references_source",
-        "relation_label": "参考来源",
-        "weight": 2
-      },
-      {
-        "source": "page_004",
-        "target": "source_mp_weixin_qq_com",
-        "relation": "references_source",
-        "relation_label": "参考来源",
-        "weight": 2
-      },
-      {
-        "source": "topic_text2sql",
         "target": "asset_imgsha_e76d357cd694",
         "relation": "supported_by",
         "relation_label": "由证据支撑",
@@ -5703,13 +5205,6 @@ const WIKI_DATA = {
         "target": "asset_imgsha_e76d357cd694",
         "relation": "contains_evidence",
         "relation_label": "页面包含证据",
-        "weight": 1
-      },
-      {
-        "source": "asset_imgsha_e76d357cd694",
-        "target": "source_mp_weixin_qq_com",
-        "relation": "from_source",
-        "relation_label": "来自网页",
         "weight": 1
       },
       {
@@ -5724,34 +5219,6 @@ const WIKI_DATA = {
         "target": "asset_imgsha_f9760a189147",
         "relation": "contains_evidence",
         "relation_label": "页面包含证据",
-        "weight": 1
-      },
-      {
-        "source": "asset_imgsha_f9760a189147",
-        "target": "source_mp_weixin_qq_com",
-        "relation": "from_source",
-        "relation_label": "来自网页",
-        "weight": 1
-      },
-      {
-        "source": "topic_text2sql",
-        "target": "source_pdf_hanspub_org",
-        "relation": "references_source",
-        "relation_label": "参考来源",
-        "weight": 2
-      },
-      {
-        "source": "page_001",
-        "target": "source_pdf_hanspub_org",
-        "relation": "references_source",
-        "relation_label": "参考来源",
-        "weight": 1
-      },
-      {
-        "source": "page_002",
-        "target": "source_pdf_hanspub_org",
-        "relation": "references_source",
-        "relation_label": "参考来源",
         "weight": 1
       },
       {
@@ -5804,13 +5271,6 @@ const WIKI_DATA = {
         "weight": 1
       },
       {
-        "source": "asset_imgsha_2a1ff9be530f",
-        "target": "source_mp_weixin_qq_com",
-        "relation": "from_source",
-        "relation_label": "来自网页",
-        "weight": 1
-      },
-      {
         "source": "topic_finetuning_trajectories",
         "target": "asset_imgsha_90624dde4170",
         "relation": "supported_by",
@@ -5822,13 +5282,6 @@ const WIKI_DATA = {
         "target": "asset_imgsha_90624dde4170",
         "relation": "contains_evidence",
         "relation_label": "页面包含证据",
-        "weight": 1
-      },
-      {
-        "source": "asset_imgsha_90624dde4170",
-        "target": "source_mp_weixin_qq_com",
-        "relation": "from_source",
-        "relation_label": "来自网页",
         "weight": 1
       },
       {
@@ -5846,13 +5299,6 @@ const WIKI_DATA = {
         "weight": 1
       },
       {
-        "source": "asset_imgsha_8e11e3ef39a2",
-        "target": "source_mp_weixin_qq_com",
-        "relation": "from_source",
-        "relation_label": "来自网页",
-        "weight": 1
-      },
-      {
         "source": "topic_finetuning_trajectories",
         "target": "asset_imgsha_1e3f27dfddbc",
         "relation": "supported_by",
@@ -5864,13 +5310,6 @@ const WIKI_DATA = {
         "target": "asset_imgsha_1e3f27dfddbc",
         "relation": "contains_evidence",
         "relation_label": "页面包含证据",
-        "weight": 1
-      },
-      {
-        "source": "asset_imgsha_1e3f27dfddbc",
-        "target": "source_mp_weixin_qq_com",
-        "relation": "from_source",
-        "relation_label": "来自网页",
         "weight": 1
       },
       {
@@ -5944,13 +5383,6 @@ const WIKI_DATA = {
         "weight": 1
       },
       {
-        "source": "asset_imgsha_dc0373ea17a7",
-        "target": "source_mp_weixin_qq_com",
-        "relation": "from_source",
-        "relation_label": "来自网页",
-        "weight": 1
-      },
-      {
         "source": "topic_finetuning_trajectories",
         "target": "asset_imgsha_e11ee8244f22",
         "relation": "supported_by",
@@ -5983,13 +5415,6 @@ const WIKI_DATA = {
         "target": "asset_imgsha_f700f7babd51",
         "relation": "contains_evidence",
         "relation_label": "页面包含证据",
-        "weight": 1
-      },
-      {
-        "source": "asset_imgsha_f700f7babd51",
-        "target": "source_mp_weixin_qq_com",
-        "relation": "from_source",
-        "relation_label": "来自网页",
         "weight": 1
       },
       {
@@ -6014,13 +5439,6 @@ const WIKI_DATA = {
         "weight": 1
       },
       {
-        "source": "asset_imgsha_4819f89e3efc",
-        "target": "source_mp_weixin_qq_com",
-        "relation": "from_source",
-        "relation_label": "来自网页",
-        "weight": 1
-      },
-      {
         "source": "topic_evaluation_dataset",
         "target": "asset_imgsha_cd654a4171e8",
         "relation": "supported_by",
@@ -6033,13 +5451,6 @@ const WIKI_DATA = {
         "relation": "contains_evidence",
         "relation_label": "页面包含证据",
         "weight": 1
-      },
-      {
-        "source": "asset_imgsha_cd654a4171e8",
-        "target": "source_mp_weixin_qq_com",
-        "relation": "from_source",
-        "relation_label": "来自网页",
-        "weight": 2
       },
       {
         "source": "page_002",
@@ -6063,13 +5474,6 @@ const WIKI_DATA = {
         "weight": 1
       },
       {
-        "source": "asset_imgsha_cd1a0caf748a",
-        "target": "source_mp_weixin_qq_com",
-        "relation": "from_source",
-        "relation_label": "来自网页",
-        "weight": 1
-      },
-      {
         "source": "topic_evaluation_dataset",
         "target": "asset_imgsha_30bfe2dad039",
         "relation": "supported_by",
@@ -6082,13 +5486,6 @@ const WIKI_DATA = {
         "relation": "contains_evidence",
         "relation_label": "页面包含证据",
         "weight": 1
-      },
-      {
-        "source": "asset_imgsha_30bfe2dad039",
-        "target": "source_mp_weixin_qq_com",
-        "relation": "from_source",
-        "relation_label": "来自网页",
-        "weight": 2
       },
       {
         "source": "page_002",
@@ -7435,13 +6832,6 @@ const WIKI_DATA = {
         "weight": 1
       },
       {
-        "source": "asset_imgsha_6650821467a8",
-        "target": "source_www_bestblogs_dev",
-        "relation": "from_source",
-        "relation_label": "来自网页",
-        "weight": 1
-      },
-      {
         "source": "topic_evaluation_dataset",
         "target": "asset_imgsha_6650821467a8",
         "relation": "supported_by",
@@ -7467,13 +6857,6 @@ const WIKI_DATA = {
         "target": "asset_imgsha_cfe257f566f0",
         "relation": "contains_evidence",
         "relation_label": "页面包含证据",
-        "weight": 1
-      },
-      {
-        "source": "asset_imgsha_cfe257f566f0",
-        "target": "source_www_bestblogs_dev",
-        "relation": "from_source",
-        "relation_label": "来自网页",
         "weight": 1
       },
       {
@@ -7502,13 +6885,6 @@ const WIKI_DATA = {
         "target": "asset_imgsha_654cba106462",
         "relation": "contains_evidence",
         "relation_label": "页面包含证据",
-        "weight": 1
-      },
-      {
-        "source": "asset_imgsha_654cba106462",
-        "target": "source_www_bestblogs_dev",
-        "relation": "from_source",
-        "relation_label": "来自网页",
         "weight": 1
       },
       {
@@ -7537,13 +6913,6 @@ const WIKI_DATA = {
         "target": "asset_imgsha_9524de954860",
         "relation": "contains_evidence",
         "relation_label": "页面包含证据",
-        "weight": 1
-      },
-      {
-        "source": "asset_imgsha_9524de954860",
-        "target": "source_www_bestblogs_dev",
-        "relation": "from_source",
-        "relation_label": "来自网页",
         "weight": 1
       },
       {
@@ -7572,13 +6941,6 @@ const WIKI_DATA = {
         "target": "asset_imgsha_b52c9cc953fe",
         "relation": "contains_evidence",
         "relation_label": "页面包含证据",
-        "weight": 1
-      },
-      {
-        "source": "asset_imgsha_b52c9cc953fe",
-        "target": "source_www_bestblogs_dev",
-        "relation": "from_source",
-        "relation_label": "来自网页",
         "weight": 1
       },
       {

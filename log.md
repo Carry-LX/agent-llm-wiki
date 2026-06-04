@@ -1,5 +1,21 @@
 # LLM-WIKI 运行日志
 
+## 2026-05-25 新增人工笔记：LLM 推理机制
+
+- 操作：新增 `wiki_manual/LLM推理机制.md`，解释 LLM Prefill/Decode 两阶段工作原理、KV Cache 作用、资源需求差异及混跑干扰问题。
+- 操作：新增 `wiki_manual/PD分离的工程挑战.md`，拆为 3 个证据节点——KV Cache 传输瓶颈、负载不均衡与调度、显存碎片与性能敏感性。含面试回答框架和 Llama-3.1-70B 定量数据。
+- 操作：新增 `wiki_manual/ClaudeCode的JSON输出机制.md`，拆为 2 个证据节点——JSON 通道机制（text_delta vs input_json_delta）、空壳工具校验（Ajv + Stop 钩子）。覆盖 outputFormat/SyntheticOutputTool/Stop hook 源码级分析。
+- 操作：新增 `wiki_manual/ClaudeCode为何放弃RAG.md`（来源：丁师兄大模型 2026-05-28），拆为 2 个证据节点——代码场景下 RAG 为何失效（embedding 语义漂移/乘法效应/索引时效性）、Agentic Search 架构取舍（无状态设计/Everything is the Model/混合方案）。含面试三层回答框架。
+- 操作：新增 `wiki_manual/Agent死循环与兜底机制.md`（来源：吴师兄学大模型 2026-05-29），拆为 2 个证据节点——死循环四种成因（工具调用循环/目标漂移/自我怀疑/幻觉性进展）、四层兜底机制（max_iterations/step budget/循环检测/人工 escalation）。含 7 条生产 Checklist、Claude Code 对照分析、三段式面试回答。3 张图片已同步至 raw/images/。
+- 操作：新增 `wiki_manual/TMIC_AI小新Agent设计方法论.md`（个人体系化总结），拆为 3 个证据节点——上下文工程三层优化（Skills vs RAG/业务模块识别/参数预取）、多轮方向控制（TodoList 锚定 + Tree Action 编排剥离）、可迁移四阶段框架（上下文加载→规划→执行→分析输出）。核心信念：基模推理能力已足够，全部工程精力让模型在正确时刻看到正确信息。
+- 操作：TMIC 文章追加"SubAgent 角色定义"感悟，新增节点 `manual_subagent_role_definition`——Agent=规划者、SubAgent=执行者，能力集合从角色定义推导而非做减法。
+- 操作：TMIC 文章追加"DeepAgent 三层基础设施"感悟，新增 2 个节点——三层架构（上下文工程→行为约束→持续进化）+ RAG 软约束与评估闭环飞轮（RAG是唯一可精准干预而不产生副作用的入口，五步闭环构成免疫系统，数据回流驱动自进化）。
+
+## 2026-05-25 文档整合
+
+- 操作：融合 AGENTS.md + SCHEMA.md → README.md，删除新增数据指南.md、维护路线图.md、optimization_backlog.md，精简 HANDOFF.md。
+- 结果：.md 文件从 28 个精简到 23 个，入口文件 README.md 成为唯一项目说明和约定来源。
+
 ## 2026-05-24 项目迁移
 
 - 操作：将项目从 `C:\Users\李鑫\Documents\Codex\2026-05-18\codex-onenote\llm_wiki_agent` 迁移至 `E:\projects\person`。

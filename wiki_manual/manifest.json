@@ -1,0 +1,35 @@
+{
+  "description": "人工笔记图节点清单。每次新增 wiki_manual/*.md 时，必须在此文件中追加对应条目。",
+  "nodes": [
+    {
+      "id": "manual_opencli_browser_agent",
+      "type": "manual_note",
+      "title": "OpenCLI 浏览器操控 Agent",
+      "description": "让 Agent 通过登录态 Chrome 操控任意网站：CLI + Daemon + Extension 三层架构，100+ 站点适配器，19 条 browser 原语，4 个 AI Agent Skill。实测百度搜索、B站热榜自动化。",
+      "md_path": "wiki_manual/OpenCLI浏览器操控Agent.md",
+      "keywords": ["OpenCLI", "browser", "agent", "chrome", "automation", "CDP", "skill"]
+    },
+    {
+      "id": "manual_sft_rl_dip_recover",
+      "type": "manual_note",
+      "title": "SFT 后 RL 训练性能先降后升机制",
+      "description": "RL 初期因 SFT/RL 目标函数不可解耦致性能下降，后期通过权重矩阵奇异向量方向重构和奖励方差隐式正则化恢复泛化。含 Llama-3.2、Qwen3、华为2026 论文实验证据和面试回答模板。",
+      "md_path": "wiki_manual/SFT后RL训练性能先降后升机制.md",
+      "keywords": ["SFT", "RL", "RLHF", "RLVR", "catastrophic forgetting", "post-training", "singular vectors", "implicit regularization", "面试"]
+    }
+  ],
+  "edges": [
+    {
+      "source": "manual_opencli_browser_agent",
+      "target": "topic_agent_architecture",
+      "relation": "manual_enrichment",
+      "relation_label": "人工扩展 Agent 工具基础设施"
+    },
+    {
+      "source": "manual_sft_rl_dip_recover",
+      "target": "topic_finetuning_trajectories",
+      "relation": "manual_enrichment",
+      "relation_label": "人工扩展 微调训练机制"
+    }
+  ]
+}

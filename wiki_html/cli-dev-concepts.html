@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CLI 开发核心概念 — 交互式可视化</title>
+<style>
+:root {
+  --bg: #fafaf8; --surface: #ffffff; --surface-hover: #f5f4f0; --border: #e4e3dd;
+  --text: #1a1a18; --text-secondary: #6b6b65; --text-muted: #9a9a94;
+  --accent-blue: #3b6df0; --accent-purple: #7c3aed; --accent-green: #10b981;
+  --accent-amber: #f59e0b; --accent-rose: #ef4444;
+  --gradient-hero: linear-gradient(135deg, #3b6df0 0%, #7c3aed 50%, #a855f7 100%);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.04); --shadow-md: 0 4px 16px rgba(0,0,0,0.06);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.08);
+  --radius-sm: 8px; --radius: 14px; --radius-lg: 20px;
+  --font-mono: 'Cascadia Code','JetBrains Mono','Fira Code','Consolas',monospace;
+  --font-sans: -apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-sans);background:var(--bg);color:var(--text);line-height:1.7;-webkit-font-smoothing:antialiased}
+
+/* Nav */
+.nav{position:sticky;top:0;z-index:100;background:rgba(250,250,248,0.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:2rem;padding:0 2rem;height:56px}
+.nav-title{font-weight:700;font-size:0.95rem;white-space:nowrap}
+.nav-links{display:flex;gap:0.25rem;overflow-x:auto}
+.nav-link{color:var(--text-muted);text-decoration:none;font-size:0.85rem;padding:0.35rem 0.75rem;border-radius:6px;transition:all 0.2s;white-space:nowrap}
+.nav-link:hover{color:var(--text);background:var(--surface-hover)}
+.nav-link.active{color:var(--accent-blue);background:rgba(59,109,240,0.08);font-weight:600}
+
+/* Hero */
+.hero{padding:6rem 2rem 5rem;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:var(--gradient-hero);opacity:0.04;pointer-events:none}
+.hero-badge{display:inline-block;background:rgba(59,109,240,0.08);color:var(--accent-blue);font-size:0.82rem;font-weight:600;padding:0.3rem 1rem;border-radius:20px;margin-bottom:1.5rem}
+.hero h1{font-size:3.2rem;font-weight:800;letter-spacing:-0.02em;line-height:1.2;margin-bottom:1rem}
+.hero h1 span{background:var(--gradient-hero);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:1.15rem;color:var(--text-secondary);max-width:600px;margin:0 auto 2.5rem}
+.hero-stats{display:flex;justify-content:center;gap:3rem;flex-wrap:wrap}
+.hero-stat{text-align:center}
+.hero-stat-num{font-size:2.4rem;font-weight:800;background:var(--gradient-hero);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-stat-label{font-size:0.85rem;color:var(--text-muted);margin-top:0.2rem}
+.hero-cta{display:inline-block;margin-top:2.5rem;padding:0.75rem 2.2rem;background:var(--accent-blue);color:#fff;border-radius:30px;text-decoration:none;font-weight:600;font-size:0.95rem;transition:transform 0.2s,box-shadow 0.2s}
+.hero-cta:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(59,109,240,0.3)}
+
+/* Sections */
+.section{padding:5rem 2rem;max-width:1100px;margin:0 auto}
+.section-header{display:flex;align-items:flex-start;gap:1.5rem;margin-bottom:2.5rem}
+.section-num{font-size:7rem;font-weight:900;line-height:0.85;color:rgba(59,109,240,0.06);user-select:none;flex-shrink:0}
+.section-info h2{font-size:1.8rem;font-weight:700;margin-bottom:0.4rem}
+.section-info p{color:var(--text-secondary);font-size:1.05rem}
+
+/* ── Simulation Panel (shared) ── */
+.sim-panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-sm)}
+.sim-controls{display:flex;align-items:center;gap:0.75rem;padding:0.8rem 1.25rem;border-bottom:1px solid var(--border);background:var(--surface-hover)}
+.sim-btn{width:34px;height:34px;border-radius:50%;border:1px solid var(--border);background:var(--surface);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:0.9rem;transition:all 0.15s;color:var(--text)}
+.sim-btn:hover{background:var(--accent-blue);color:#fff;border-color:var(--accent-blue)}
+.sim-btn.small{width:28px;height:28px;font-size:0.75rem}
+.sim-speed{display:flex;gap:2px;margin-left:auto}
+.sim-speed-btn{padding:0.2rem 0.5rem;font-size:0.73rem;border:1px solid var(--border);background:transparent;border-radius:4px;cursor:pointer;color:var(--text-muted);transition:all 0.15s}
+.sim-speed-btn.active,.sim-speed-btn:hover{background:var(--accent-blue);color:#fff;border-color:var(--accent-blue)}
+.sim-progress{display:flex;align-items:center;gap:0.5rem;font-family:var(--font-mono);font-size:0.82rem;color:var(--text-muted)}
+.sim-bar{width:80px;height:4px;background:var(--border);border-radius:2px;overflow:hidden}
+.sim-bar-fill{height:100%;background:var(--accent-blue);border-radius:2px;transition:width 0.3s}
+.sim-label{font-family:var(--font-mono);font-size:0.78rem;color:var(--accent-purple);padding:0 0.25rem}
+.sim-stage{font-size:0.82rem;font-weight:600;color:var(--text);min-width:160px;text-align:center}
+.sim-stage-desc{font-size:0.78rem;color:var(--text-secondary);min-width:200px}
+
+/* ── Process Simulation ── */
+.proc-sim{position:relative;min-height:420px;padding:1.5rem;overflow:hidden}
+.proc-box{position:absolute;border:2px solid var(--border);border-radius:var(--radius);background:var(--surface);padding:0.8rem 1rem;min-width:170px;text-align:center;transition:all 0.5s ease}
+.proc-box.parent{border-color:var(--accent-blue);left:80px;top:160px}
+.proc-box.child{border-color:var(--accent-green);left:360px;top:160px;opacity:0;transform:scale(0.5)}
+.proc-box.visible{opacity:1;transform:scale(1)}
+.proc-box .proc-title{font-weight:700;font-size:1rem;margin-bottom:0.25rem}
+.proc-box .proc-pid{font-family:var(--font-mono);font-size:0.73rem;color:var(--text-muted)}
+.proc-box .proc-mem{font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);margin-top:0.2rem}
+.proc-inner{font-size:0.73rem;color:var(--text-secondary);margin-top:0.4rem;line-height:1.5}
+.proc-arrow{position:absolute;font-size:1.3rem;color:var(--accent-amber);font-weight:700;opacity:0;transition:opacity 0.4s;z-index:2}
+.proc-code-panel{position:absolute;right:1.5rem;top:1.5rem;bottom:1.5rem;width:280px;background:#f0efe9;border-radius:var(--radius-sm);border:1px solid var(--border);padding:1rem;font-family:var(--font-mono);font-size:0.78rem;line-height:1.7;overflow:hidden;opacity:0;transition:opacity 0.4s}
+.proc-code-panel.show{opacity:1}
+.code-line{padding:0 0.3rem;border-radius:2px;transition:background 0.3s;color:#6b6b65}
+.code-line.highlight{background:rgba(59,109,240,0.12);color:#1a1a18;font-weight:600}
+.proc-memory-map{position:absolute;left:560px;top:30px;width:200px;font-family:var(--font-mono);font-size:0.68rem;opacity:0;transition:opacity 0.4s}
+.proc-memory-map.show{opacity:1}
+.mem-block{border:1px dashed var(--border);padding:0.3rem 0.5rem;margin-bottom:0.2rem;border-radius:3px;text-align:center}
+.mem-block.code-seg{background:rgba(59,109,240,0.06);border-color:rgba(59,109,240,0.2)}
+.mem-block.data-seg{background:rgba(16,185,129,0.06);border-color:rgba(16,185,129,0.2)}
+.mem-block.stack-seg{background:rgba(245,158,11,0.06);border-color:rgba(245,158,11,0.2)}
+/* fd display in process box */
+.proc-fds{display:flex;gap:0.3rem;justify-content:center;margin-top:0.4rem}
+.proc-fd{font-family:var(--font-mono);font-size:0.65rem;padding:0.1rem 0.35rem;border-radius:3px;border:1px solid var(--border)}
+.proc-fd.in{background:rgba(59,109,240,0.07);border-color:rgba(59,109,240,0.2)}
+.proc-fd.out{background:rgba(16,185,129,0.07);border-color:rgba(16,185,129,0.2)}
+.proc-fd.err{background:rgba(239,68,68,0.07);border-color:rgba(239,68,68,0.2)}
+/* signal flash */
+@keyframes signalFlash{0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,0.4)}50%{box-shadow:0 0 0 8px rgba(239,68,68,0)}}
+.proc-box.signalled{animation:signalFlash 0.8s ease;border-color:var(--accent-rose)}
+/* exit fade */
+@keyframes exitFade{to{opacity:0.2;transform:scale(0.9);filter:grayscale(1)}}
+.proc-box.exiting{animation:exitFade 1s ease forwards}
+
+/* ── Env Var Simulation ── */
+.env-sim{padding:1.5rem;display:flex;gap:2rem;align-items:flex-start;flex-wrap:wrap}
+.env-table{border:1px solid var(--border);border-radius:var(--radius-sm);overflow:hidden;font-family:var(--font-mono);font-size:0.82rem;flex:1;min-width:280px}
+.env-table .env-hdr{background:var(--surface-hover);padding:0.5rem 0.8rem;font-weight:600;font-size:0.75rem;color:var(--text-secondary);border-bottom:1px solid var(--border)}
+.env-table .env-row{display:flex;border-bottom:1px solid var(--border);transition:all 0.6s}
+.env-table .env-row:last-child{border-bottom:none}
+.env-row .env-key{width:130px;padding:0.4rem 0.8rem;background:var(--surface);font-weight:600;color:var(--accent-purple);flex-shrink:0}
+.env-row .env-val{padding:0.4rem 0.8rem;background:var(--surface);flex:1;transition:all 0.5s}
+.env-row.changed .env-val{background:rgba(245,158,11,0.1);color:var(--accent-amber)}
+.env-row.new .env-key,.env-row.new .env-val{background:rgba(16,185,129,0.06);color:var(--accent-green)}
+.env-row.inherited .env-val{color:var(--text-muted)}
+.env-hint{font-size:0.82rem;color:var(--text-muted);margin-top:1rem;text-align:center}
+.env-interact{margin-top:1rem;display:flex;gap:0.5rem;justify-content:center;flex-wrap:wrap}
+.env-interact input{padding:0.4rem 0.7rem;border:1px solid var(--border);border-radius:6px;font-family:var(--font-mono);font-size:0.82rem;width:140px}
+.env-interact button{padding:0.4rem 1rem;background:var(--accent-blue);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.82rem;font-weight:600}
+.env-interact button:hover{opacity:0.9}
+
+/* ── stdio Terminal Simulation ── */
+.term-sim{padding:1.5rem}
+.term-window{background:#1e1e1e;border-radius:var(--radius-sm);overflow:hidden;font-family:var(--font-mono);font-size:0.85rem;color:#d4d4d4;max-width:700px;margin:0 auto}
+.term-titlebar{background:#383838;padding:0.4rem 0.8rem;display:flex;align-items:center;gap:0.5rem}
+.term-dot{width:10px;height:10px;border-radius:50%}
+.term-dot.r{background:#ff5f57}.term-dot.y{background:#febc2e}.term-dot.g{background:#28c840}
+.term-title{color:#999;font-size:0.7rem;margin-left:0.5rem}
+.term-body{padding:1rem;min-height:200px;line-height:1.8;white-space:pre-wrap}
+.term-body .prompt{color:#6bce6b}
+.term-body .cmd{color:#e0e0e0}
+.term-body .output{color:#aaa}
+.term-body .pipe-hl{color:var(--accent-amber)}
+.term-body .cursor{display:inline-block;width:8px;height:15px;background:#d4d4d4;animation:blink 1s step-end infinite;vertical-align:text-bottom}
+@keyframes blink{50%{opacity:0}}
+/* pipe visual below terminal */
+.pipe-visual{display:flex;align-items:center;justify-content:center;gap:0;padding:1rem 0;flex-wrap:wrap}
+.pipe-node{background:var(--surface);border:2px solid var(--border);border-radius:var(--radius-sm);padding:0.6rem 1rem;font-family:var(--font-mono);font-size:0.82rem;min-width:90px;text-align:center;transition:all 0.3s}
+.pipe-node.producer{border-color:var(--accent-blue)}
+.pipe-node.consumer{border-color:var(--accent-green)}
+.pipe-channel{position:relative;min-width:80px;height:4px;flex-shrink:0}
+.pipe-channel .data-block{position:absolute;top:-10px;width:16px;height:18px;background:var(--accent-amber);border-radius:3px;opacity:0.9;font-size:0.6rem;display:flex;align-items:center;justify-content:center;color:#fff;font-family:var(--font-mono)}
+.pipe-channel .ch-label{position:absolute;top:-24px;left:50%;transform:translateX(-50%);font-size:0.68rem;font-family:var(--font-mono);color:var(--accent-amber);white-space:nowrap;font-weight:600}
+.fd-labels{display:flex;justify-content:center;gap:2rem;margin-top:0.5rem;font-family:var(--font-mono);font-size:0.75rem}
+
+/* ── IPC Timeline ── */
+.ipc-timeline{position:relative;padding:1rem 1.5rem 1rem 120px;min-height:400px}
+.timeline-participants{position:absolute;left:1.5rem;top:1rem;bottom:1rem;width:90px;display:flex;flex-direction:column;justify-content:space-around}
+.timeline-participant{padding:0.5rem;text-align:center;font-weight:600;font-size:0.82rem;border-radius:6px}
+.timeline-participant.parent{background:rgba(59,109,240,0.08);color:var(--accent-blue)}
+.timeline-participant.child{background:rgba(16,185,129,0.08);color:var(--accent-green)}
+.timeline-events{position:relative;min-height:380px}
+.timeline-event{position:absolute;display:flex;align-items:center;opacity:0;transition:opacity 0.5s;font-size:0.82rem}
+.timeline-event.visible{opacity:1}
+.timeline-event .evt-dot{width:10px;height:10px;border-radius:50%;margin-right:0.5rem;flex-shrink:0}
+.timeline-event .evt-arrow{font-size:1.1rem;margin:0 0.5rem;color:var(--text-muted)}
+.timeline-event .evt-label{font-family:var(--font-mono);font-size:0.75rem}
+.timeline-event .evt-desc{font-size:0.78rem;color:var(--text-secondary);margin-left:0.5rem}
+.ipc-method-tabs{display:flex;gap:0.25rem;justify-content:center;margin-bottom:1rem;flex-wrap:wrap}
+.ipc-method-tab{padding:0.4rem 1rem;font-size:0.82rem;border:1px solid var(--border);background:var(--surface);border-radius:20px;cursor:pointer;color:var(--text-secondary);transition:all 0.15s}
+.ipc-method-tab:hover{color:var(--text);border-color:var(--accent-blue)}
+.ipc-method-tab.active{background:var(--accent-blue);color:#fff;border-color:var(--accent-blue)}
+
+/* Footer */
+.footer{text-align:center;padding:3rem 2rem;color:var(--text-muted);font-size:0.85rem;border-top:1px solid var(--border);margin-top:2rem}
+.footer a{color:var(--accent-blue);text-decoration:none}
+.footer a:hover{text-decoration:underline}
+
+@media(max-width:768px){
+  .hero h1{font-size:2rem}.hero-stats{gap:1.5rem}.section{padding:3rem 1.25rem}
+  .section-num{font-size:4rem}.env-sim{flex-direction:column}
+  .proc-sim{min-height:600px}.proc-box.parent{left:20px;top:20px}.proc-box.child{left:20px;top:200px}
+  .proc-code-panel{position:relative;width:auto;right:auto;top:auto;margin-top:1rem}
+  .proc-memory-map{position:relative;left:auto;top:auto;width:auto}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-title">CLI 开发概念</div>
+  <div class="nav-links">
+    <a href="#process" class="nav-link">进程</a>
+    <a href="#env" class="nav-link">环境变量</a>
+    <a href="#stdio" class="nav-link">标准 I/O</a>
+    <a href="#ipc" class="nav-link">子进程通信</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-badge">📚 交互式可视化教程</div>
+  <h1>CLI 开发<span>核心概念</span></h1>
+  <p class="hero-sub">进程、环境变量、标准流、子进程通信。每个命令行工具背后的基石。<br>看动画就能理解，不用死记硬背。</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="hero-stat-num">4</div><div class="hero-stat-label">核心概念</div></div>
+    <div class="hero-stat"><div class="hero-stat-num">3</div><div class="hero-stat-label">标准流</div></div>
+    <div class="hero-stat"><div class="hero-stat-num">6</div><div class="hero-stat-label">通信方式</div></div>
+    <div class="hero-stat"><div class="hero-stat-num">10+</div><div class="hero-stat-label">动态演示</div></div>
+  </div>
+  <a href="#process" class="hero-cta">开始探索 ↓</a>
+</section>
+
+<!-- ═══ 01 · 进程生命周期 ═══ -->
+<section class="section" id="process">
+  <div class="section-header">
+    <div class="section-num">01</div>
+    <div class="section-info">
+      <h2>进程生命周期</h2>
+      <p>从 Shell 按下回车到子进程退出——整个过程在操作系统中到底发生了什么？</p>
+    </div>
+  </div>
+
+  <div class="sim-panel">
+    <div class="sim-controls">
+      <button class="sim-btn" id="proc-prev" title="上一步">◀</button>
+      <button class="sim-btn" id="proc-play" title="播放/暂停">▶</button>
+      <button class="sim-btn" id="proc-restart" title="重新开始">↺</button>
+      <div class="sim-bar"><div class="sim-bar-fill" id="proc-bar-fill"></div></div>
+      <span class="sim-progress"><span id="proc-cur">1</span>/<span id="proc-total">8</span></span>
+      <span class="sim-stage" id="proc-stage">初始状态</span>
+      <span class="sim-stage-desc" id="proc-desc"></span>
+      <div class="sim-speed">
+        <button class="sim-speed-btn" data-speed="2000">0.5x</button>
+        <button class="sim-speed-btn active" data-speed="1000">1x</button>
+        <button class="sim-speed-btn" data-speed="500">2x</button>
+      </div>
+    </div>
+    <div class="proc-sim">
+      <!-- Code panel -->
+      <div class="proc-code-panel" id="proc-code">
+        <div class="code-line" data-line="0">// Shell 执行命令</div>
+        <div class="code-line" data-line="1">$ git status</div>
+        <div class="code-line" data-line="2"></div>
+        <div class="code-line" data-line="3">// 1. Shell 调用 fork()</div>
+        <div class="code-line" data-line="4">pid_t pid = fork();</div>
+        <div class="code-line" data-line="5"></div>
+        <div class="code-line" data-line="6">// 2. 子进程调用 exec()</div>
+        <div class="code-line" data-line="7">execvp("git", argv);</div>
+        <div class="code-line" data-line="8"></div>
+        <div class="code-line" data-line="9">// 3. 父进程等待</div>
+        <div class="code-line" data-line="10">waitpid(pid, &status, 0);</div>
+        <div class="code-line" data-line="11"></div>
+        <div class="code-line" data-line="12">// 4. 退出码</div>
+        <div class="code-line" data-line="13">echo $?  # 0 = 成功</div>
+      </div>
+      <!-- Memory map -->
+      <div class="proc-memory-map" id="proc-memmap">
+        <div style="font-weight:600;margin-bottom:0.4rem;">子进程地址空间</div>
+        <div class="mem-block code-seg">Text (git 代码)</div>
+        <div class="mem-block data-seg">Data (全局变量)</div>
+        <div class="mem-block" style="background:rgba(124,58,237,0.04);border-color:rgba(124,58,237,0.15);">Heap (malloc)</div>
+        <div class="mem-block stack-seg">Stack (局部变量)</div>
+      </div>
+      <!-- Process boxes -->
+      <div class="proc-box parent visible" id="proc-parent">
+        <div class="proc-title">🖥️ Shell (父进程)</div>
+        <div class="proc-pid">PID: 1042</div>
+        <div class="proc-inner">等待用户输入...</div>
+        <div class="proc-fds"><span class="proc-fd in">fd0:in</span><span class="proc-fd out">fd1:out</span><span class="proc-fd err">fd2:err</span></div>
+      </div>
+      <div class="proc-box child" id="proc-child">
+        <div class="proc-title">📦 子进程</div>
+        <div class="proc-pid">PID: —</div>
+        <div class="proc-inner"></div>
+        <div class="proc-fds"><span class="proc-fd in">fd0:in</span><span class="proc-fd out">fd1:out</span><span class="proc-fd err">fd2:err</span></div>
+      </div>
+      <div class="proc-arrow" id="proc-arrow" style="left:270px;top:200px;">fork() →</div>
+      <!-- Phase annotations -->
+      <div style="position:absolute;left:80px;top:320px;font-size:0.75rem;color:var(--text-muted);" id="proc-note"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 02 · 环境变量 ═══ -->
+<section class="section" id="env">
+  <div class="section-header">
+    <div class="section-num">02</div>
+    <div class="section-info">
+      <h2>环境变量</h2>
+      <p>进程的"遗传基因"——fork 时完整复制，之后各自独立演化。</p>
+    </div>
+  </div>
+
+  <div class="sim-panel">
+    <div class="sim-controls">
+      <button class="sim-btn" id="env-play" title="演示 fork 继承">▶</button>
+      <button class="sim-btn" id="env-restart" title="重新开始">↺</button>
+      <span class="sim-stage" id="env-stage">准备就绪</span>
+      <span class="sim-stage-desc" id="env-desc">点击播放观察环境变量的继承与修改</span>
+    </div>
+    <div class="env-sim">
+      <div>
+        <div class="env-hdr">🖥️ Shell (父进程)</div>
+        <div class="env-table" id="env-parent">
+          <div class="env-row"><span class="env-key">HOME</span><span class="env-val">/home/user</span></div>
+          <div class="env-row"><span class="env-key">PATH</span><span class="env-val">/usr/bin:/usr/local/bin</span></div>
+          <div class="env-row"><span class="env-key">USER</span><span class="env-val">alice</span></div>
+          <div class="env-row"><span class="env-key">SHELL</span><span class="env-val">/bin/bash</span></div>
+          <div class="env-row"><span class="env-key">EDITOR</span><span class="env-val">vim</span></div>
+          <div class="env-row"><span class="env-key">LANG</span><span class="env-val">en_US.UTF-8</span></div>
+        </div>
+      </div>
+      <div style="font-size:2rem;color:var(--text-muted);align-self:center;">→</div>
+      <div>
+        <div class="env-hdr">📦 子进程 (fork 后)</div>
+        <div class="env-table" id="env-child">
+          <div class="env-row"><span class="env-key">HOME</span><span class="env-val">—</span></div>
+          <div class="env-row"><span class="env-key">PATH</span><span class="env-val">—</span></div>
+          <div class="env-row"><span class="env-key">USER</span><span class="env-val">—</span></div>
+          <div class="env-row"><span class="env-key">SHELL</span><span class="env-val">—</span></div>
+          <div class="env-row"><span class="env-key">EDITOR</span><span class="env-val">—</span></div>
+          <div class="env-row"><span class="env-key">LANG</span><span class="env-val">—</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="env-hint" style="border-top:1px solid var(--border);padding-top:1rem;">
+      你也可以试试：在父进程中加一个变量，看看子进程能否继承
+    </div>
+    <div class="env-interact">
+      <input type="text" id="env-new-key" placeholder="变量名 (如 DEBUG)">
+      <input type="text" id="env-new-val" placeholder="值 (如 1)">
+      <button id="env-add-btn">添加到父进程</button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 03 · 标准 I/O ═══ -->
+<section class="section" id="stdio">
+  <div class="section-header">
+    <div class="section-num">03</div>
+    <div class="section-info">
+      <h2>stdin / stdout / stderr</h2>
+      <p>三个标准文件描述符——每个进程一出生就带着它们。管道把它们串成流水线。</p>
+    </div>
+  </div>
+
+  <div class="sim-panel">
+    <div class="sim-controls">
+      <button class="sim-btn" id="stdio-play" title="运行命令演示">▶</button>
+      <button class="sim-btn" id="stdio-restart" title="重新开始">↺</button>
+      <span class="sim-stage" id="stdio-stage">等待执行</span>
+      <span class="sim-stage-desc" id="stdio-desc">点击播放观看管道数据流</span>
+    </div>
+    <div class="term-sim">
+      <div class="term-window">
+        <div class="term-titlebar">
+          <span class="term-dot r"></span><span class="term-dot y"></span><span class="term-dot g"></span>
+          <span class="term-title">terminal — bash</span>
+        </div>
+        <div class="term-body" id="term-body">
+          <span class="prompt">$ </span><span class="cursor"></span>
+        </div>
+      </div>
+    </div>
+    <div class="pipe-visual" id="pipe-visual"></div>
+    <div class="fd-labels" id="fd-labels"></div>
+  </div>
+</section>
+
+<!-- ═══ 04 · 子进程通信 ═══ -->
+<section class="section" id="ipc">
+  <div class="section-header">
+    <div class="section-num">04</div>
+    <div class="section-info">
+      <h2>子进程通信</h2>
+      <p>父进程如何控制子进程？子进程如何回报结果？六种方式，六种场景。</p>
+    </div>
+  </div>
+
+  <div class="ipc-method-tabs" id="ipc-tabs">
+    <button class="ipc-method-tab active" data-method="exitcode">退出码</button>
+    <button class="ipc-method-tab" data-method="signal">信号</button>
+    <button class="ipc-method-tab" data-method="pipe">管道</button>
+    <button class="ipc-method-tab" data-method="env">环境变量</button>
+    <button class="ipc-method-tab" data-method="stdio">stdin/stdout</button>
+    <button class="ipc-method-tab" data-method="socket">Socket/IPC</button>
+  </div>
+
+  <div class="sim-panel">
+    <div class="sim-controls">
+      <button class="sim-btn" id="ipc-play" title="播放时序动画">▶</button>
+      <button class="sim-btn" id="ipc-restart" title="重新播放">↺</button>
+      <span class="sim-stage" id="ipc-stage">退出码 (最简单)</span>
+      <span class="sim-stage-desc" id="ipc-desc">子进程结束 → 返回退出码 → 父进程用 $? 读取</span>
+    </div>
+    <div class="ipc-timeline">
+      <div class="timeline-participants">
+        <div class="timeline-participant parent">🖥️ 父进程</div>
+        <div class="timeline-participant child">📦 子进程</div>
+      </div>
+      <div class="timeline-events" id="timeline-events"></div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <p>CLI 开发核心概念 · 交互式可视化教程</p>
+  <p style="margin-top:0.5rem;">核心参考：
+    <a href="https://man7.org/linux/man-pages/man2/fork.2.html" target="_blank">fork(2)</a> ·
+    <a href="https://man7.org/linux/man-pages/man3/exec.3.html" target="_blank">exec(3)</a> ·
+    <a href="https://man7.org/linux/man-pages/man7/environ.7.html" target="_blank">environ(7)</a> ·
+    <a href="https://man7.org/linux/man-pages/man2/pipe.2.html" target="_blank">pipe(2)</a> ·
+    <a href="https://man7.org/linux/man-pages/man2/wait.2.html" target="_blank">wait(2)</a>
+  </p>
+</footer>
+
+<script>
+// ═══════════════════════════════════════════
+//  Process Lifecycle Simulation
+// ═══════════════════════════════════════════
+(function(){
+  const parentBox = document.getElementById('proc-parent');
+  const childBox = document.getElementById('proc-child');
+  const arrow = document.getElementById('proc-arrow');
+  const codePanel = document.getElementById('proc-code');
+  const memMap = document.getElementById('proc-memmap');
+  const note = document.getElementById('proc-note');
+  const stageEl = document.getElementById('proc-stage');
+  const descEl = document.getElementById('proc-desc');
+  const barFill = document.getElementById('proc-bar-fill');
+  const curEl = document.getElementById('proc-cur');
+  const totalEl = document.getElementById('proc-total');
+  const codeLines = codePanel.querySelectorAll('.code-line');
+
+  function highlightLine(n) {
+    codeLines.forEach(l => l.classList.remove('highlight'));
+    codeLines.forEach(l => { if (parseInt(l.dataset.line) === n) l.classList.add('highlight'); });
+  }
+
+  const phases = [
+    {
+      stage: '初始状态', desc: 'Shell 等待用户输入命令',
+      action() {
+        parentBox.classList.add('visible'); parentBox.classList.remove('exiting','signalled');
+        childBox.classList.remove('visible','exiting','signalled');
+        childBox.querySelector('.proc-pid').textContent = 'PID: —';
+        childBox.querySelector('.proc-inner').textContent = '';
+        childBox.querySelector('.proc-title').innerHTML = '📦 子进程';
+        arrow.style.opacity = '0'; codePanel.classList.remove('show'); memMap.classList.remove('show');
+        note.textContent = ''; highlightLine(0);
+        parentBox.querySelector('.proc-inner').textContent = '等待用户输入...';
+      }
+    },
+    {
+      stage: '用户输入命令', desc: '$ git status',
+      action() {
+        parentBox.querySelector('.proc-inner').textContent = '解析命令: git status';
+        note.textContent = '用户在终端输入命令';
+        highlightLine(1);
+      }
+    },
+    {
+      stage: 'Shell 调用 fork()', desc: '创建子进程，复制内存空间',
+      action() {
+        parentBox.querySelector('.proc-inner').textContent = 'fork() 中...';
+        note.textContent = '操作系统创建子进程';
+        childBox.classList.add('visible');
+        childBox.querySelector('.proc-pid').textContent = 'PID: 1043';
+        childBox.querySelector('.proc-inner').textContent = 'Shell 的完整副本';
+        childBox.querySelector('.proc-title').innerHTML = '📦 Shell 副本';
+        arrow.textContent = 'fork() →';
+        arrow.style.opacity = '1';
+        codePanel.classList.add('show');
+        highlightLine(4);
+        // Parent fds + child inherits
+        childBox.querySelector('.proc-fds').innerHTML = '<span class="proc-fd in">fd0:in</span><span class="proc-fd out">fd1:out</span><span class="proc-fd err">fd2:err</span>';
+        parentBox.querySelector('.proc-fds').innerHTML = '<span class="proc-fd in">fd0:in</span><span class="proc-fd out">fd1:out</span><span class="proc-fd err">fd2:err</span>';
+      }
+    },
+    {
+      stage: '子进程调用 exec()', desc: '用新程序替换子进程内存',
+      action() {
+        childBox.querySelector('.proc-inner').textContent = 'exec(git) 中...';
+        childBox.querySelector('.proc-title').innerHTML = '📦 git (子进程)';
+        note.textContent = '代码段被 git 程序替换';
+        arrow.textContent = 'exec(git) →';
+        highlightLine(7);
+        memMap.classList.add('show');
+        // flash child to show transformation
+        childBox.style.transition = 'all 0.15s ease';
+        childBox.style.borderColor = 'var(--accent-amber)';
+        setTimeout(() => { childBox.style.borderColor = 'var(--accent-green)'; }, 200);
+      }
+    },
+    {
+      stage: '子进程运行中', desc: 'git 检查仓库状态，读取文件',
+      action() {
+        parentBox.querySelector('.proc-inner').textContent = 'waitpid() 等待子进程...';
+        childBox.querySelector('.proc-inner').textContent = '运行中... 扫描文件变更';
+        note.textContent = '父进程阻塞等待子进程结束';
+        highlightLine(10);
+        childBox.style.borderColor = 'var(--accent-green)';
+        // animate child "working"
+        const dots = ['.','..','...','....'];
+        let i = 0;
+        const intv = setInterval(() => {
+          if (!window._procRunning) { clearInterval(intv); return; }
+          childBox.querySelector('.proc-inner').textContent = '运行中' + dots[i % 4] + ' 扫描文件变更';
+          i++;
+        }, 500);
+        window._procInterval = intv;
+      }
+    },
+    {
+      stage: '写入 stdout', desc: 'git 输出结果到 fd 1',
+      action() {
+        if (window._procInterval) clearInterval(window._procInterval);
+        childBox.querySelector('.proc-inner').textContent = '写入 stdout...';
+        note.textContent = '输出流向终端屏幕';
+        childBox.querySelector('.proc-fds').innerHTML = '<span class="proc-fd in">fd0:in</span><span class="proc-fd out" style="background:rgba(16,185,129,0.2);">fd1:→ "On branch main"</span><span class="proc-fd err">fd2:err</span>';
+        highlightLine(12);
+        // show output in parent area
+        setTimeout(() => {
+          note.innerHTML = '终端显示:<br><code style="background:#f0efe9;padding:2px 6px;border-radius:3px;font-family:var(--font-mono)">On branch main<br>nothing to commit</code>';
+        }, 600);
+      }
+    },
+    {
+      stage: '子进程退出', desc: 'exit(0) → 释放资源',
+      action() {
+        childBox.querySelector('.proc-inner').textContent = 'exit(0)';
+        childBox.classList.add('exiting');
+        note.textContent = '子进程结束，退出码 = 0';
+        highlightLine(13);
+      }
+    },
+    {
+      stage: '父进程回收', desc: 'waitpid() 返回，$? = 0',
+      action() {
+        parentBox.querySelector('.proc-inner').textContent = '收到退出码: $? = 0';
+        parentBox.querySelector('.proc-fds').innerHTML = '<span class="proc-fd in">fd0:in</span><span class="proc-fd out">fd1:out</span><span class="proc-fd err">fd2:err</span>';
+        note.innerHTML = '✅ 命令成功执行<br>Shell 提示符重新出现，等待下一条命令';
+        arrow.textContent = 'exit code →';
+        arrow.style.color = 'var(--accent-green)';
+      }
+    }
+  ];
+
+  let procPhase = 0, procPlaying = false, procTimer = null, procSpeed = 1000;
+
+  function runProcPhase(i) {
+    procPhase = i;
+    const p = phases[i];
+    stageEl.textContent = p.stage;
+    descEl.textContent = p.desc;
+    p.action();
+    curEl.textContent = i + 1;
+    barFill.style.width = ((i + 1) / phases.length * 100) + '%';
+    window._procRunning = true;
+  }
+
+  function procAdvance() {
+    if (!procPlaying) return;
+    procTimer = setTimeout(() => {
+      runProcPhase((procPhase + 1) % phases.length);
+      procAdvance();
+    }, procSpeed);
+  }
+
+  document.getElementById('proc-play').addEventListener('click', function(){
+    procPlaying = !procPlaying;
+    this.textContent = procPlaying ? '⏸' : '▶';
+    if (procPlaying) { window._procRunning = true; procAdvance(); }
+    else { clearTimeout(procTimer); }
+  });
+  document.getElementById('proc-prev').addEventListener('click', ()=>{
+    procPlaying = false; document.getElementById('proc-play').textContent = '▶';
+    clearTimeout(procTimer); runProcPhase((procPhase - 1 + phases.length) % phases.length);
+  });
+  document.getElementById('proc-restart').addEventListener('click', ()=>{
+    procPlaying = false; document.getElementById('proc-play').textContent = '▶';
+    clearTimeout(procTimer); runProcPhase(0);
+  });
+  document.querySelectorAll('#process .sim-speed-btn').forEach(b=>{
+    b.addEventListener('click', function(){
+      document.querySelectorAll('#process .sim-speed-btn').forEach(x=>x.classList.remove('active'));
+      this.classList.add('active');
+      procSpeed = parseInt(this.dataset.speed);
+      if(procPlaying){ clearTimeout(procTimer); procAdvance(); }
+    });
+  });
+  totalEl.textContent = phases.length;
+  runProcPhase(0);
+})();
+
+// ═══════════════════════════════════════════
+//  Environment Variables Simulation
+// ═══════════════════════════════════════════
+(function(){
+  const envStage = document.getElementById('env-stage');
+  const envDesc = document.getElementById('env-desc');
+  let envPhase = 0;
+
+  const parentVals = ['/home/user','/usr/bin:/usr/local/bin','alice','/bin/bash','vim','en_US.UTF-8'];
+
+  function resetEnv() {
+    const pRows = document.querySelectorAll('#env-parent .env-row');
+    const cRows = document.querySelectorAll('#env-child .env-row');
+    pRows.forEach((r,i) => { r.classList.remove('changed','new'); r.querySelector('.env-val').textContent = parentVals[i]; });
+    cRows.forEach(r => { r.classList.remove('changed','new','inherited'); r.querySelector('.env-val').textContent = '—'; });
+    envPhase = 0; envStage.textContent = '准备就绪'; envDesc.textContent = '点击播放观察环境变量的继承与修改';
+  }
+
+  function envAnimate() {
+    if (envPhase === 0) {
+      envStage.textContent = 'fork() — 继承'; envDesc.textContent = '子进程获得父进程全部环境变量的副本';
+      const cRows = document.querySelectorAll('#env-child .env-row');
+      cRows.forEach((r,i) => {
+        setTimeout(() => {
+          r.classList.add('inherited');
+          r.querySelector('.env-val').textContent = parentVals[i];
+        }, i * 200);
+      });
+      envPhase = 1;
+      setTimeout(envAnimate, 1800);
+    } else if (envPhase === 1) {
+      envStage.textContent = '子进程修改 PATH'; envDesc.textContent = '子进程修改自己的 PATH，父进程不受影响';
+      const cRows = document.querySelectorAll('#env-child .env-row');
+      const pathRow = cRows[1];
+      pathRow.classList.remove('inherited'); pathRow.classList.add('changed');
+      pathRow.querySelector('.env-val').textContent = '/usr/bin:/usr/local/bin:/project/node_modules/.bin';
+      // verify parent unchanged
+      const pPathRow = document.querySelectorAll('#env-parent .env-row')[1];
+      pPathRow.classList.add('changed');
+      envPhase = 2;
+      setTimeout(envAnimate, 2000);
+    } else if (envPhase === 2) {
+      envStage.textContent = '各自独立'; envDesc.textContent = '父子进程的环境变量已经是两份独立数据，互不影响';
+      envPhase = 0;
+    }
+  }
+
+  document.getElementById('env-play').addEventListener('click', ()=>{ resetEnv(); setTimeout(envAnimate, 300); });
+  document.getElementById('env-restart').addEventListener('click', resetEnv);
+
+  // Add custom env var
+  document.getElementById('env-add-btn').addEventListener('click', ()=>{
+    const key = document.getElementById('env-new-key').value.trim();
+    const val = document.getElementById('env-new-val').value.trim();
+    if (!key) return;
+    // Add to parent table with visual highlight
+    const pTable = document.getElementById('env-parent');
+    const row = document.createElement('div'); row.className = 'env-row new';
+    row.innerHTML = `<span class="env-key">${key}</span><span class="env-val">${val}</span>`;
+    pTable.appendChild(row);
+    // Trigger replay to show inheritance
+    document.getElementById('env-new-key').value = '';
+    document.getElementById('env-new-val').value = '';
+    envStage.textContent = '新变量已添加'; envDesc.textContent = `点击播放看看 ${key}=${val} 如何传递给子进程`;
+    parentVals.push(val); // keep in sync for reset
+  });
+})();
+
+// ═══════════════════════════════════════════
+//  stdio Terminal + Pipe Simulation
+// ═══════════════════════════════════════════
+(function(){
+  const termBody = document.getElementById('term-body');
+  const pipeVis = document.getElementById('pipe-visual');
+  const fdLabels = document.getElementById('fd-labels');
+  const stdioStage = document.getElementById('stdio-stage');
+  const stdioDesc = document.getElementById('stdio-desc');
+  let stdioPlaying = false;
+
+  function resetStdio() {
+    termBody.innerHTML = '<span class="prompt">$ </span><span class="cursor"></span>';
+    pipeVis.innerHTML = ''; fdLabels.innerHTML = '';
+    stdioStage.textContent = '等待执行'; stdioDesc.textContent = '点击播放观看管道数据流';
+    stdioPlaying = false;
+  }
+
+  function typeText(text, el, speed, callback) {
+    let i = 0;
+    const cursor = el.querySelector('.cursor');
+    function tick() {
+      if (i < text.length) {
+        if (cursor) cursor.before(document.createTextNode(text[i]));
+        else el.appendChild(document.createTextNode(text[i]));
+        i++;
+        setTimeout(tick, speed);
+      } else { if (callback) callback(); }
+    }
+    tick();
+  }
+
+  function stdioAnimate() {
+    if (stdioPlaying) return;
+    stdioPlaying = true;
+    stdioStage.textContent = '输入命令';
+    stdioDesc.textContent = '用户键入: ls -la | grep ".js" | wc -l';
+
+    // Type the command character by character
+    const cmd = 'ls -la | grep ".js" | wc -l';
+    typeText(cmd, termBody, 60, () => {
+      stdioStage.textContent = '执行管道';
+      stdioDesc.textContent = 'Shell 创建三个子进程，用管道连接它们的 stdout → stdin';
+
+      // Build pipe visual
+      setTimeout(() => {
+        pipeVis.innerHTML = `
+          <div class="pipe-node producer">ls -la<div style="font-size:0.65rem;color:var(--text-muted)">stdout→</div></div>
+          <div class="pipe-channel"><div class="ch-label">| pipe</div><div class="data-block" id="block1">📋</div></div>
+          <div class="pipe-node consumer">grep ".js"<div style="font-size:0.65rem;color:var(--text-muted)">←stdin stdout→</div></div>
+          <div class="pipe-channel"><div class="ch-label">| pipe</div><div class="data-block" id="block2">📋</div></div>
+          <div class="pipe-node consumer">wc -l<div style="font-size:0.65rem;color:var(--text-muted)">←stdin</div></div>
+        `;
+        fdLabels.innerHTML = '<span style="color:var(--accent-blue)">🔵 fd 1 (stdout)</span> → <span style="color:var(--accent-amber)">🟡 pipe</span> → <span style="color:var(--accent-green)">🟢 fd 0 (stdin)</span>';
+
+        // Animate data blocks flowing
+        const b1 = document.getElementById('block1');
+        const b2 = document.getElementById('block2');
+        function flowBlock(block, cb) {
+          let pos = 0; const max = 60;
+          const iv = setInterval(() => {
+            pos += 3; block.style.left = pos + 'px';
+            if (pos >= max) { clearInterval(iv); if (cb) cb(); }
+          }, 50);
+        }
+        flowBlock(b1, () => flowBlock(b2, () => {
+          stdioStage.textContent = '输出结果';
+          stdioDesc.textContent = "wc -l 统计行数，输出到终端";
+          setTimeout(() => {
+            termBody.innerHTML = '<span class="prompt">$ </span><span class="cmd">ls -la | grep ".js" | wc -l</span>\n<span class="output">      23</span>\n<span class="prompt">$ </span><span class="cursor"></span>';
+            stdioStage.textContent = '完成';
+            stdioDesc.textContent = '23 个 .js 文件。管道把三个简单工具组合成强大的数据处理链。';
+          }, 800);
+        }));
+      }, 500);
+    });
+  }
+
+  document.getElementById('stdio-play').addEventListener('click', stdioAnimate);
+  document.getElementById('stdio-restart').addEventListener('click', resetStdio);
+})();
+
+// ═══════════════════════════════════════════
+//  IPC Timeline Simulation
+// ═══════════════════════════════════════════
+(function(){
+  const eventsContainer = document.getElementById('timeline-events');
+  const ipcStage = document.getElementById('ipc-stage');
+  const ipcDesc = document.getElementById('ipc-desc');
+  let ipcTimer = null;
+
+  const sequences = {
+    exitcode: {
+      title: '退出码 (最简单)',
+      desc: '子进程结束 → 返回退出码 → 父进程用 $? 读取',
+      events: [
+        { from: 'child', to: 'parent', label: '进程运行', color: 'var(--accent-green)', desc: '子进程执行任务', top: 20 },
+        { from: 'child', to: 'parent', label: 'exit(0)', color: 'var(--accent-purple)', desc: '子进程结束，返回退出码 0', top: 80 },
+        { from: 'parent', to: 'parent', label: 'waitpid()', color: 'var(--accent-blue)', desc: '父进程收集退出状态，$? = 0', top: 130 },
+        { from: 'parent', to: 'parent', label: '继续执行', color: 'var(--accent-green)', desc: '命令成功，提示符返回', top: 180 },
+      ]
+    },
+    signal: {
+      title: '信号 (父→子)',
+      desc: '父进程发送 SIGTERM，子进程捕获后优雅退出',
+      events: [
+        { from: 'child', to: 'parent', label: '进程运行中', color: 'var(--accent-green)', desc: '子进程启动，注册 SIGTERM handler', top: 20 },
+        { from: 'parent', to: 'child', label: 'SIGTERM →', color: 'var(--accent-rose)', desc: '父进程调用 kill(pid, SIGTERM)', top: 80 },
+        { from: 'child', to: 'child', label: 'signal handler', color: 'var(--accent-amber)', desc: '子进程捕获信号，清理资源', top: 130 },
+        { from: 'child', to: 'parent', label: 'exit(0)', color: 'var(--accent-purple)', desc: '清理完毕，正常退出', top: 180 },
+        { from: 'parent', to: 'parent', label: 'waitpid()', color: 'var(--accent-blue)', desc: '父进程确认子进程已终止', top: 230 },
+      ]
+    },
+    pipe: {
+      title: '管道 (单向数据流)',
+      desc: '父进程创建 pipe，fork 后子进程继承 fd，一端写一端读',
+      events: [
+        { from: 'parent', to: 'parent', label: 'pipe(fds)', color: 'var(--accent-blue)', desc: '父进程创建管道，获得 fds[0](读) fds[1](写)', top: 20 },
+        { from: 'parent', to: 'child', label: 'fork()', color: 'var(--accent-amber)', desc: '子进程继承管道的两个 fd', top: 80 },
+        { from: 'child', to: 'child', label: 'close(fds[0])', color: 'var(--accent-rose)', desc: '子进程关闭读端，只保留写端', top: 130 },
+        { from: 'parent', to: 'parent', label: 'close(fds[1])', color: 'var(--accent-rose)', desc: '父进程关闭写端，只保留读端', top: 180 },
+        { from: 'child', to: 'parent', label: 'write() → pipe → read()', color: 'var(--accent-green)', desc: '子进程写入数据，父进程读取', top: 230 },
+      ]
+    },
+    env: {
+      title: '环境变量 (父→子, 启动时)',
+      desc: 'fork+exec 前设置 env，子进程启动时继承',
+      events: [
+        { from: 'parent', to: 'parent', label: 'setenv("DEBUG","1")', color: 'var(--accent-blue)', desc: '父进程设置环境变量', top: 20 },
+        { from: 'parent', to: 'child', label: 'fork()', color: 'var(--accent-amber)', desc: '子进程获得完整 env 副本', top: 80 },
+        { from: 'child', to: 'child', label: 'exec()', color: 'var(--accent-purple)', desc: '新程序读取 getenv("DEBUG") → "1"', top: 130 },
+        { from: 'child', to: 'child', label: 'setenv("DEBUG","2")', color: 'var(--accent-green)', desc: '子进程修改自己的副本，父进程不变', top: 180 },
+      ]
+    },
+    stdio: {
+      title: 'stdin/stdout (双向交互)',
+      desc: '父进程程序化控制子进程：写 stdin，读 stdout/stderr',
+      events: [
+        { from: 'parent', to: 'child', label: 'spawn("python", ...)', color: 'var(--accent-blue)', desc: '父进程启动子进程，绑定管道', top: 20 },
+        { from: 'parent', to: 'child', label: 'stdin.write("2+3\\n") →', color: 'var(--accent-amber)', desc: '父进程向子进程 stdin 写入数据', top: 80 },
+        { from: 'child', to: 'child', label: 'input() 读取 → 计算', color: 'var(--accent-purple)', desc: '子进程从 stdin 读取，执行计算', top: 130 },
+        { from: 'child', to: 'parent', label: '← stdout: "5\\n"', color: 'var(--accent-green)', desc: '结果通过 stdout 返回给父进程', top: 180 },
+        { from: 'parent', to: 'parent', label: 'stdout.on("data", ...)', color: 'var(--accent-blue)', desc: '父进程读取结果: 5', top: 230 },
+      ]
+    },
+    socket: {
+      title: 'Socket/IPC (双向, 持久)',
+      desc: 'Unix domain socket 或 TCP loopback，长连接双向通信',
+      events: [
+        { from: 'parent', to: 'parent', label: 'socket() + bind() + listen()', color: 'var(--accent-blue)', desc: '父进程创建 socket 服务端', top: 20 },
+        { from: 'child', to: 'parent', label: '→ connect()', color: 'var(--accent-amber)', desc: '子进程连接到父进程的 socket', top: 80 },
+        { from: 'parent', to: 'child', label: 'accept() ↔', color: 'var(--accent-green)', desc: '双向连接建立，持久保持', top: 130 },
+        { from: 'parent', to: 'child', label: 'send() / recv() ↕', color: 'var(--accent-purple)', desc: '双方随时可以收发消息', top: 180 },
+        { from: 'child', to: 'parent', label: 'close()', color: 'var(--accent-rose)', desc: '任务完成，关闭连接', top: 230 },
+      ]
+    }
+  };
+
+  function renderEvents(method) {
+    const seq = sequences[method];
+    ipcStage.textContent = seq.title;
+    ipcDesc.textContent = seq.desc;
+    eventsContainer.innerHTML = '';
+    seq.events.forEach((evt, i) => {
+      const el = document.createElement('div');
+      el.className = 'timeline-event';
+      el.style.top = evt.top + 'px';
+      el.style.left = '0px';
+      el.style.opacity = '0';
+      el.innerHTML = `
+        <span class="evt-dot" style="background:${evt.color}"></span>
+        <span class="evt-label" style="color:${evt.color}">${evt.label}</span>
+        <span class="evt-arrow">→</span>
+        <span class="evt-desc">${evt.desc}</span>
+      `;
+      el.dataset.index = i;
+      eventsContainer.appendChild(el);
+    });
+    // Reveal sequentially
+    const allEvents = eventsContainer.querySelectorAll('.timeline-event');
+    allEvents.forEach((el, i) => {
+      setTimeout(() => { el.style.opacity = '1'; }, i * 400 + 100);
+    });
+  }
+
+  // Method tab switching
+  document.querySelectorAll('.ipc-method-tab').forEach(tab => {
+    tab.addEventListener('click', function() {
+      document.querySelectorAll('.ipc-method-tab').forEach(t => t.classList.remove('active'));
+      this.classList.add('active');
+      if (ipcTimer) clearTimeout(ipcTimer);
+      renderEvents(this.dataset.method);
+    });
+  });
+
+  // Play/replay buttons
+  document.getElementById('ipc-play').addEventListener('click', () => {
+    const active = document.querySelector('.ipc-method-tab.active');
+    if (ipcTimer) clearTimeout(ipcTimer);
+    renderEvents(active.dataset.method);
+  });
+  document.getElementById('ipc-restart').addEventListener('click', () => {
+    const active = document.querySelector('.ipc-method-tab.active');
+    if (ipcTimer) clearTimeout(ipcTimer);
+    renderEvents(active.dataset.method);
+  });
+
+  // Initial render
+  renderEvents('exitcode');
+})();
+
+// ═══════════════════════════════════════════
+//  Sticky Nav Highlight
+// ═══════════════════════════════════════════
+const navLinks = document.querySelectorAll('.nav-link');
+const sections = [...document.querySelectorAll('.section')].map(s => s.id);
+new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(l => l.classList.remove('active'));
+      const link = document.querySelector(`.nav-link[href="#${e.target.id}"]`);
+      if (link) link.classList.add('active');
+    }
+  });
+}, { rootMargin: '-40% 0px -55% 0px' }).observe(document.getElementById('process'));
+sections.forEach(id => {
+  const el = document.getElementById(id);
+  if (el) new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        navLinks.forEach(l => l.classList.remove('active'));
+        const link = document.querySelector(`.nav-link[href="#${e.target.id}"]`);
+        if (link) link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' }).observe(el);
+});
+</script>
+</body>
+</html>

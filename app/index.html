@@ -28,6 +28,50 @@
       --source: #0d7969;
       --page: #806f55;
       --root: #111827;
+      --manual-note: #3b82b0;
+
+      /* Wiki prose */
+      --font-serif: "Noto Serif SC", "Source Han Serif SC", Georgia, "Microsoft YaHei", serif;
+      --font-sans: "Microsoft YaHei", system-ui, -apple-system, sans-serif;
+      --font-mono: "Fira Code", "Cascadia Code", Consolas, monospace;
+      --prose-width: 780px;
+      --prose-line-height: 1.82;
+      --content-bg: #fffdf8;
+      --code-bg: #f4f1ea;
+      --blockquote-border: #b8a88f;
+
+      /* Importance dots */
+      --dot-high: #9b7cb9;
+      --dot-medium: #d7c4bb;
+      --dot-low: #e8927c;
+    }
+
+    [data-theme="dark"] {
+      --bg: #1a1d1a;
+      --paper: #222520;
+      --ink: #e4e0d4;
+      --muted: #9a9888;
+      --line: #3a3d35;
+      --strong: #6a6858;
+      --shadow: 0 18px 48px rgba(0, 0, 0, .35);
+      --content-bg: #252822;
+      --code-bg: #2d302a;
+      --blockquote-border: #6a6858;
+
+      --topic: #2db5b8;
+      --concept: #c4872e;
+      --method: #d15a6a;
+      --infrastructure: #7a95a4;
+      --system: #6b8ec7;
+      --workflow: #8ea642;
+      --control: #a56db5;
+      --training: #d4814a;
+      --evaluation: #6aa67a;
+      --evidence: #8e959c;
+      --source: #3aada0;
+      --page: #a89470;
+      --root: #d1d5db;
+      --manual-note: #5ba3e0;
     }
 
     * { box-sizing: border-box; }
@@ -36,17 +80,87 @@
       margin: 0;
       background: var(--bg);
       color: var(--ink);
-      font-family: "Microsoft YaHei", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-family: var(--font-sans);
       letter-spacing: 0;
       overflow: hidden;
     }
 
+    /* === Header bar === */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 48px;
+      padding: 0 24px;
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .topbar-title {
+      font-family: var(--font-serif);
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: .02em;
+    }
+    .topbar-tabs {
+      display: flex;
+      gap: 4px;
+      background: var(--bg);
+      border-radius: 8px;
+      padding: 3px;
+    }
+    .topbar-tab {
+      padding: 6px 18px;
+      border-radius: 6px;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      font-size: 14px;
+      cursor: pointer;
+      transition: all .2s;
+      font-family: var(--font-sans);
+    }
+    .topbar-tab.active {
+      background: var(--paper);
+      color: var(--ink);
+      box-shadow: 0 1px 3px rgba(0,0,0,.08);
+    }
+    .topbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .theme-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: var(--paper);
+      color: var(--ink);
+      font-size: 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all .2s;
+    }
+    .theme-btn:hover { border-color: var(--strong); }
+
     button, input { font: inherit; }
+
+    /* Graph mode container */
+    #graphMode { display: block; }
+    #wikiMode { display: none; }
 
     .shell {
       display: grid;
       grid-template-columns: var(--left) 8px minmax(360px, 1fr) 8px var(--right);
-      height: 100vh;
+      height: calc(100vh - 48px);
       min-width: 900px;
     }
 
@@ -317,6 +431,10 @@
       stroke: rgba(32, 37, 31, .66);
       stroke-width: 2.2;
     }
+    .link.query-related {
+      stroke: rgba(242,201,76,.45);
+      stroke-width: 1.6;
+    }
 
     .node circle {
       stroke: rgba(255, 255, 255, .95);
@@ -337,8 +455,13 @@
 
     .node.evidence text, .node.source text { font-size: 11px; }
     .node.selected circle { stroke: #101817; stroke-width: 3.4; }
-    .node.dim, .link.dim { opacity: .16; }
-    .node.hit circle { stroke: #f2c94c; stroke-width: 3; }
+    .node.dim, .link.dim { opacity: .07; }
+    .node.hit circle {
+      stroke: #f5a623;
+      stroke-width: 4;
+      filter: drop-shadow(0 0 3px rgba(245,166,35,.85)) drop-shadow(0 0 10px rgba(245,166,35,.45)) drop-shadow(0 0 20px rgba(245,166,35,.2));
+    }
+    .node.hit text { font-weight: 800; fill: #1a1a1a; font-size: 13px; }
 
     .detail-img-wrap {
       border: 1px solid var(--line);
@@ -449,9 +572,281 @@
       .badge, .toolbtn { font-size: 12px; padding: 7px 9px; }
       .quick, .stats { grid-template-columns: 1fr 1fr; }
     }
+
+    /* ===== Wiki mode styles ===== */
+    #wikiMode {
+      height: calc(100vh - 48px);
+      display: none;
+      overflow: hidden;
+    }
+    #wikiMode.active { display: flex; }
+    #graphMode.hidden { display: none; }
+
+    .wiki-layout {
+      display: flex;
+      height: 100%;
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .wiki-sidebar {
+      width: 280px;
+      flex-shrink: 0;
+      background: var(--paper);
+      border-right: 1px solid var(--line);
+      overflow-y: auto;
+      padding: 24px 20px;
+    }
+    .wiki-sidebar h3 {
+      font-family: var(--font-serif);
+      font-size: 15px;
+      margin: 0 0 6px;
+      color: var(--ink);
+    }
+    .wiki-sidebar .wiki-desc {
+      font-size: 12px;
+      color: var(--muted);
+      margin: 0 0 20px;
+      line-height: 1.5;
+    }
+
+    .wiki-topic-group { margin-bottom: 18px; }
+    .wiki-topic-header {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      padding: 6px 4px;
+      border: none;
+      background: none;
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 600;
+      font-family: var(--font-serif);
+      cursor: pointer;
+      border-radius: 4px;
+      transition: background .15s;
+    }
+    .wiki-topic-header:hover { background: var(--bg); }
+    .wiki-topic-header .arrow {
+      font-size: 10px;
+      margin-right: 6px;
+      transition: transform .2s;
+      color: var(--muted);
+    }
+    .wiki-topic-header .arrow.open { transform: rotate(90deg); }
+
+    .wiki-pages { margin-left: 16px; }
+    .wiki-page-item {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      padding: 5px 8px;
+      border: 1px solid transparent;
+      border-radius: 6px;
+      background: none;
+      color: var(--ink);
+      font-size: 13px;
+      text-align: left;
+      cursor: pointer;
+      transition: all .15s;
+      margin-bottom: 2px;
+    }
+    .wiki-page-item:hover { background: var(--bg); }
+    .wiki-page-item.active {
+      background: var(--bg);
+      border-color: var(--line);
+      color: var(--ink);
+      font-weight: 500;
+    }
+    .wiki-page-item .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      margin-right: 8px;
+      flex-shrink: 0;
+    }
+    .wiki-page-item .dot.high { background: var(--dot-high); }
+    .wiki-page-item .dot.medium { background: var(--dot-medium); }
+    .wiki-page-item .dot.low { background: var(--dot-low); }
+    .wiki-page-item .page-title { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .wiki-page-item .badge-src {
+      font-size: 10px;
+      padding: 1px 5px;
+      border-radius: 3px;
+      margin-left: 6px;
+      background: var(--bg);
+      color: var(--muted);
+      flex-shrink: 0;
+    }
+
+    .wiki-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 32px 48px;
+      background: var(--content-bg);
+    }
+    .wiki-content-inner {
+      max-width: var(--prose-width);
+      margin: 0 auto;
+    }
+    .wiki-content h1 {
+      font-family: var(--font-serif);
+      font-size: 26px;
+      margin: 0 0 24px;
+      color: var(--ink);
+      line-height: 1.3;
+    }
+    .wiki-content h2 {
+      font-family: var(--font-serif);
+      font-size: 19px;
+      margin: 32px 0 12px;
+      color: var(--ink);
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--line);
+    }
+    .wiki-content h3 {
+      font-family: var(--font-serif);
+      font-size: 16px;
+      margin: 24px 0 8px;
+    }
+    .wiki-content p {
+      font-size: 15px;
+      line-height: var(--prose-line-height);
+      margin: 0 0 16px;
+      color: var(--ink);
+    }
+    .wiki-content ul, .wiki-content ol {
+      padding-left: 24px;
+      margin: 0 0 16px;
+      line-height: var(--prose-line-height);
+    }
+    .wiki-content li { margin-bottom: 4px; font-size: 15px; }
+    .wiki-content blockquote {
+      border-left: 3px solid var(--blockquote-border);
+      margin: 16px 0;
+      padding: 8px 16px;
+      background: var(--bg);
+      border-radius: 0 6px 6px 0;
+    }
+    .wiki-content blockquote p { margin: 0; color: var(--muted); font-style: italic; }
+    .wiki-content pre {
+      background: var(--code-bg);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+      overflow-x: auto;
+      margin: 16px 0;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+    .wiki-content code {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      background: var(--code-bg);
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+    .wiki-content pre code {
+      background: none;
+      padding: 0;
+    }
+    .wiki-content table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 14px;
+    }
+    .wiki-content th {
+      background: var(--bg);
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 600;
+      border: 1px solid var(--line);
+    }
+    .wiki-content td {
+      padding: 8px 14px;
+      border: 1px solid var(--line);
+    }
+    .wiki-content tr:hover td { background: var(--bg); }
+    .wiki-content img { max-width: 100%; border-radius: 6px; margin: 12px 0; cursor: pointer; transition: opacity .2s; }
+    .wiki-content img:hover { opacity: .88; }
+    .wiki-content td img { max-height: 180px; max-width: 260px; display: block; cursor: pointer; }
+    .wiki-content a { color: var(--topic); }
+    .wiki-content hr { border: none; border-top: 1px solid var(--line); margin: 24px 0; }
+
+    .wiki-empty {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      color: var(--muted);
+      font-family: var(--font-serif);
+      font-size: 16px;
+    }
+    .wiki-empty-icon { font-size: 48px; margin-bottom: 16px; opacity: .5; }
+
+    /* FAB */
+    .fab {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      color: var(--ink);
+      font-size: 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow);
+      z-index: 30;
+      transition: all .2s;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .fab.visible { opacity: 1; pointer-events: auto; }
+    .fab:hover { border-color: var(--strong); transform: translateY(-2px); }
+
+    /* Wiki responsive */
+    @media (max-width: 900px) {
+      .wiki-sidebar { width: 240px; padding: 16px 14px; }
+      .wiki-content { padding: 24px 20px; }
+    }
+    @media (max-width: 640px) {
+      .wiki-layout { flex-direction: column; }
+      .wiki-sidebar {
+        width: 100%;
+        max-height: 40vh;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+      .wiki-content { padding: 20px 16px; }
+      .topbar { padding: 0 12px; }
+      .topbar-tab { padding: 6px 12px; font-size: 13px; }
+    }
   </style>
 </head>
 <body>
+  <!-- Header bar -->
+  <header class="topbar">
+    <span class="topbar-title">LLM-WIKI</span>
+    <div class="topbar-tabs">
+      <button class="topbar-tab active" data-mode="graph" id="tabGraph">图谱</button>
+      <button class="topbar-tab" data-mode="wiki" id="tabWiki">文档</button>
+    </div>
+    <div class="topbar-actions">
+      <button class="theme-btn" id="themeBtn" title="切换深色模式">☀</button>
+    </div>
+  </header>
+
+  <!-- Graph mode -->
+  <div id="graphMode">
   <div id="shell" class="shell">
     <aside class="panel left">
       <div class="panel-head">
@@ -512,32 +907,73 @@
       <div id="neighbors" class="neighbors"></div>
     </aside>
   </div>
+  </div><!-- end #graphMode -->
+
+  <!-- Wiki mode -->
+  <div id="wikiMode">
+    <div class="wiki-layout">
+      <aside class="wiki-sidebar" id="wikiSidebar">
+        <h3 id="wikiTreeTitle">文档目录</h3>
+        <p class="wiki-desc" id="wikiTreeDesc"></p>
+        <div id="wikiTree"></div>
+      </aside>
+      <main class="wiki-content" id="wikiContent">
+        <div class="wiki-empty">
+          <div class="wiki-empty-icon">📖</div>
+          <p>从左侧目录选择页面开始阅读</p>
+        </div>
+      </main>
+    </div>
+  </div><!-- end #wikiMode -->
+
+  <button class="fab" id="fabTop" title="回到顶部">↑</button>
 
   <div id="modal" class="modal"><button type="button">关闭</button><img alt=""></div>
 
   <script src="wiki_data.js"></script>
+  <script src="wiki_content.js"></script>
+  <script src="../wiki_manual/manifest.js"></script>
+  <script>
+    // 将手工笔记图节点融入自动生成图谱（manifest.js 设置 window.__MANUAL_MANIFEST__）
+    (function loadManualManifest() {
+      try {
+        var manifest = window.__MANUAL_MANIFEST__;
+        if (manifest && manifest.nodes && manifest.nodes.length) {
+          WIKI_DATA.graph.nodes = WIKI_DATA.graph.nodes.concat(manifest.nodes);
+        }
+        if (manifest && manifest.edges && manifest.edges.length) {
+          WIKI_DATA.graph.edges = WIKI_DATA.graph.edges.concat(manifest.edges);
+        }
+      } catch(e) {
+        console.warn("无法加载手工笔记清单:", e);
+      }
+    })();
+  </script>
   <script>
     const color = {
       root: "#111827", topic: "#157a7d", concept: "#9a6a22", method: "#b14a5a",
       infrastructure: "#58707a", system: "#4c68a1", workflow: "#6c7f2e",
       control: "#824f91", training: "#bd6530", evaluation: "#4d8656",
-      evidence: "#697179", source: "#0d7969", page: "#806f55"
+      evidence: "#697179", source: "#0d7969", page: "#806f55",
+      manual_note: "#3b82b0"
     };
 
     const label = {
       root: "根节点", topic: "主题", concept: "概念", method: "方法",
       infrastructure: "基础设施", system: "系统", workflow: "流程",
       control: "控制/安全", training: "训练", evaluation: "评测",
-      evidence: "证据图片", source: "网页来源", page: "OneNote 页面"
+      evidence: "证据图片", source: "网页来源", page: "OneNote 页面",
+      manual_note: "人工笔记"
     };
 
     const relationText = {
       contains_page: "包含页面", has_topic: "形成主题", supported_by: "由证据支撑",
       contains_evidence: "页面包含证据", from_source: "来自网页",
-      references_source: "参考来源", explained_by: "由材料说明", has_concept: "关联概念"
+      references_source: "参考来源", explained_by: "由材料说明", has_concept: "关联概念",
+      manual_enrichment: "人工扩展"
     };
 
-    const structureTypes = ["root", "topic", "concept", "method", "infrastructure", "system", "workflow", "control", "training", "evaluation", "page"];
+    const structureTypes = ["root", "topic", "concept", "method", "infrastructure", "system", "workflow", "control", "training", "evaluation", "page", "manual_note"];
     const allTypes = Object.keys(label).filter(t => WIKI_DATA.graph.nodes.some(n => n.type === t));
     const nodes = WIKI_DATA.graph.nodes.map(n => ({ ...n, vx: 0, vy: 0 }));
     const edges = WIKI_DATA.graph.edges.map(e => ({ ...e, relation_label: e.relation_label || relationText[e.relation] || e.relation }));
@@ -613,7 +1049,6 @@
 
     function visibleNode(n) {
       if (!state.visibleTypes.has(n.type)) return false;
-      if (state.query && !matchState(n)) return false;
       const keep = focusedIds();
       if (keep && !keep.has(n.id)) return false;
       return true;
@@ -764,22 +1199,26 @@
       const selectedNeighbors = new Set((adj.get(state.selected) || []).map(x => x.id));
       const queryHits = new Set(nodes.filter(n => matchState(n) === "direct").map(n => n.id));
 
+      const hasQuery = !!state.query;
+
       linkLayer.innerHTML = lines.map(e => {
         const a = byId.get(e.source), b = byId.get(e.target);
         const focus = state.selected && (e.source === state.selected || e.target === state.selected);
-        const dim = state.selected && !focus ? " dim" : "";
-        return `<line class="link ${focus ? "focus" : ""}${dim}" x1="${a.x}" y1="${a.y}" x2="${b.x}" y2="${b.y}"><title>${esc(e.relation_label)}</title></line>`;
+        const queryRelated = hasQuery && (queryHits.has(e.source) || queryHits.has(e.target));
+        const dim = (state.selected && !focus) || (hasQuery && !queryRelated) ? " dim" : "";
+        return `<line class="link ${focus ? "focus" : ""}${queryRelated ? " query-related" : ""}${dim}" x1="${a.x}" y1="${a.y}" x2="${b.x}" y2="${b.y}"><title>${esc(e.relation_label)}</title></line>`;
       }).join("");
 
       nodeLayer.innerHTML = list.map(n => {
-        const r = nodeRadius(n);
+        const hit = queryHits.has(n.id);
+        const r = nodeRadius(n) + (hit ? 4 : 0);
         const selected = n.id === state.selected ? " selected" : "";
         const related = n.id === state.selected || selectedNeighbors.has(n.id);
-        const dim = state.selected && !related ? " dim" : "";
-        const hit = queryHits.has(n.id) ? " hit" : "";
-        const labelShown = n.type !== "evidence" && (n.type !== "source" || state.scale > 1.1 || n.id === state.selected);
+        const dim = (state.selected && !related) || (hasQuery && !hit) ? " dim" : "";
+        const hitClass = hit ? " hit" : "";
+        const labelShown = n.type !== "evidence" && (n.type !== "source" || state.scale > 1.1 || n.id === state.selected || hit);
         const title = n.title.length > 26 ? n.title.slice(0, 25) + "..." : n.title;
-        return `<g class="node ${esc(n.type)}${selected}${dim}${hit}" data-id="${esc(n.id)}" transform="translate(${n.x},${n.y})"><circle r="${r}" fill="${color[n.type] || "#666"}"><title>${esc(label[n.type] || n.type)} · ${esc(n.title)}</title></circle>${labelShown ? `<text x="${r + 6}" y="4">${esc(title)}</text>` : ""}</g>`;
+        return `<g class="node ${esc(n.type)}${selected}${dim}${hitClass}" data-id="${esc(n.id)}" transform="translate(${n.x},${n.y})"><circle r="${r}" fill="${color[n.type] || "#666"}"><title>${esc(label[n.type] || n.type)} · ${esc(n.title)}</title></circle>${labelShown ? `<text x="${r + 6}" y="4">${esc(title)}</text>` : ""}</g>`;
       }).join("");
 
       g.setAttribute("transform", `translate(${state.tx},${state.ty}) scale(${state.scale})`);
@@ -894,7 +1333,7 @@
       for (const n of nodes) { n.vx = 0; n.vy = 0; }
       const isPlainFullGraph = state.preset === "all" && !state.focusTopic && !state.query;
       if (isPlainFullGraph) initPositions();
-      if (shouldFit && !isPlainFullGraph) fitVisibleNodes();
+      if (shouldFit && !isPlainFullGraph && !state.query) fitVisibleNodes();
       else if (isPlainFullGraph) {
         state.tx = 0;
         state.ty = 0;
@@ -1077,8 +1516,10 @@
       if (state.preset === "all" && !state.focusTopic && !state.query) {
         initPositions();
         render();
-      } else {
+      } else if (!state.query) {
         fitVisibleNodes();
+      } else {
+        render();
       }
     });
 
@@ -1088,6 +1529,233 @@
     renderDetail();
     render();
     statusEl.textContent = "布局完成";
+
+    // ====== Wiki mode + Theme logic ======
+
+    // -- Theme --
+    function applyTheme(mode) {
+      document.documentElement.dataset.theme = mode;
+      document.getElementById('themeBtn').textContent = mode === 'dark' ? '☾' : '☀';
+    }
+    function getPreferredTheme() {
+      var saved = localStorage.getItem('llm-wiki-theme');
+      if (saved) return saved;
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+    var currentTheme = getPreferredTheme();
+    applyTheme(currentTheme);
+
+    document.getElementById('themeBtn').addEventListener('click', function() {
+      currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      applyTheme(currentTheme);
+      localStorage.setItem('llm-wiki-theme', currentTheme);
+    });
+
+    // -- Mode switching --
+    var tabGraph = document.getElementById('tabGraph');
+    var tabWiki = document.getElementById('tabWiki');
+    var graphMode = document.getElementById('graphMode');
+    var wikiMode = document.getElementById('wikiMode');
+
+    tabGraph.addEventListener('click', function() { switchMode('graph'); });
+    tabWiki.addEventListener('click', function() { switchMode('wiki'); });
+
+    function switchMode(mode) {
+      if (mode === 'graph') {
+        tabGraph.classList.add('active');
+        tabWiki.classList.remove('active');
+        graphMode.classList.remove('hidden');
+        wikiMode.classList.remove('active');
+        wikiMode.style.display = 'none';
+        // Re-fit graph after layout recalculation
+        setTimeout(function() {
+          if (state.query) { render(); }
+          else if (state.preset === 'all' && !state.focusTopic) { initPositions(); render(); }
+          else { fitVisibleNodes(); }
+        }, 100);
+      } else {
+        tabWiki.classList.remove('active');
+        tabGraph.classList.remove('active');
+        tabWiki.classList.add('active');
+        graphMode.classList.add('hidden');
+        wikiMode.classList.add('active');
+        wikiMode.style.display = 'flex';
+        initWikiIfNeeded();
+      }
+    }
+
+    // -- FAB back-to-top --
+    var fabTop = document.getElementById('fabTop');
+    var wikiContentEl = document.getElementById('wikiContent');
+    wikiContentEl.addEventListener('scroll', function() {
+      if (wikiContentEl.scrollTop > 300) {
+        fabTop.classList.add('visible');
+      } else {
+        fabTop.classList.remove('visible');
+      }
+    });
+    fabTop.addEventListener('click', function() {
+      wikiContentEl.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Wiki image click → open modal
+    wikiContentEl.addEventListener('click', function(ev) {
+      if (ev.target.tagName === 'IMG') openImage(ev.target.src);
+    });
+
+    // -- Wiki tree & content --
+    var wikiData = window.__WIKI_CONTENT__;
+    var wikiInited = false;
+
+    function initWikiIfNeeded() {
+      if (wikiInited) return;
+      wikiInited = true;
+      if (!wikiData || !wikiData.tree) {
+        document.getElementById('wikiTree').innerHTML = '<p style="color:var(--muted);font-size:13px">wiki_content.js 尚未生成。<br>运行 python tools/build_wiki_content.py</p>';
+        return;
+      }
+      document.getElementById('wikiTreeTitle').textContent = 'LLM-WIKI 文档';
+      document.getElementById('wikiTreeDesc').textContent = wikiData.tree.length + ' 个主题分组';
+      renderWikiTree();
+    }
+
+    function renderWikiTree() {
+      var treeEl = document.getElementById('wikiTree');
+      var html = '';
+      wikiData.tree.forEach(function(topic) {
+        html += '<div class="wiki-topic-group">';
+        html += '<button class="wiki-topic-header" onclick="toggleTopic(this)" data-topic="' + escAttr(topic.id) + '">';
+        html += '<span class="arrow open">▶</span>' + escHtml(topic.title);
+        html += '</button>';
+        html += '<div class="wiki-pages">';
+        topic.pages.forEach(function(p) {
+          html += '<button class="wiki-page-item" data-page="' + escAttr(p.id) + '" onclick="openWikiPage(\'' + escAttr(p.id) + '\', this)">';
+          html += '<span class="dot ' + p.importance + '"></span>';
+          html += '<span class="page-title">' + escHtml(p.title) + '</span>';
+          html += '<span class="badge-src">' + (p.source === 'manual' ? '笔记' : '自动') + '</span>';
+          html += '</button>';
+        });
+        html += '</div></div>';
+      });
+      treeEl.innerHTML = html;
+      // Open first topic's first page
+      if (wikiData.tree.length) {
+        var firstPage = wikiData.tree[0].pages[0];
+        if (firstPage) openWikiPage(firstPage.id);
+      }
+    }
+
+    function toggleTopic(btn) {
+      var arrow = btn.querySelector('.arrow');
+      var pages = btn.nextElementSibling;
+      if (arrow.classList.contains('open')) {
+        arrow.classList.remove('open');
+        pages.style.display = 'none';
+      } else {
+        arrow.classList.add('open');
+        pages.style.display = 'block';
+      }
+    }
+
+    function openWikiPage(pageId, btn) {
+      var page = wikiData.pages[pageId];
+      if (!page) return;
+
+      // Highlight active
+      var items = document.querySelectorAll('.wiki-page-item');
+      items.forEach(function(el) { el.classList.remove('active'); });
+      if (btn) btn.classList.add('active');
+
+      // Find and highlight by data-page attribute
+      var target = document.querySelector('.wiki-page-item[data-page="' + pageId.replace(/"/g, '\\"') + '"]');
+      if (target && target !== btn) target.classList.add('active');
+
+      var content = document.getElementById('wikiContent');
+      var html = page.html;
+      if (!html && page.raw) {
+        html = renderMarkdown(page.raw);
+      }
+      if (!html) {
+        content.innerHTML = '<div class="wiki-empty"><p>页面内容为空</p></div>';
+        return;
+      }
+      content.innerHTML = '<div class="wiki-content-inner"><h1>' + escHtml(page.title) + '</h1>' + html + '</div>';
+      content.scrollTop = 0;
+    }
+
+    // -- Minimal Markdown renderer (fallback) --
+    function renderMarkdown(text) {
+      var lines = text.split('\n');
+      var out = [];
+      var inCode = false, codeLang = '', codeBuf = [];
+      var inTable = false, tableRows = [];
+
+      function flushTable() {
+        if (!tableRows.length) return;
+        var rows = '';
+        for (var i = 0; i < tableRows.length; i++) {
+          var tag = i === 0 ? 'th' : 'td';
+          var cells = tableRows[i].map(function(c) { return '<' + tag + '>' + inlineMd(c.trim()) + '</' + tag + '>'; }).join('');
+          rows += '<tr>' + cells + '</tr>';
+        }
+        out.push('<table>' + rows + '</table>');
+        tableRows = [];
+        inTable = false;
+      }
+
+      function inlineMd(s) {
+        return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+                .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1">')
+                .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>')
+                .replace(/`([^`]+?)`/g, '<code>$1</code>')
+                .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+                .replace(/\*(.+?)\*/g, '<em>$1</em>');
+      }
+
+      for (var i = 0; i < lines.length; i++) {
+        var line = lines[i];
+        if (line.indexOf('```') === 0) {
+          if (inCode) { out.push('<pre><code>' + codeBuf.join('\n').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') + '</code></pre>'); codeBuf = []; inCode = false; }
+          else { flushTable(); inCode = true; codeLang = line.slice(3).trim(); }
+          continue;
+        }
+        if (inCode) { codeBuf.push(line); continue; }
+
+        if (/^\|.*\|$/.test(line)) {
+          var cells = line.trim().replace(/^\||\|$/g, '').split('|');
+          if (/^[-:\s]+$/.test(cells.join(''))) continue;
+          if (!inTable) inTable = true;
+          tableRows.push(cells);
+          continue;
+        } else if (inTable) { flushTable(); }
+
+        if (/^[-*_]{3,}\s*$/.test(line)) { out.push('<hr>'); continue; }
+
+        var hm = line.match(/^(#{1,4})\s+(.+)$/);
+        if (hm) { out.push('<h' + hm[1].length + '>' + inlineMd(hm[2]) + '</h' + hm[1].length + '>'); continue; }
+
+        if (/^>\s?(.*)$/.test(line)) {
+          out.push('<blockquote><p>' + inlineMd(line.replace(/^>\s?/, '')) + '</p></blockquote>');
+          continue;
+        }
+
+        if (/^[-*]\s+(.+)$/.test(line)) { out.push('<ul><li>' + inlineMd(line.replace(/^[-*]\s+/, '')) + '</li></ul>'); continue; }
+
+        if (line.trim() === '') { if (out.length && out[out.length-1] !== '</p>') out.push('</p>'); continue; }
+
+        if (out.length === 0 || out[out.length-1] === '</p>' || out[out.length-1].indexOf('<h') === 0 || out[out.length-1].indexOf('<table') === 0 || out[out.length-1].indexOf('<ul') === 0 || out[out.length-1].indexOf('<blockquote') === 0 || out[out.length-1].indexOf('<hr') === 0 || out[out.length-1].indexOf('<pre') === 0) {
+          out.push('<p>' + inlineMd(line));
+        } else {
+          out[out.length-1] = out[out.length-1].replace(/<\/p>$/, '') + ' ' + inlineMd(line) + '</p>';
+        }
+      }
+      if (inCode) out.push('<pre><code>' + codeBuf.join('\n').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') + '</code></pre>');
+      flushTable();
+      return out.join('\n');
+    }
+
+    function escHtml(s) { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+    function escAttr(s) { return s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
   </script>
 </body>
 </html>
