@@ -58,6 +58,10 @@ reports/  检查层      健康报告
 # 全量重建（需 OneNote 桌面版）
 & .\tools\rebuild_agent_wiki.ps1
 
+# 启动本地服务（⚠️ 必须从项目根目录启动，否则节点图片无法加载）
+python -m http.server 8082
+# 然后打开 http://localhost:8082/app/index.html
+
 # 检索
 python .\tools\search_agent_wiki.py
 

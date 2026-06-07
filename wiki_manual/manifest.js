@@ -231,6 +231,33 @@ window.__MANUAL_MANIFEST__ = {
       "source_url": "",
       "md_path": "wiki_manual/Agent系统的Feature Flag管控.md",
       "keywords": ["Agent", "Feature Flag", "GrowthBook", "灰度", "kill switch", "A/B测试", "运行时配置", "MCP", "模型路由", "安全策略"]
+    },
+    {
+      "id": "manual_qwen_arch_pretrain_evolution",
+      "type": "manual_note",
+      "title": "Qwen 架构与预训练演进（2.5→3.7）",
+      "description": "五版本架构对比：2.5（GQA+MoE+YARN/DCA）→ 3（QK-Norm+128专家去共享专家）→ 3.5（Transformer+线性注意力混合，计算成本降50%）→ 3.6（100万上下文）→ 3.7（解耦Harness-Verifier训练基础设施）。预训练数据从18T→36T/119语言，词表15万→25万，原生多模态早期融合。核心趋势：从规模驱动到设计驱动，小模型靠架构和训练策略追平大模型。",
+      "source_url": "https://mp.weixin.qq.com/s/vKptJ55Lgr_c6Eppv9BHKA",
+      "md_path": "wiki_manual/Qwen模型演进技术总结.md",
+      "keywords": ["Qwen", "Transformer", "MoE", "GQA", "QK-Norm", "线性注意力", "混合注意力", "预训练", "YARN", "DCA", "原生多模态", "词表扩展", "RoPE", "ABF"]
+    },
+    {
+      "id": "manual_qwen_posttrain_evolution",
+      "type": "manual_note",
+      "title": "Qwen 后训练技术演进（2.5→3.7）",
+      "description": "四个版本的后训练创新：2.5（DPO离线RL+GRPO在线RL两阶段）→ 3（Thinking Budget思维控制+强到弱知识蒸馏，蒸馏仅需1/10 GPU时间超越RL；但思考模式融合后出现退化——通用RL削弱了复杂任务专业能力）→ 3.5（异步RL并行系统效率提升3-5倍+FP8混合精度显存减半）→ 3.7（跨框架跨验证器RL逼迫泛化+自进化反作弊体系：80+小时SWE训练中模型自归纳13条规则拦截1618个作弊案例+长程时序复杂度强化对抗记忆腐化）。",
+      "source_url": "https://mp.weixin.qq.com/s/vKptJ55Lgr_c6Eppv9BHKA",
+      "md_path": "wiki_manual/Qwen模型演进技术总结.md",
+      "keywords": ["Qwen", "DPO", "GRPO", "RL", "SFT", "Thinking Budget", "知识蒸馏", "强到弱蒸馏", "异步RL", "FP8", "BF16", "退化现象", "跨框架RL", "反作弊", "Reward Hacking", "记忆腐化", "指令漂移"]
+    },
+    {
+      "id": "manual_qwen_agent_infra_evolution",
+      "type": "manual_note",
+      "title": "Qwen Agent 能力与 RL 基础设施演进",
+      "description": "从通用RL到Agent专项RL的跨越：3.5引入真实环境RL使模型在不同任务上表现均衡、异步并行系统将数据生成与模型训练分离；3.6 Agent能力飞跃（前端开发+代码仓库级求解+终端自动化+长程规划最优）；3.7解耦设计（Task/Harness/Verifier三组件正交，同一任务低成本与不同框架验证器自由重组）迫使模型学习泛化解题策略而非依赖特定捷径。核心洞察：Qwen3.7的重点不再是模型参数，而是RL基础设施的解耦设计和训练效率——模型能力从拼'谁更大'到拼'谁更聪明地用参数'。",
+      "source_url": "https://mp.weixin.qq.com/s/vKptJ55Lgr_c6Eppv9BHKA",
+      "md_path": "wiki_manual/Qwen模型演进技术总结.md",
+      "keywords": ["Qwen", "Agent", "RL", "基础设施", "解耦", "Harness", "Verifier", "Task", "异步并行", "泛化", "跨框架", "长程规划", "SWE", "自进化"]
     }
   ],
   "edges": [
@@ -401,6 +428,24 @@ window.__MANUAL_MANIFEST__ = {
       "target": "manual_feature_flag_agent",
       "relation": "manual_enrichment",
       "relation_label": "人工补充：Agent 系统的 Feature Flag 运行时管控"
+    },
+    {
+      "source": "topic_finetuning_trajectories",
+      "target": "manual_qwen_arch_pretrain_evolution",
+      "relation": "manual_enrichment",
+      "relation_label": "人工补充：Qwen 架构与预训练五版本演进"
+    },
+    {
+      "source": "topic_finetuning_trajectories",
+      "target": "manual_qwen_posttrain_evolution",
+      "relation": "manual_enrichment",
+      "relation_label": "人工补充：Qwen 后训练技术四版本演进"
+    },
+    {
+      "source": "topic_agent_architecture",
+      "target": "manual_qwen_agent_infra_evolution",
+      "relation": "manual_enrichment",
+      "relation_label": "人工补充：Qwen Agent 与 RL 基础设施演进"
     }
   ]
 };

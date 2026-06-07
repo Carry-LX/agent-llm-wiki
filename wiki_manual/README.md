@@ -23,3 +23,4 @@
 - [大模型为什么不使用Dropout](大模型为什么不使用Dropout.md)
 - [SFT+GRPO主观推理任务实战反思](SFT+GRPO主观推理任务实战反思.md)
 - [Agent系统的Feature Flag管控](Agent系统的Feature Flag管控.md)
+- [Qwen模型演进技术总结](Qwen模型演进技术总结.md)

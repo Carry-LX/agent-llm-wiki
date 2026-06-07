@@ -1,5 +1,10 @@
 # LLM-WIKI 运行日志
 
+## 2026-06-07 新增人工笔记：Qwen 模型演进技术总结
+
+- 操作：新增 `wiki_manual/Qwen模型演进技术总结.md`（来源：丁师兄大模型 2026-06-04，授权自自动学习机知乎），拆为 3 个证据节点——架构与预训练演进（GQA→QK-Norm→混合注意力→解耦Harness-Verifier）、后训练技术演进（DPO+GRPO→Thinking Budget+蒸馏→异步RL→跨框架RL+反作弊）、Agent与RL基础设施演进（通用RL→Agent专项RL→自进化体系）。覆盖 Qwen 2.5/3/3.5/3.6/3.7 五个版本。10 张图片已同步至 raw/images/。
+- 操作：manifest.js 新增 3 个节点 + 3 条边，连接 topic_finetuning_trajectories 和 topic_agent_architecture。
+
 ## 2026-05-25 新增人工笔记：LLM 推理机制
 
 - 操作：新增 `wiki_manual/LLM推理机制.md`，解释 LLM Prefill/Decode 两阶段工作原理、KV Cache 作用、资源需求差异及混跑干扰问题。
