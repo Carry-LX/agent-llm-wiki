@@ -233,6 +233,33 @@ window.__MANUAL_MANIFEST__ = {
       "keywords": ["Agent", "Feature Flag", "GrowthBook", "灰度", "kill switch", "A/B测试", "运行时配置", "MCP", "模型路由", "安全策略"]
     },
     {
+      "id": "manual_agentic_rl_taxonomy",
+      "type": "manual_note",
+      "title": "RL 训练的四象限分类：RLHF/RLVR × Agentic/传统",
+      "description": "两对正交概念的统一框架：RLHF vs RLVR 是奖励来源的区别（人类偏好模型 vs 客观规则验证），Agentic RL vs 传统 RL 是行为空间的区别（多轮工具调用 vs 单轮问答）。四象限交叉后挑战不是简单叠加而是产生新问题——Agentic RLVR 的核心挑战是行为模式是否合理（trajectory 级监控），传统 RLVR 几乎不存在这个问题（只有一个生成动作）。含对比表、面试回答框架。",
+      "source_url": "https://mp.weixin.qq.com/s/RsSx-IoZ7kFDdo8Y1fzBfA",
+      "md_path": "wiki_manual/Agentic_RL行为相变分析.md",
+      "keywords": ["RLHF", "RLVR", "Agentic RL", "GRPO", "行为空间", "奖励来源", "正交", "四象限", "分类", "面试"]
+    },
+    {
+      "id": "manual_agentic_rl_phase_transition",
+      "type": "manual_note",
+      "title": "Agentic RL 行为相变：从 Search-First 到 Guess-First",
+      "description": "Search-R1 复现实验中观察到的核心现象：GRPO 训练中模型突然从'先搜再答'切换为'先猜再搜'，准确率从57%跌到42%，但训练没有崩，后又恢复。根因：Exact Match reward 只看最终答案不看过程，猜对和搜对在GRPO视角等同但猜的路径更短（正向自我加速反馈回路）。扩展到更多工具后同样出现行为突变——verification 从几乎不用变为近乎确定性行为（这次是好的）。核心洞察：Agentic RL 不是平滑优化过程，而是一系列行为相变（behavioral phase transition），本质挑战不是优化稳定性而是行为演化。",
+      "source_url": "https://mp.weixin.qq.com/s/RsSx-IoZ7kFDdo8Y1fzBfA",
+      "md_path": "wiki_manual/Agentic_RL行为相变分析.md",
+      "keywords": ["Agentic RL", "行为相变", "phase transition", "GRPO", "Search-R1", "guess-first", "reward hacking", "正反馈", "entropy spike", "off-policy staleness"]
+    },
+    {
+      "id": "manual_agentic_rl_monitoring",
+      "type": "manual_note",
+      "title": "Agentic RL 的监控困境与解决方向",
+      "description": "现有 RL 指标在 Agentic RL 中的表现：KL divergence（相对 reference policy）最能提前捕捉行为相变但不区分好坏；importance sampling/clip fraction 几乎看不到高层行为变化——单个 token 概率分布没偏移但 action sequence 已质变；entropy spike 是行为变化的结果而非原因。未来方向：规则干预（第一轮不搜就答→判错终止）简单但难泛化；model-based monitor 根据任务类型+trajectory history+已有证据判断行为是否 bad shortcut——Reward 告诉你模型是否成功，Trajectory 告诉你模型是如何成功的，二者在 Agentic RL 中并不总是一致。",
+      "source_url": "https://mp.weixin.qq.com/s/RsSx-IoZ7kFDdo8Y1fzBfA",
+      "md_path": "wiki_manual/Agentic_RL行为相变分析.md",
+      "keywords": ["Agentic RL", "监控", "KL divergence", "importance sampling", "clip fraction", "entropy", "model-based monitor", "trajectory", "reward hacking", "bad shortcut"]
+    },
+    {
       "id": "manual_qwen_arch_pretrain_evolution",
       "type": "manual_note",
       "title": "Qwen 架构与预训练演进（2.5→3.7）",
@@ -446,6 +473,24 @@ window.__MANUAL_MANIFEST__ = {
       "target": "manual_qwen_agent_infra_evolution",
       "relation": "manual_enrichment",
       "relation_label": "人工补充：Qwen Agent 与 RL 基础设施演进"
+    },
+    {
+      "source": "topic_finetuning_trajectories",
+      "target": "manual_agentic_rl_taxonomy",
+      "relation": "manual_enrichment",
+      "relation_label": "人工补充：RLHF/RLVR × Agentic/传统 四象限分类"
+    },
+    {
+      "source": "topic_finetuning_trajectories",
+      "target": "manual_agentic_rl_phase_transition",
+      "relation": "manual_enrichment",
+      "relation_label": "人工补充：Agentic RL 行为相变机理"
+    },
+    {
+      "source": "topic_agent_architecture",
+      "target": "manual_agentic_rl_monitoring",
+      "relation": "manual_enrichment",
+      "relation_label": "人工补充：Agentic RL 轨迹级监控"
     }
   ]
 };

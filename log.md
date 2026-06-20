@@ -1,5 +1,10 @@
 # LLM-WIKI 运行日志
 
+## 2026-06-20 新增人工笔记：Agentic RL 行为相变分析
+
+- 操作：新增 `wiki_manual/Agentic_RL行为相变分析.md`（来源：丁师兄大模型 2026-06-19，原作 Jason 知乎），拆为 3 个证据节点——RLHF/RLVR × Agentic/传统四象限分类、行为相变机理（Search-First→Guess-First 自加速正反馈回路）、轨迹级监控困境与 model-based monitor 方向。含"先猜再搜"机制推演和 GRPO 奖励函数盲区分析。8 张图片已同步至 raw/images/。
+- 操作：manifest.js 新增 3 个节点 + 3 条边，连接 topic_finetuning_trajectories 和 topic_agent_architecture。
+
 ## 2026-06-07 新增人工笔记：Qwen 模型演进技术总结
 
 - 操作：新增 `wiki_manual/Qwen模型演进技术总结.md`（来源：丁师兄大模型 2026-06-04，授权自自动学习机知乎），拆为 3 个证据节点——架构与预训练演进（GQA→QK-Norm→混合注意力→解耦Harness-Verifier）、后训练技术演进（DPO+GRPO→Thinking Budget+蒸馏→异步RL→跨框架RL+反作弊）、Agent与RL基础设施演进（通用RL→Agent专项RL→自进化体系）。覆盖 Qwen 2.5/3/3.5/3.6/3.7 五个版本。10 张图片已同步至 raw/images/。
